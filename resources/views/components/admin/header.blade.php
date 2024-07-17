@@ -4,21 +4,21 @@
             <div class="d-flex">
                 <!-- LOGO -->
                 <div class="navbar-brand-box horizontal-logo">
-                    <a href="index.html" class="logo logo-dark">
+                    <a  class="logo logo-dark">
                         <span class="logo-sm">
-                            <img src="{{ asset('admin/images/logo-sm.png') }}" alt="" height="22" />
+                            <img src="{{ asset('admin/logo_image.png') }}" alt="" height="22" />
                         </span>
                         <span class="logo-lg">
-                            <img src="{{ asset('admin/images/logo-dark.png') }}" alt="" height="17" />
+                            <img src="{{ asset('admin/logo_image.png') }}" alt="" height="17" />
                         </span>
                     </a>
 
-                    <a href="index.html" class="logo logo-light">
+                    <a class="logo logo-light">
                         <span class="logo-sm">
-                            <img src="{{ asset('admin/images/logo-sm.png') }}" alt="" height="22" />
+                            <img src="{{ asset('admin/logo_image.png') }}" alt="" height="50" />
                         </span>
                         <span class="logo-lg">
-                            <img src="{{ asset('admin/images/logo-light.png') }}" alt="" height="17" />
+                            <img src="{{ asset('admin/logo_image.png') }}" alt="" height="50" />
                         </span>
                     </a>
                 </div>
@@ -32,7 +32,7 @@
                 </button>
 
                 <!-- App Search-->
-                <form class="app-search d-none d-md-block">
+                <form class="app-search d-none d-md-none">
                     <div class="position-relative">
                         <input type="text" class="form-control" placeholder="Search..." autocomplete="off" id="search-options" value="" />
                         <span class="mdi mdi-magnify search-widget-icon"></span>
