@@ -28,7 +28,7 @@
                         <div class="card overflow-hidden card-bg-fill border-0 card-border-effect-none">
                             <div class="row g-0">
                                 <div class="col-lg-6">
-                                    <img src="{{ asset('admin/images/auth-one-bg.jpg') }}" alt="" width="100%" height="100%">
+                                    <img src="{{ asset('admin/images/(SRA).jpg') }}" alt="" width="100%" height="100%">
                                     <div class="p-lg-5 p-4 auth-one-bg h-100 d-none">
                                         <div class="bg-overlay"></div>
                                         <div class="position-relative h-100 d-flex flex-column">
@@ -64,7 +64,7 @@
                                 <div class="col-lg-6">
                                     <div class="p-lg-5 p-4">
                                         <div class="text-center">
-                                            <img  src="{{ asset('admin/logo_image.png') }}" height="50%" width="50%" alt="">
+                                            <img  src="{{ asset('admin/images/Slum-Rehabilitation-Authority-Mumbai (1).png') }}" height="40%" width="40%" alt="">
                                             <h5 class="text-white text-center pt-3">लॉगिन मध्ये आपले स्वागत आहे</h5>
                                         </div>
 
