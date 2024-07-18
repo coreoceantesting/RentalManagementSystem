@@ -54,7 +54,7 @@
                                 <a href="{{ route('contractors.index') }}" class="nav-link" data-key="t-horizontal">Contractor</a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{ route('wards.index') }}" class="nav-link" data-key="t-horizontal">Architect</a>
+                                <a href="{{ route('architects.index') }}" class="nav-link" data-key="t-horizontal">Architect</a>
                             </li>
                             <li class="nav-item">
                                 <a href="{{ route('wards.index') }}" class="nav-link" data-key="t-horizontal">Schemes</a>
