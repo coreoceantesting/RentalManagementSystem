@@ -51,6 +51,7 @@ Route::middleware(['auth','PreventBackHistory', 'firewall.all'])->group(function
 
     // Masters
     Route::resource('wards', App\Http\Controllers\Admin\Masters\WardController::class );
+    Route::resource('contractors', App\Http\Controllers\Admin\Masters\ContractorController::class );
 
 
 
