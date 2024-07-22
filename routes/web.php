@@ -29,7 +29,10 @@ Route::middleware(['guest','PreventBackHistory', 'firewall.all'])->group(functio
     Route::post('login', [App\Http\Controllers\Admin\AuthController::class, 'login'])->name('signin');
     Route::get('register', [App\Http\Controllers\Admin\AuthController::class, 'showRegister'] )->name('register');
     Route::post('register', [App\Http\Controllers\Admin\AuthController::class, 'register'])->name('signup');
-
+    Route::get('citizen/registration', [App\Http\Controllers\Admin\Citizen\CitizenController::class, 'citizenRegistration'] )->name('citizenRegistration');
+    Route::post('citizen/registration/store', [App\Http\Controllers\Admin\Citizen\CitizenController::class, 'storeCitizenRegistration'])->name('storeCitizenRegistration');
+    Route::get('citizen/login', [App\Http\Controllers\Admin\Citizen\CitizenController::class, 'citizenLoginPage'] )->name('citizenLoginPage');
+    Route::post('citizen/login', [App\Http\Controllers\Admin\Citizen\CitizenController::class, 'citizenLogin'])->name('citizenLogin');
 });
 
 
