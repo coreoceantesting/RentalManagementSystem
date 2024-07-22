@@ -53,6 +53,7 @@ Route::middleware(['auth','PreventBackHistory', 'firewall.all'])->group(function
     Route::resource('wards', App\Http\Controllers\Admin\Masters\WardController::class );
     Route::resource('contractors', App\Http\Controllers\Admin\Masters\ContractorController::class );
     Route::resource('architects', App\Http\Controllers\Admin\Masters\ArchitectController::class );
+    Route::resource('schemes', App\Http\Controllers\Admin\Masters\SchemeController::class );
 
 
 
