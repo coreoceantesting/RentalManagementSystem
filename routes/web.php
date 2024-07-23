@@ -34,6 +34,7 @@ Route::middleware(['guest','PreventBackHistory', 'firewall.all'])->group(functio
     Route::post('citizen/registration/store', [App\Http\Controllers\Admin\Citizen\CitizenController::class, 'storeCitizenRegistration'])->name('storeCitizenRegistration');
     Route::get('citizen/login', [App\Http\Controllers\Admin\Citizen\CitizenController::class, 'citizenLoginPage'] )->name('citizenLoginPage');
     Route::post('citizen/login', [App\Http\Controllers\Admin\Citizen\CitizenController::class, 'citizenLogin'])->name('citizenLogin');
+    Route::post('password/email', [App\Http\Controllers\Admin\Citizen\CitizenController::class, 'sendResetLinkEmail'])->name('password.email');
 });
 
 

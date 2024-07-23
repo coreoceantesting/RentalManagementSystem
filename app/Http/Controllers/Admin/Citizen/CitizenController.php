@@ -16,6 +16,7 @@ use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Log;
 use App\Http\Requests\Admin\StoreUserRequest;
+use Illuminate\Support\Facades\Mail;
 
 class CitizenController extends Controller
 {
@@ -117,6 +118,7 @@ class CitizenController extends Controller
         {
             DB::beginTransaction();
             $input = $request->validated();
+            $input['non_encrypt_password'] = $input['password'];
             $input['password'] = Hash::make($input['password']);
             $input['address'] = $input['address'];
             $input['name'] = $input['citizen_first_name'].' '.$input['citizen_middle_name']. ' '. $input['citizen_last_name'];
@@ -129,6 +131,31 @@ class CitizenController extends Controller
         catch(\Exception $e)
         {
             return $this->respondWithAjax($e, 'creating', 'Citizen');
+        }
+    }
+
+    // forgot password send password to mail
+    public function sendResetLinkEmail(Request $request)
+    {
+        $request->validate(['email' => 'required|email']);
+
+        $user = User::where('email', $request->email)->where('is_citizen', '=', 'Yes')->first();
+        // dd($user);
+
+        if (!$user) {
+            return response()->json(['message' => 'No user found with this email address.'], 404);
+        }
+
+        try {
+            // Send password via email
+            Mail::raw('Your password is: ' . $user->non_encrypt_password, function ($message) use ($user) {
+                $message->to($user->email)
+                        ->subject('Your Password');
+            });
+
+            return response()->json(['message' => 'Password has been sent to your email.']);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'Failed to send password. Please try again.'], 500);
         }
     }
 

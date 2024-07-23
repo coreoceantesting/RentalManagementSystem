@@ -29,6 +29,7 @@ class StoreCitizenRequest extends FormRequest
             'citizen_last_name' => 'nullable',
             'address' => 'nullable',
             'is_citizen' => 'nullable',
+            'non_encrypt_password' => 'nullable',
             'email' => 'required|unique:users,email|email',
             'mobile' => 'required|unique:users,mobile|digits:10',
             'password' => 'required|min:8',

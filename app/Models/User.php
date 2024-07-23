@@ -24,7 +24,8 @@ class User extends Authenticatable
         'password',
         'mobile',
         'address',
-        'is_citizen'
+        'is_citizen',
+        'non_encrypt_password'
     ];
 
     /**

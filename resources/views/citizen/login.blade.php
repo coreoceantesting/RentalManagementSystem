@@ -22,6 +22,19 @@
         .form-control{
             color: black !important;
         }
+
+        .modal-backdrop {
+            --vz-backdrop-zindex: 1050;
+            --vz-backdrop-bg: #000;
+            --vz-backdrop-opacity: 0.5;
+            position: unset !important;
+            top: 0;
+            left: 0;
+            z-index: var(--vz-backdrop-zindex);
+            width: 100vw;
+            height: 100vh;
+            background-color: var(--vz-backdrop-bg);
+        }
     </style>
 
 </head>
@@ -83,7 +96,7 @@
 
                                                 <div class="mb-3">
                                                     <div class="float-end">
-                                                        <a href="auth-pass-reset-cover.html" class="text-dark">Forgot password?</a>
+                                                        <a id="forgot-password" style="cursor: pointer" class="text-dark">Forgot password?</a>
                                                     </div>
                                                     <label class="form-label" for="password-input">Password</label>
                                                     <div class="position-relative auth-pass-inputgroup mb-3">
@@ -107,12 +120,37 @@
                                         <div class="mt-4 text-center text-dark">
                                             <p class="mt-0">Don't have an account ? <a href="{{route('citizenRegistration')}}" class="fw-semibold text-primary text-decoration-underline"> Signup</a> </p>
                                         </div>
+
+                                        <!-- Forgot Password Modal -->
+                                        <div class="modal fade" id="forgotPasswordModal" tabindex="-1" aria-labelledby="forgotPasswordModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header bg-white text-dark">
+                                                        <h5 class="modal-title text-dark" id="forgotPasswordModalLabel">Forgot Password</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body bg-white">
+                                                        <form id="forgotPasswordForm">
+                                                            @csrf
+                                                            <div class="mb-3">
+                                                                <label for="email" class="form-label">Email Address</label>
+                                                                <input type="email" class="form-control" name="email" id="email" placeholder="Enter your email" required>
+                                                            </div>
+                                                            <div class="text-center">
+                                                                <button type="submit" class="btn btn-primary">Send Password</button>
+                                                                <button type="submit" data-bs-dismiss="modal" aria-label="Close" class="btn btn-primary">Close</button>
+                                                            </div>
+                                                            <div id="forgotPasswordMessage" class="mt-3"></div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
@@ -196,6 +234,37 @@
             });
         }
 
+    });
+</script>
+
+<script>
+    $(document).ready(function() {
+        // Show modal when "Forgot password?" link is clicked
+        $('#forgot-password').on('click', function(e) {
+            e.preventDefault();
+            $('#forgotPasswordModal').modal('show');
+        });
+
+        // Handle form submission
+        $('#forgotPasswordForm').submit(function(e) {
+            e.preventDefault();
+            var formdata = new FormData(this);
+
+            $.ajax({
+                url: '{{ route('password.email') }}',
+                type: 'POST',
+                data: formdata,
+                contentType: false,
+                processData: false,
+                success: function(data) {
+                    $('#forgotPasswordMessage').html('<div class="alert alert-success">Password has been sent to your email.</div>');
+                    $('#forgotPasswordForm')[0].reset(); // Reset form
+                },
+                error: function(error) {
+                    $('#forgotPasswordMessage').html('<div class="alert alert-danger">Error: ' + error.responseJSON.message + '</div>');
+                }
+            });
+        });
     });
 </script>
 
