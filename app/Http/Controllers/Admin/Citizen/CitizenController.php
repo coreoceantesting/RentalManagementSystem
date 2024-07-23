@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\Admin\Citizen;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\Admin\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\Admin\StoreCitizenRequest;
 use App\Models\Role;
 use App\Models\RegisterCitizen;
+use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Arr;
@@ -14,6 +15,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Log;
+use App\Http\Requests\Admin\StoreUserRequest;
 
 class CitizenController extends Controller
 {
@@ -21,7 +23,7 @@ class CitizenController extends Controller
         return view('citizen.registration');
     }
 
-    public function storeCitizenRegistration(Request $request)
+    public function storeCitizenRegistrationOld(Request $request)
     {
         try {
             // Define validation rules
@@ -62,7 +64,6 @@ class CitizenController extends Controller
 
     public function citizenLogin(Request $request)
     {
-        // Validate the incoming request
         $validator = Validator::make($request->all(), [
             'username' => 'required',
             'password' => 'required',
@@ -72,7 +73,6 @@ class CitizenController extends Controller
             'password.required' => 'Please enter password',
         ]);
 
-        // Check if validation passes
         if ($validator->passes())
         {
             $username = $request->username;
@@ -81,38 +81,54 @@ class CitizenController extends Controller
 
             try
             {
-                // Find user in RegisterCitizen model
-                $user = RegisterCitizen::where('citizen_username', $username)->first();
+                $user = User::where('email', $username)->where('is_citizen', 'Yes')->first();
 
-                // Check if user exists
-                if (!$user)
-                    return response()->json(['error2' => 'No user found with this username']);
+                if(!$user)
+                    return response()->json(['error2'=> 'No user found with this username']);
 
-                // Check if user is active and has roles
-                if ($user->active_status == '0' && !$user->roles)
-                    return response()->json(['error2' => 'You are not authorized to login, contact HOD']);
+                if($user->active_status == '0' && !$user->roles)
+                    return response()->json(['error2'=> 'You are not authorized to login, contact HOD']);
 
-                // Check password
-                if (!Hash::check($password, $user->password))
-                    return response()->json(['error2' => 'Your entered credentials are invalid']);
+                if(!auth()->attempt(['email' => $username, 'password' => $password], $remember_me))
+                    return response()->json(['error2'=> 'Your entered credentials are invalid']);
 
-                // Check user role
                 $userType = '';
-                if ($user->hasRole(['User']))
+                if( $user->hasRole(['User']) )
                     $userType = 'user';
 
-                return response()->json(['success' => 'Login successful', 'user_type' => $userType]);
+                return response()->json(['success'=> 'login successful', 'user_type'=> $userType ]);
             }
-            catch (\Exception $e)
+            catch(\Exception $e)
             {
                 DB::rollBack();
-                Log::error("Login error: " . $e->getMessage());
-                return response()->json(['error2' => 'Something went wrong while validating your credentials!']);
+                Log::info("login error:". $e);
+                return response()->json(['error2'=> 'Something went wrong while validating your credentials!']);
             }
         }
         else
         {
-            return response()->json(['error' => $validator->errors()]);
+            return response()->json(['error'=>$validator->errors()]);
+        }
+    }
+
+    public function storeCitizenRegistration(StoreCitizenRequest $request)
+    {
+        try
+        {
+            DB::beginTransaction();
+            $input = $request->validated();
+            $input['password'] = Hash::make($input['password']);
+            $input['address'] = $input['address'];
+            $input['name'] = $input['citizen_first_name'].' '.$input['citizen_middle_name']. ' '. $input['citizen_last_name'];
+            $input['is_citizen'] = "Yes";
+            $user = User::create($input);
+            DB::table('model_has_roles')->insert(['role_id'=> 3, 'model_type'=> 'App\Models\User', 'model_id'=> $user->id]);
+            DB::commit();
+            return response()->json(['success'=> 'Citizen Registration successfully!']);
+        }
+        catch(\Exception $e)
+        {
+            return $this->respondWithAjax($e, 'creating', 'Citizen');
         }
     }
 

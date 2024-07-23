@@ -22,14 +22,17 @@ class StoreCitizenRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'citizen_first_name' => 'required',
-            'citizen_middle_name' => 'required',
-            'citizen_last_name' => 'required',
-            'citizen_email' => 'required|email',
-            'citizen_mobile_no' => 'required|digits:10',
-            'citizen_address' => 'required',
-            'citizen_username' => 'required',
+            'role' => 'nullable',
+            'name' => 'nullable',
+            'citizen_first_name' => 'nullable',
+            'citizen_middle_name' => 'nullable',
+            'citizen_last_name' => 'nullable',
+            'address' => 'nullable',
+            'is_citizen' => 'nullable',
+            'email' => 'required|unique:users,email|email',
+            'mobile' => 'required|unique:users,mobile|digits:10',
             'password' => 'required|min:8',
+            'confirm_password' => 'required|same:password',
         ];
     }
 }

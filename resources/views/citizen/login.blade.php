@@ -15,19 +15,28 @@
     <link href="{{ asset('admin/css/app.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('admin/css/custom.min.css') }}" rel="stylesheet" type="text/css" />
 
+    <style>
+        .form-label{
+            color: black;
+        }
+        .form-control{
+            color: black !important;
+        }
+    </style>
+
 </head>
 
 <body>
 
-    <div class="auth-page-wrapper auth-bg-cover py-5 d-flex justify-content-center align-items-center min-vh-100">
+    <div class="auth-page-wrapper auth-bg-cover py-1 d-flex justify-content-center align-items-center min-vh-100">
         <div class="bg-overlay"></div>
-        <div class="auth-page-content overflow-hidden pt-lg-5">
+        <div class="auth-page-content overflow-hidden pt-lg-1">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
-                        <div class="card overflow-hidden card-bg-fill border-0 card-border-effect-none">
+                        <div class="card overflow-hidden card-bg-fill border-0 card-border-effect-none" style="background-color: #ececec">
                             <div class="row g-0">
-                                <div class="col-lg-6">
+                                <div class="col-lg-7">
                                     <img src="{{ asset('admin/images/(SRA).jpg') }}" alt="" width="100%" height="100%">
                                     <div class="p-lg-5 p-4 auth-one-bg h-100 d-none">
                                         <div class="bg-overlay"></div>
@@ -57,24 +66,24 @@
                                     </div>
                                 </div>
 
-                                <div class="col-lg-6">
-                                    <div class="p-lg-5 p-4">
+                                <div class="col-lg-5">
+                                    <div class="p-lg-3 p-1">
                                         <div class="text-center">
                                             <img  src="{{ asset('admin/images/Slum-Rehabilitation-Authority-Mumbai (1).png') }}" height="40%" width="40%" alt="">
-                                            <h5 class="text-white text-center pt-3">नागरिक लॉगिन मध्ये आपले स्वागत आहे</h5>
+                                            <h5 class="text-dark text-center pt-3">नागरिक लॉगिन मध्ये आपले स्वागत आहे</h5>
                                         </div>
 
-                                        <div class="mt-4">
+                                        <div class="mt-2">
                                             <form id="loginForm">
                                                 @csrf
                                                 <div class="mb-3">
-                                                    <label for="username" class="form-label">Username</label>
-                                                    <input type="text" class="form-control" name="username" id="username" placeholder="Enter username">
+                                                    <label for="username" class="form-label">Email</label>
+                                                    <input type="email" class="form-control" name="username" id="username" placeholder="Enter username">
                                                 </div>
 
                                                 <div class="mb-3">
                                                     <div class="float-end">
-                                                        <a href="auth-pass-reset-cover.html" class="text-muted">Forgot password?</a>
+                                                        <a href="auth-pass-reset-cover.html" class="text-dark">Forgot password?</a>
                                                     </div>
                                                     <label class="form-label" for="password-input">Password</label>
                                                     <div class="position-relative auth-pass-inputgroup mb-3">
@@ -83,20 +92,20 @@
                                                     </div>
                                                 </div>
 
-                                                <div class="form-check">
-                                                    {{-- <input class="form-check-input" type="checkbox" value="" id="remember_me" name="remember_me"> --}}
-                                                    {{-- <label class="form-check-label" for="auth-remember-check">Remember me</label> --}}
-                                                </div>
+                                                {{-- <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" value="" id="remember_me" name="remember_me">
+                                                    <label class="form-check-label" for="auth-remember-check">Remember me</label>
+                                                </div> --}}
 
-                                                <div class="mt-4">
-                                                    <button class="btn btn-primary w-100" type="submit" id="loginForm_submit">Sign In</button>
+                                                <div class="mt-4 text-center">
+                                                    <button class="btn btn-primary w-20" type="submit" id="loginForm_submit">Sign In</button>
                                                 </div>
 
                                             </form>
                                         </div>
 
-                                        <div class="mt-5 text-center">
-                                            {{-- <p class="mb-0">Don't have an account ? <a href="auth-signup-cover.html" class="fw-semibold text-primary text-decoration-underline"> Signup</a> </p> --}}
+                                        <div class="mt-4 text-center text-dark">
+                                            <p class="mt-0">Don't have an account ? <a href="{{route('citizenRegistration')}}" class="fw-semibold text-primary text-decoration-underline"> Signup</a> </p>
                                         </div>
                                     </div>
                                 </div>
@@ -109,7 +118,7 @@
         </div>
 
 
-        <footer class="footer">
+        {{-- <footer class="footer">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
@@ -123,7 +132,7 @@
                     </div>
                 </div>
             </div>
-        </footer>
+        </footer> --}}
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>

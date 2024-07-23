@@ -44,7 +44,7 @@ class AuthController extends Controller
 
             try
             {
-                $user = User::where('email', $username)->first();
+                $user = User::where('email', $username)->whereNull('is_citizen')->first();
 
                 if(!$user)
                     return response()->json(['error2'=> 'No user found with this username']);
@@ -78,7 +78,8 @@ class AuthController extends Controller
     {
         auth()->logout();
 
-        return redirect()->route('login');
+        // return redirect()->route('login');
+        return redirect()->route('/');
     }
 
 

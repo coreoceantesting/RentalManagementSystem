@@ -49,7 +49,7 @@
                                 <div class="col-lg-7 bg-white">
                                     <div class="p-lg-4 p-3">
                                         <div class="text-center">
-                                            <img  src="{{ asset('admin/images/Group 1 copy 2.png') }}" height="60%" width="60%" alt="">
+                                            <img  src="{{ asset('admin/images/Group 1 copy 2.png') }}" height="55%" width="55%" alt="">
                                             <h5 class="text-dark text-center pt-3" style="font-weight: bold">नोंदणीमध्ये आपले स्वागत आहे</h5>
                                         </div>
 
@@ -60,50 +60,54 @@
                                                 <div class="mb-3 row">
                                                     <div class="col-md-6">
                                                         <label class="col-form-label" for="citizen_first_name">Citizen First Name (नागरिकाचे पहिले नाव)<span class="text-danger">*</span></label>
-                                                        <input class="form-control" id="citizen_first_name" name="citizen_first_name" type="text" placeholder="Enter Citizen First Name">
+                                                        <input class="form-control" id="citizen_first_name" name="citizen_first_name" type="text" placeholder="Enter Citizen First Name" required>
                                                         <span class="text-danger is-invalid citizen_first_name_err"></span>
                                                     </div>
                                                     <div class="col-md-6">
                                                         <label class="col-form-label" for="citizen_middle_name">Citizen Middle Name (नागरिकाचे मधले नाव)<span class="text-danger">*</span></label>
-                                                        <input class="form-control" id="citizen_middle_name" name="citizen_middle_name" type="text" placeholder="Enter Citizen Middle Name">
+                                                        <input class="form-control" id="citizen_middle_name" name="citizen_middle_name" type="text" placeholder="Enter Citizen Middle Name" required>
                                                         <span class="text-danger is-invalid citizen_middle_name_err"></span>
                                                     </div>
                                                     
                                                     <div class="col-md-6">
                                                         <label class="col-form-label" for="citizen_last_name">Citizen Last Name (नागरिकाचे आडनाव)<span class="text-danger">*</span></label>
-                                                        <input class="form-control" id="citizen_last_name" name="citizen_last_name" type="text" placeholder="Enter Citizen Last Name">
+                                                        <input class="form-control" id="citizen_last_name" name="citizen_last_name" type="text" placeholder="Enter Citizen Last Name" required>
                                                         <span class="text-danger is-invalid citizen_last_name_err"></span>
                                                     </div>
                                                     
                                                     <div class="col-md-6">
-                                                        <label class="col-form-label" for="citizen_mobile_no">Citizen Mobile No (नागरिकाचे मोबाईल नं)<span class="text-danger">*</span></label>
-                                                        <input class="form-control" id="citizen_mobile_no" name="citizen_mobile_no" type="number" placeholder="Enter Citizen Mobile Number">
-                                                        <span class="text-danger is-invalid citizen_mobile_no_err"></span>
+                                                        <label class="col-form-label" for="mobile">Citizen Mobile No (नागरिकाचा मोबाईल नंबर)<span class="text-danger">*</span></label>
+                                                        <input class="form-control" id="mobile" name="mobile" type="number" placeholder="Enter Citizen Mobile Number" required>
+                                                        <span class="text-danger is-invalid mobile_err"></span>
                                                     </div>
 
                                                     <div class="col-md-6">
-                                                        <label class="col-form-label" for="citizen_email">Citizen Email (नागरिकाचे ईमेल)<span class="text-danger">*</span></label>
-                                                        <input class="form-control" id="citizen_email" name="citizen_email" type="email" placeholder="Enter Citizen Email">
-                                                        <span class="text-danger is-invalid citizen_email_err"></span>
+                                                        <label class="col-form-label" for="email">Citizen Email (नागरिकाचा ईमेल)<span class="text-danger">*</span></label>
+                                                        <input class="form-control" id="email" name="email" type="email" placeholder="Enter Citizen Email" required>
+                                                        <span class="text-danger is-invalid email_err"></span>
                                                     </div>
                                                     
                                                     <div class="col-md-6">
-                                                        <label class="col-form-label" for="citizen_address">Citizen Address (नागरिकाचे पत्ता)<span class="text-danger">*</span></label>
-                                                        <textarea class="form-control" name="citizen_address" id="citizen_address" cols="30" rows="3"></textarea>
-                                                        <span class="text-danger is-invalid citizen_address_err"></span>
+                                                        <label class="col-form-label" for="address">Citizen Address (नागरिकाचा पत्ता)<span class="text-danger">*</span></label>
+                                                        <textarea class="form-control" name="address" id="address" cols="30" rows="3" required></textarea>
+                                                        <span class="text-danger is-invalid address_err"></span>
                                                     </div>
                         
                                                     <div class="col-md-6">
-                                                        <label class="col-form-label" for="citizen_username">UserName<span class="text-danger">*</span></label>
-                                                        <input class="form-control" id="citizen_username" name="citizen_username" type="text" placeholder="Enter Citizen UserName">
-                                                        <span class="text-danger is-invalid citizen_username_err"></span>
+                                                        <label class="col-form-label" for="password">Password (पासवर्ड)<span class="text-danger">*</span></label>
+                                                        <div class="input-group">
+                                                            <input type="password" class="form-control" id="password" name="password" placeholder="password" required>
+                                                            <span class="input-group-text" id="togglePassword">
+                                                                <i class="fa fa-eye"></i>
+                                                            </span>
+                                                        </div>
                                                     </div>
                                                     
                                                     <div class="col-md-6">
-                                                        <label class="col-form-label" for="password">Password<span class="text-danger">*</span></label>
+                                                        <label class="col-form-label" for="confirm_password">Confirm Password (पासवर्डची पुष्टी करा)<span class="text-danger">*</span></label>
                                                         <div class="input-group">
-                                                            <input type="password" class="form-control" id="password" name="password" placeholder="password">
-                                                            <span class="input-group-text" id="togglePassword">
+                                                            <input type="password" class="form-control" id="confirm_password" name="confirm_password" placeholder="Confirm Password" required>
+                                                            <span class="input-group-text" id="togglePasswordnew">
                                                                 <i class="fa fa-eye"></i>
                                                             </span>
                                                         </div>
@@ -182,6 +186,24 @@
         });
     </script>
 
+<script>
+    // Toggle password visibility
+    document.getElementById('togglePasswordnew').addEventListener('click', function () {
+        const passwordField = document.getElementById('confirm_password');
+        const icon = this.querySelector('i');
+
+        if (passwordField.type === 'password') {
+            passwordField.type = 'text';
+            icon.classList.remove('fa-eye');
+            icon.classList.add('fa-eye-slash');
+        } else {
+            passwordField.type = 'password';
+            icon.classList.remove('fa-eye-slash');
+            icon.classList.add('fa-eye');
+        }
+    });
+</script>confirm_password
+
     <script>
         $("#registartionForm").submit(function(e) {
             e.preventDefault();
@@ -195,7 +217,11 @@
                 processData: false,
                 success: function(data) {
                     if (!data.error && !data.error2) {
-                            window.location.href = '{{ route('citizenLoginPage') }}';
+                            swal("Successful!", data.success, "success")
+                            .then((action) => {
+                                window.location.href = '{{ route('citizenLoginPage') }}';
+                            });
+                            // window.location.href = '{{ route('citizenLoginPage') }}';
                     } else {
                         if (data.error2) {
                             swal("Error!", data.error2, "error");

@@ -15,57 +15,40 @@
     <link href="{{ asset('admin/css/app.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('admin/css/custom.min.css') }}" rel="stylesheet" type="text/css" />
 
+    <style>
+        .form-label{
+        color:black;
+    }
+
+    .form-control{
+        color:black !important;
+    }
+
+    
+    </style>
+
 </head>
 
 <body>
 
-    <div class="auth-page-wrapper auth-bg-cover py-5 d-flex justify-content-center align-items-center min-vh-100">
+    <div class="auth-page-wrapper auth-bg-cover py-1 d-flex justify-content-center align-items-center min-vh-100">
         <div class="bg-overlay"></div>
-        <div class="auth-page-content overflow-hidden pt-lg-5">
+        <div class="auth-page-content overflow-hidden pt-lg-3">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
-                        <div class="card overflow-hidden card-bg-fill border-0 card-border-effect-none">
+                        <div class="card overflow-hidden card-bg-fill border-0 card-border-effect-none" style="background-color: #a7e0e2">
                             <div class="row g-0">
-                                <div class="col-lg-6">
+                                <div class="col-lg-7">
                                     <img src="{{ asset('admin/images/(SRA).jpg') }}" alt="" width="100%" height="100%">
-                                    <div class="p-lg-5 p-4 auth-one-bg h-100 d-none">
-                                        <div class="bg-overlay"></div>
-                                        <div class="position-relative h-100 d-flex flex-column">
-                                            <div class="mb-4">
-                                                <a href="index.html" class="d-block">
-                                                    <img src="{{ asset('admin/images/logo-light.png') }}" alt="" height="18">
-                                                </a>
-                                            </div>
-                                            <div class="mt-auto">
-                                                <div class="mb-3">
-                                                    <i class="ri-double-quotes-l display-4 text-success"></i>
-                                                </div>
-
-                                                <div id="qoutescarouselIndicators" class="carousel slide" data-bs-ride="carousel">
-                                                    <div class="carousel-indicators">
-                                                        <button type="button" data-bs-target="#qoutescarouselIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                                                        <button type="button" data-bs-target="#qoutescarouselIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                                                        <button type="button" data-bs-target="#qoutescarouselIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
-                                                    </div>
-                                                    <div class="carousel-inner text-center text-white pb-5">
-                                                        @foreach ($quotes as $quote)
-                                                            <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
-                                                                <p class="fs-15 fst-italic">{!! $quote !!}</p>
-                                                            </div>
-                                                        @endforeach
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    
                                 </div>
 
-                                <div class="col-lg-6">
-                                    <div class="p-lg-5 p-4">
+                                <div class="col-lg-5">
+                                    <div class="p-lg-3 p-4">
                                         <div class="text-center">
                                             <img  src="{{ asset('admin/images/Slum-Rehabilitation-Authority-Mumbai (1).png') }}" height="40%" width="40%" alt="">
-                                            <h5 class="text-white text-center pt-3">लॉगिन मध्ये आपले स्वागत आहे</h5>
+                                            <h5 class="text-dark text-center pt-3">लॉगिन मध्ये आपले स्वागत आहे</h5>
                                         </div>
 
                                         <div class="mt-4">
@@ -77,9 +60,9 @@
                                                 </div>
 
                                                 <div class="mb-3">
-                                                    <div class="float-end">
+                                                    {{-- <div class="float-end">
                                                         <a href="auth-pass-reset-cover.html" class="text-muted">Forgot password?</a>
-                                                    </div>
+                                                    </div> --}}
                                                     <label class="form-label" for="password-input">Password</label>
                                                     <div class="position-relative auth-pass-inputgroup mb-3">
                                                         <input type="password" class="form-control pe-5 password-input" placeholder="Enter password" id="password" name="password" >
@@ -87,13 +70,13 @@
                                                     </div>
                                                 </div>
 
-                                                <div class="form-check">
+                                                {{-- <div class="form-check">
                                                     <input class="form-check-input" type="checkbox" value="" id="remember_me" name="remember_me">
-                                                    {{-- <label class="form-check-label" for="auth-remember-check">Remember me</label> --}}
-                                                </div>
+                                                    <label class="form-check-label" for="auth-remember-check">Remember me</label>
+                                                </div> --}}
 
-                                                <div class="mt-4">
-                                                    <button class="btn btn-primary w-100" type="submit" id="loginForm_submit">Sign In</button>
+                                                <div class="mt-4 text-center">
+                                                    <button class="btn btn-primary w-25" type="submit" id="loginForm_submit">Sign In</button>
                                                 </div>
 
                                             </form>
@@ -113,7 +96,7 @@
         </div>
 
 
-        <footer class="footer">
+        <footer class="footer d-none">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
