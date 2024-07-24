@@ -26,6 +26,13 @@
         input, select, textarea{
         color: black !important;
     }
+
+    .auth-page-wrapper .auth-page-content {
+            padding-bottom: 0px !important;
+            position: relative;
+            z-index: 2;
+            width: 100%;
+        }
     </style>
 
 </head>
@@ -33,10 +40,10 @@
 <body>
 
     <!-- auth-page wrapper -->
-    <div class="auth-page-wrapper auth-bg-cover py-5 d-flex justify-content-center align-items-center min-vh-100">
+    <div class="auth-page-wrapper auth-bg-cover py-1 d-flex justify-content-center align-items-center min-vh-100">
         <div class="bg-overlay"></div>
         <!-- auth-page content -->
-        <div class="auth-page-content overflow-hidden pt-lg-5">
+        <div class="auth-page-content overflow-hidden pt-lg-1">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
@@ -47,9 +54,9 @@
                                 </div>
 
                                 <div class="col-lg-7 bg-white">
-                                    <div class="p-lg-4 p-3">
+                                    <div class="p-lg-4 p-2">
                                         <div class="text-center">
-                                            <img  src="{{ asset('admin/images/Group 1 copy 2.png') }}" height="55%" width="55%" alt="">
+                                            <img  src="{{ asset('admin/images/Group 1 copy 2.png') }}" height="50%" width="50%" alt="">
                                             <h5 class="text-dark text-center pt-3" style="font-weight: bold">नोंदणीमध्ये आपले स्वागत आहे</h5>
                                         </div>
 
@@ -121,7 +128,7 @@
                                             </form>
                                         </div>
 
-                                        <div class="mt-5 text-center text-dark">
+                                        <div class="mt-3 text-center text-dark">
                                             <p class="mb-0">Already have an account ? <a href="{{route('citizenLoginPage')}}" class="fw-semibold text-primary text-decoration-underline"> Signin</a> </p>
                                         </div>
                                     </div>
@@ -140,7 +147,7 @@
         <!-- end auth page content -->
 
         <!-- footer -->
-        <footer class="footer">
+        <footer class="footer d-none">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
@@ -202,7 +209,7 @@
             icon.classList.add('fa-eye');
         }
     });
-</script>confirm_password
+</script>
 
     <script>
         $("#registartionForm").submit(function(e) {
