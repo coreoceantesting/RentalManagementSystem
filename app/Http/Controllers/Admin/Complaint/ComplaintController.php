@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin\Complaint;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Contractor;
 
 class ComplaintController extends Controller
 {

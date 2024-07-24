@@ -51,13 +51,13 @@
                         <div class="card overflow-hidden m-0 card-bg-fill border-0 card-border-effect-none">
                             <div class="row justify-content-center g-0">
                                 <div class="col-lg-5">
-                                    <img src="{{ asset('admin/images/(SRA).jpg') }}" alt="" width="100%" height="100%">
+                                    <img src="{{ asset('admin/images/Group 5.jpg') }}" alt="" width="100%" height="100%">
                                 </div>
 
                                 <div class="col-lg-7 bg-white">
                                     <div class="p-lg-4 p-2">
                                         <div class="text-center">
-                                            <img  src="{{ asset('admin/images/Group 1 copy 2.png') }}" height="50%" width="50%" alt="">
+                                            <img  src="{{ asset('admin/images/Group 1 copy 2.png') }}" height="35%" width="35%" alt="">
                                             <h5 class="text-dark text-center pt-3" style="font-weight: bold">नोंदणीमध्ये आपले स्वागत आहे</h5>
                                         </div>
 
