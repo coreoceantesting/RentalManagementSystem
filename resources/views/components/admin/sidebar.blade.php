@@ -87,6 +87,13 @@
                 </li>
                 @endcan
 
+                <li class="nav-item">
+                    <a class="nav-link menu-link" href="{{ route('complaint.index') }}" >
+                        <i class="ri-add-circle-line"></i>
+                        <span data-key="t-dashboards">Add Complaint</span>
+                    </a>
+                </li>
+
             </ul>
         </div>
     </div>

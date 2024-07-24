@@ -14,7 +14,7 @@
             }
 
             .bg-img{
-                background-image: url('{{ asset('admin/images/bulding-img.jpg') }}');
+                background-image: url('{{ asset('admin/images/xyz.jpg') }}');
                 background-repeat: no-repeat;
                 background-position: 0%;
                 background-size: cover;

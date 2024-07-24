@@ -33,6 +33,10 @@
             z-index: 2;
             width: 100%;
         }
+
+        .auth-bg-cover {
+    background: oldlace !important;
+}
     </style>
 
 </head>

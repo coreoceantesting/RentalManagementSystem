@@ -24,6 +24,17 @@
         color:black !important;
     }
 
+    .auth-page-wrapper .auth-page-content {
+            padding-bottom: 0px !important;
+            position: relative;
+            z-index: 2;
+            width: 100%;
+        }
+
+        .auth-bg-cover {
+    background: aliceblue !important;
+}
+
     
     </style>
 
@@ -37,10 +48,10 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
-                        <div class="card overflow-hidden card-bg-fill border-0 card-border-effect-none" style="background-color: #a7e0e2">
+                        <div class="card overflow-hidden card-bg-fill border-0 card-border-effect-none" style="background-color: #cdeff0">
                             <div class="row g-0">
                                 <div class="col-lg-7">
-                                    <img src="{{ asset('admin/images/(SRA).jpg') }}" alt="" width="100%" height="100%">
+                                    <img src="{{ asset('admin/images/adminLogin.jpg') }}" alt="" width="100%" height="100%">
                                     
                                 </div>
 

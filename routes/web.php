@@ -60,6 +60,9 @@ Route::middleware(['auth','PreventBackHistory', 'firewall.all'])->group(function
     Route::resource('architects', App\Http\Controllers\Admin\Masters\ArchitectController::class );
     Route::resource('schemes', App\Http\Controllers\Admin\Masters\SchemeController::class );
 
+    // complaint routes
+    Route::resource('complaint', App\Http\Controllers\Admin\Complaint\ComplaintController::class );
+
 
 
 
