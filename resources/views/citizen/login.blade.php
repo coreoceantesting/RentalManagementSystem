@@ -35,6 +35,13 @@
             height: 100vh;
             background-color: var(--vz-backdrop-bg);
         }
+
+        .auth-page-wrapper .auth-page-content {
+            padding-bottom: 0px !important;
+            position: relative;
+            z-index: 2;
+            width: 100%;
+        }
     </style>
 
 </head>
@@ -50,7 +57,7 @@
                         <div class="card overflow-hidden card-bg-fill border-0 card-border-effect-none" style="background-color: #ececec">
                             <div class="row g-0">
                                 <div class="col-lg-7">
-                                    <img src="{{ asset('admin/images/(SRA).jpg') }}" alt="" width="100%" height="100%">
+                                    <img src="{{ asset('admin/images/auth-one-bg 1.jpg') }}" alt="" width="100%" height="100%">
                                     <div class="p-lg-5 p-4 auth-one-bg h-100 d-none">
                                         <div class="bg-overlay"></div>
                                         <div class="position-relative h-100 d-flex flex-column">

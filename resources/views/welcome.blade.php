@@ -216,15 +216,15 @@
                     border-radius: 8px;
                     margin: 10px auto;
                     width: 80%; */
-
                     font-weight: bold;
                     background-color: #fefefe;
                     color: #0d0101;
                     padding: 15px;
                     border-radius: 30px;
-                    border: solid 4px red;
                     margin: 10px auto;
                     width: 80%;
+                    border-style: groove;
+                    box-shadow: 2px 2px 2px 2px red;
 
                 }
 
