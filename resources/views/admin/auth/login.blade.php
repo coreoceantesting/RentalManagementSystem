@@ -31,9 +31,6 @@
             width: 100%;
         }
 
-        .auth-bg-cover {
-    background: aliceblue !important;
-}
 
     
     </style>
@@ -48,7 +45,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
-                        <div class="card overflow-hidden card-bg-fill border-0 card-border-effect-none" style="background-color: #cdeff0">
+                        <div class="card overflow-hidden card-bg-fill border-0 card-border-effect-none" style="background-color: #ececec">
                             <div class="row g-0">
                                 <div class="col-lg-7">
                                     <img src="{{ asset('admin/images/adminLogin.jpg') }}" alt="" width="100%" height="100%">
