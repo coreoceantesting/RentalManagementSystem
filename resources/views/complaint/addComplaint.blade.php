@@ -149,7 +149,7 @@
 
                                 <div class="col-md-6">
                                     <label class="col-form-label" for="is_there_rental_agreement">Is there a rental agreement? (भाडे करार करण्यात आलेला आहे का ?)<span class="text-danger">*</span></label>
-                                    <select class="form-control" name="form-control" name="is_there_rental_agreement" id="is_there_rental_agreement">
+                                    <select class="form-control" name="is_there_rental_agreement" id="is_there_rental_agreement">
                                         <option value="">Select Option</option>
                                         <option value="yes">Yes / होय</option>
                                         <option value="no">No / नाही</option>
@@ -171,7 +171,7 @@
 
                                 <div class="col-md-6">
                                     <label class="col-form-label" for="is_developer_paid_earlier_rent">Has the developer paid the rent earlier? (विकासकाने पूर्वी भाडे दिले आहे ?)<span class="text-danger">*</span></label>
-                                    <select class="form-control" name="form-control" name="is_developer_paid_earlier_rent" id="is_developer_paid_earlier_rent">
+                                    <select class="form-control" name="is_developer_paid_earlier_rent" id="is_developer_paid_earlier_rent">
                                         <option value="">Select Option</option>
                                         <option value="yes">Yes / होय</option>
                                         <option value="no">No / नाही</option>
@@ -199,7 +199,7 @@
 
                                 <div class="col-md-6">
                                     <label class="col-form-label" for="montly_received_date">At what monthly rate was the said rent received? (सदरील भाडे कोणत्या मासिक दराने मिळाले)<span class="text-danger">*</span></label>
-                                    <input class="form-control" type="number" name="montly_received_date" id="montly_received_date">
+                                    <input class="form-control" type="number" name="montly_received_date" id="montly_received_date" placeholder="Enter Amount">
                                     <span class="text-danger is-invalid montly_received_date_err"></span>
                                 </div>
 
@@ -215,25 +215,25 @@
 
                                 <div class="col-md-6">
                                     <label class="col-form-label" for="bank_account_no">Bank Account No (बँक खाते क्र)<span class="text-danger">*</span></label>
-                                    <input class="form-control" type="number" name="bank_account_no" id="bank_account_no">
+                                    <input class="form-control" type="number" name="bank_account_no" id="bank_account_no" placeholder="Enter Bank Account No">
                                     <span class="text-danger is-invalid bank_account_no_err"></span>
                                 </div>
 
                                 <div class="col-md-6">
                                     <label class="col-form-label" for="bank_name">Bank Name (बँकेचे नाव)<span class="text-danger">*</span></label>
-                                    <input class="form-control" type="text" name="bank_name" id="bank_name">
+                                    <input class="form-control" type="text" name="bank_name" id="bank_name" placeholder="Enter Bank Name">
                                     <span class="text-danger is-invalid bank_name_err"></span>
                                 </div>
 
                                 <div class="col-md-6">
                                     <label class="col-form-label" for="bank_address">Bank Address (बँकेचा पत्ता)<span class="text-danger">*</span></label>
-                                    <input class="form-control" type="text" name="bank_address" id="bank_address">
+                                    <input class="form-control" type="text" name="bank_address" id="bank_address" placeholder="Enter Bank Address">
                                     <span class="text-danger is-invalid bank_address_err"></span>
                                 </div>
 
                                 <div class="col-md-6">
                                     <label class="col-form-label" for="ifsc_code">IFSC Code (आयएफएससी कोड)<span class="text-danger">*</span></label>
-                                    <input class="form-control" type="text" name="ifsc_code" id="ifsc_code">
+                                    <input class="form-control" type="text" name="ifsc_code" id="ifsc_code" placeholder="Enter IFSC Code">
                                     <span class="text-danger is-invalid ifsc_code_err"></span>
                                 </div>
 
