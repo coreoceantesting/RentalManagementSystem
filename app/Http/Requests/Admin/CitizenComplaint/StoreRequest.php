@@ -42,7 +42,7 @@ class StoreRequest extends FormRequest
             'is_developer_paid_earlier_rent' => 'required',
             'old_monthly_rate_of_rent' => 'nullable',
             'date_of_previous_rent_was' => 'required',
-            'montly_received_date' => 'required',
+            'montly_received_rate' => 'required',
             'bank_account_no' => 'required',
             'bank_name' => 'required',
             'bank_address' => 'required',

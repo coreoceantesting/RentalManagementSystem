@@ -198,9 +198,9 @@
                                 </div>
 
                                 <div class="col-md-6">
-                                    <label class="col-form-label" for="montly_received_date">At what monthly rate was the said rent received? (सदरील भाडे कोणत्या मासिक दराने मिळाले)<span class="text-danger">*</span></label>
-                                    <input class="form-control" type="number" name="montly_received_date" id="montly_received_date" placeholder="Enter Amount">
-                                    <span class="text-danger is-invalid montly_received_date_err"></span>
+                                    <label class="col-form-label" for="montly_received_rate">At what monthly rate was the said rent received? (सदरील भाडे कोणत्या मासिक दराने मिळाले)<span class="text-danger">*</span></label>
+                                    <input class="form-control" type="number" name="montly_received_rate" id="montly_received_rate" placeholder="Enter Amount">
+                                    <span class="text-danger is-invalid montly_received_rate_err"></span>
                                 </div>
 
 

@@ -4,9 +4,13 @@ namespace App\Http\Controllers\Admin\Complaint;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Requests\Admin\CitizenComplaint\StoreRequest;
+use Illuminate\Support\Facades\DB;
+use App\Models\ComplaintDetail;
+use App\Models\ComplaintStatus;
 use App\Models\Contractor;
 use App\Models\Scheme;
-use App\Http\Requests\Admin\CitizenComplaint\StoreRequest;
+use Carbon\Carbon;
 
 class ComplaintController extends Controller
 {
@@ -38,14 +42,34 @@ class ComplaintController extends Controller
             DB::beginTransaction();
             $input = $request->validated();
             $input['created_by'] = auth()->user()->id;
-            // Architect::create($input);
+            $input['created_at'] = now();
+
+            // Handle file uploads
+            if ($request->hasFile('appendix_doc')) {
+                $appendixDoc = $request->file('appendix_doc');
+                $appendixDocPath = $appendixDoc->store('appendix_docs', 'public');
+                $input['appendix_doc'] = $appendixDocPath;
+            }
+
+            if ($request->hasFile('copy_of_bank_passbook')) {
+                $bankPassbook = $request->file('copy_of_bank_passbook');
+                $bankPassbookPath = $bankPassbook->store('bank_passbooks', 'public');
+                $input['copy_of_bank_passbook'] = $bankPassbookPath;
+            }
+
+           $complaint = ComplaintDetail::create($input);
+
+           ComplaintStatus::create([
+                'complaint_id' => $complaint->id,
+            ]);
+
             DB::commit();
 
             return response()->json(['success'=> 'Complaint Store Successfully!']);
         }
         catch(\Exception $e)
         {
-            return $this->respondWithAjax($e, 'creating', 'Architect');
+            return $this->respondWithAjax($e, 'creating', 'Complaint');
         }
     }
 
