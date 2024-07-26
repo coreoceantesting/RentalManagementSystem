@@ -14,7 +14,8 @@ class Scheme extends Model
     protected $fillable = [
         'scheme_name', 
         'contractor',
-        'architect', 
+        'architect',
+        'scheme_detail', 
         'created_by', 
         'updated_by', 
         'deleted_by'

@@ -62,6 +62,7 @@ Route::middleware(['auth','PreventBackHistory', 'firewall.all'])->group(function
 
     // complaint routes
     Route::resource('complaint', App\Http\Controllers\Admin\Complaint\ComplaintController::class );
+    Route::get('/get-scheme-details/{id}', [App\Http\Controllers\Admin\Complaint\ComplaintController::class, 'getSchemeDetails'])->name('get.scheme.details');
 
 
 

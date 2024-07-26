@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin\Complaint;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Contractor;
+use App\Models\Scheme;
 
 class ComplaintController extends Controller
 {
@@ -13,7 +14,9 @@ class ComplaintController extends Controller
      */
     public function index()
     {
-        return view('complaint.addComplaint');
+        $schemes_list = Scheme::latest()->get();
+        $contractor_list = Contractor::latest()->get();
+        return view('complaint.addComplaint')->with(['schemes_list' => $schemes_list, 'contractor_list' => $contractor_list]);
     }
 
     /**
@@ -62,5 +65,16 @@ class ComplaintController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function getSchemeDetails($id)
+    {
+        $scheme_detail = Scheme::find($id);
+        $contractor_detail = Contractor::where('id', $scheme_detail->contractor)->first();
+
+        return response()->json([
+            'scheme_detail' => $scheme_detail,
+            'contractor_detail' => $contractor_detail,
+        ]);
     }
 }

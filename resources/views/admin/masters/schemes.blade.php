@@ -21,6 +21,13 @@
                                     <input class="form-control" id="scheme_name" name="scheme_name" type="text" placeholder="Enter Scheme Name">
                                     <span class="text-danger is-invalid scheme_name_err"></span>
                                 </div>
+
+                                <div class="col-md-4">
+                                    <label class="col-form-label" for="scheme_detail">Scheme Details<span class="text-danger">*</span></label>
+                                    <textarea class="form-control" id="scheme_detail" name="scheme_detail" cols="30" rows="2" placeholder="Enter Scheme Detail"></textarea>
+                                    <span class="text-danger is-invalid scheme_detail_err"></span>
+                                </div>
+
                                 <div class="col-md-4">
                                     <label class="col-form-label" for="contractor">Contractor <span class="text-danger">*</span></label>
                                     <select class="form-control" name="contractor" id="contractor">
@@ -32,7 +39,7 @@
                                     <span class="text-danger is-invalid contractor_err"></span>
                                 </div>
                                 <div class="col-md-4">
-                                    <label class="col-form-label" for="architect">Contractor <span class="text-danger">*</span></label>
+                                    <label class="col-form-label" for="architect">Architect <span class="text-danger">*</span></label>
                                     <select class="form-control" name="architect" id="architect">
                                         <option value="">Select Architect</option>    
                                         @foreach ($architects as $architect)
@@ -72,6 +79,13 @@
                                     <input class="form-control" id="scheme_name" name="scheme_name" type="text" placeholder="Enter Scheme Name">
                                     <span class="text-danger is-invalid scheme_name_err"></span>
                                 </div>
+
+                                <div class="col-md-4">
+                                    <label class="col-form-label" for="scheme_detail">Scheme Details<span class="text-danger">*</span></label>
+                                    <textarea class="form-control" id="scheme_detail" name="scheme_detail" cols="30" rows="2" placeholder="Enter Scheme Detail"></textarea>
+                                    <span class="text-danger is-invalid scheme_detail_err"></span>
+                                </div>
+
                                 <div class="col-md-4">
                                     <label class="col-form-label" for="contractor">Contractor <span class="text-danger">*</span></label>
                                     <select class="form-control" name="contractor" id="contractor">
@@ -83,7 +97,7 @@
                                     <span class="text-danger is-invalid contractor_err"></span>
                                 </div>
                                 <div class="col-md-4">
-                                    <label class="col-form-label" for="architect">Contractor <span class="text-danger">*</span></label>
+                                    <label class="col-form-label" for="architect">Architect <span class="text-danger">*</span></label>
                                     <select class="form-control" name="architect" id="architect">
                                         <option value="">Select Architect</option>    
                                         @foreach ($architects as $architect)
@@ -218,6 +232,7 @@
                     $("#editForm input[name='scheme_name']").val(data.scheme.scheme_name);
                     $("#editForm select[name='contractor']").val(data.scheme.contractor);
                     $("#editForm select[name='architect']").val(data.scheme.architect);
+                    $("#editForm textarea[name='scheme_detail']").val(data.scheme.scheme_detail);
                 }
                 else
                 {

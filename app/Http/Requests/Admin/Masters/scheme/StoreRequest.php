@@ -25,6 +25,7 @@ class StoreRequest extends FormRequest
             'scheme_name' => 'required',
             'contractor' => 'required',
             'architect' => 'required',
+            'scheme_detail' => 'required',
         ];
     }
 }
