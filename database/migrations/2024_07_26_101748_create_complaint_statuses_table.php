@@ -40,6 +40,7 @@ return new class extends Migration
             $table->string('send_to_collector_remark')->nullable();
             $table->integer('approval_by')->nullable();
             $table->datetime('approval_at')->nullable();
+            $table->string('approval_remark')->nullable();
             $table->string('stop_work_subject')->nullable();
             $table->string('stop_work_doc')->nullable();
             $table->integer('stop_work_approval_by')->nullable();

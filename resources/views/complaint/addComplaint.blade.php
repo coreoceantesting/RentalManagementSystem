@@ -13,7 +13,7 @@
                         <div class="card-body">
                             <div class="mb-3 row">
                                 <div class="card-header">
-                                    <h2 class="text-center"><b>Applicant Details (अर्जदाराचे तपशील)</b></h2>
+                                    <h4 class="text-center"><b>Applicant Details (अर्जदाराचे तपशील)</b></h4>
                                 </div>
                                 <div class="col-md-4">
                                     <label class="col-form-label" for="applicant_name">Applicant Name (अर्जदाराचे नाव) <span class="text-danger">*</span></label>
@@ -41,7 +41,7 @@
                         <div class="card-body">
                             <div class="mb-3 row">
                                 <div class="card-header">
-                                    <h2 class="text-center"><b>Current status of applicant in Annexure 2 (परिशिष्ट २ मधील अर्जदाराची सद्यस्तिथी )</b></h2>
+                                    <h4 class="text-center"><b>Current status of applicant in Annexure 2 (परिशिष्ट २ मधील अर्जदाराची सद्यस्तिथी )</b></h4>
                                 </div>
                                 <div class="col-md-6">
                                     <label class="col-form-label" for="original_no">A in original Pari-2. No (मुळ  परि -२ मधील अ . क्र :) <span class="text-danger">*</span></label>
@@ -87,7 +87,7 @@
                         <div class="card-body">
                             <div class="mb-3 row">
                                 <div class="card-header">
-                                    <h2 class="text-center"><b>Scheme Details (योजना तपशील)</b></h2>
+                                    <h4 class="text-center"><b>Scheme Details (योजना तपशील)</b></h4>
                                 </div>
                                 <div class="col-md-6">
                                     <label class="col-form-label" for="scheme_name">Scheme Name (योजनेचे नाव) <span class="text-danger">*</span></label>
@@ -112,7 +112,7 @@
                         <div class="card-body">
                             <div class="mb-3 row">
                                 <div class="card-header">
-                                    <h2 class="text-center"><b>Contractor Details (कंत्राटदार तपशील)</b></h2>
+                                    <h4 class="text-center"><b>Contractor Details (कंत्राटदार तपशील)</b></h4>
                                 </div>
 
                                 <div class="col-md-6">
@@ -139,7 +139,7 @@
                         <div class="card-body">
                             <div class="mb-3 row">
                                 <div class="card-header">
-                                    <h2 class="text-center"><b>Others Details (इतर तपशील)</b></h2>
+                                    <h4 class="text-center"><b>Others Details (इतर तपशील)</b></h4>
                                 </div>
                                 <div class="col-md-6">
                                     <label class="col-form-label" for="date_of_demolition">Date of demolition of hut (झोपडी तोडल्याची दिनांक)<span class="text-danger">*</span></label>
@@ -210,7 +210,7 @@
                         <div class="card-body">
                             <div class="mb-3 row">
                                 <div class="card-header">
-                                    <h2 class="text-center"><b>Bank Details (बँक तपशील)</b></h2>
+                                    <h4 class="text-center"><b>Bank Details (बँक तपशील)</b></h4>
                                 </div>
 
                                 <div class="col-md-6">

@@ -87,10 +87,40 @@
                 </li>
                 @endcan
 
+                {{-- Citizen Menus --}}
+
                 <li class="nav-item">
                     <a class="nav-link menu-link" href="{{ route('complaint.index') }}" >
                         <i class="ri-add-circle-line"></i>
                         <span data-key="t-dashboards">Add Complaint</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link menu-link" href="{{ route('list.all.applications') }}" >
+                        <i class="ri-list-check"></i>
+                        <span data-key="t-dashboards">Application List</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link menu-link" href="{{ route('list.rejected.applications') }}" >
+                        <i class="ri-list-check"></i>
+                        <span data-key="t-dashboards">Rejected Application List</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link menu-link" href="#" >
+                        <i class="ri-list-check"></i>
+                        <span data-key="t-dashboards">Hearing Application List</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link menu-link" href="#" >
+                        <i class="ri-list-check"></i>
+                        <span data-key="t-dashboards">Close List</span>
                     </a>
                 </li>
 
