@@ -64,9 +64,11 @@ Route::middleware(['auth','PreventBackHistory', 'firewall.all'])->group(function
     Route::resource('complaint', App\Http\Controllers\Admin\Complaint\ComplaintController::class );
     Route::get('/get-scheme-details/{id}', [App\Http\Controllers\Admin\Complaint\ComplaintController::class, 'getSchemeDetails'])->name('get.scheme.details');
 
-    // citizen route 
+    // citizen route
     Route::get('/application-list', [App\Http\Controllers\Admin\Citizen\ListingController::class, 'allApplicationList'])->name('list.all.applications');
     Route::get('/rejected-application-list', [App\Http\Controllers\Admin\Citizen\ListingController::class, 'rejectedApplicationList'])->name('list.rejected.applications');
+    Route::get('/hearing-application-list', [App\Http\Controllers\Admin\Citizen\ListingController::class, 'hearingApplicationList'])->name('list.hearing.applications');
+    Route::get('/close-application-list', [App\Http\Controllers\Admin\Citizen\ListingController::class, 'closeApplicationList'])->name('list.close.applications');
 
 
 

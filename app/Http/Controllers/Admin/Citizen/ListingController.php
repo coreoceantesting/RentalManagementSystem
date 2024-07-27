@@ -21,7 +21,7 @@ class ListingController extends Controller
                                 ->select('complaint_details.*', 'schemes.scheme_name as SchemeName', 'complaint_statuses.overall_status')
                                 ->get();
 
-        return view('citizen.allApplicationList')->with(['application_lists' => $application_lists]); 
+        return view('citizen.allApplicationList')->with(['application_lists' => $application_lists]);
     }
 
     public function rejectedApplicationList(Request $request){
@@ -32,7 +32,31 @@ class ListingController extends Controller
                                 ->where('complaint_statuses.overall_status', 'Rejected')
                                 ->select('complaint_details.*', 'schemes.scheme_name as SchemeName', 'complaint_statuses.overall_status', 'complaint_statuses.approval_remark')
                                 ->get();
-                                
-        return view('citizen.rejectedApplicationList')->with(['application_lists' => $application_lists]); 
+
+        return view('citizen.rejectedApplicationList')->with(['application_lists' => $application_lists]);
+    }
+
+    public function hearingApplicationList(Request $request)
+    {
+        $application_lists = ComplaintDetail::leftjoin('complaint_statuses', 'complaint_details.id', '=', 'complaint_statuses.complaint_id')
+                                ->leftjoin('schemes', 'complaint_details.scheme_name', '=', 'schemes.id')
+                                ->where('complaint_details.created_by', auth()->user()->id)
+                                ->where('complaint_statuses.status', 'Send For Hearing')
+                                ->select('complaint_details.*', 'schemes.scheme_name as SchemeName', 'complaint_statuses.overall_status', 'complaint_statuses.approval_remark')
+                                ->get();
+
+        return view('citizen.hearingApplicationList')->with(['application_lists' => $application_lists]);
+    }
+
+    public function closeApplicationList(Request $request)
+    {
+        $application_lists = ComplaintDetail::leftjoin('complaint_statuses', 'complaint_details.id', '=', 'complaint_statuses.complaint_id')
+                                ->leftjoin('schemes', 'complaint_details.scheme_name', '=', 'schemes.id')
+                                ->where('complaint_details.created_by', auth()->user()->id)
+                                ->where('complaint_statuses.overall_status', 'Closed')
+                                ->select('complaint_details.*', 'schemes.scheme_name as SchemeName', 'complaint_statuses.overall_status', 'complaint_statuses.approval_remark')
+                                ->get();
+
+        return view('citizen.closeApplicationList')->with(['application_lists' => $application_lists]);
     }
 }

@@ -108,14 +108,14 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link menu-link" href="#" >
+                    <a class="nav-link menu-link" href="{{ route('list.hearing.applications') }}" >
                         <i class="ri-list-check"></i>
                         <span data-key="t-dashboards">Hearing Application List</span>
                     </a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link menu-link" href="#" >
+                    <a class="nav-link menu-link" href="{{ route('list.close.applications') }}" >
                         <i class="ri-list-check"></i>
                         <span data-key="t-dashboards">Close List</span>
                     </a>
