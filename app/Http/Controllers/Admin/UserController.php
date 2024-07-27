@@ -24,7 +24,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::whereNot('id', Auth::user()->id)->latest()->get();
+        $users = User::whereNot('id', Auth::user()->id)->whereNull('is_citizen')->latest()->get();
         $roles = Role::orderBy('id', 'DESC')->whereNot('name', 'like', '%super%')->get();
 
         return view('admin.users')->with(['users'=> $users, 'roles'=> $roles]);
