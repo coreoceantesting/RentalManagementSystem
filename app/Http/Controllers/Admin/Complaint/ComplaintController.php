@@ -115,4 +115,16 @@ class ComplaintController extends Controller
             'contractor_detail' => $contractor_detail,
         ]);
     }
+
+    public function viewApplicationDetails($id)
+    {
+        $application_detail = ComplaintDetail::leftjoin('complaint_statuses', 'complaint_details.id', '=', 'complaint_statuses.complaint_id')
+                                ->leftjoin('schemes', 'complaint_details.scheme_name', '=', 'schemes.id')
+                                ->where('complaint_details.id', $id)
+                                ->select('complaint_details.*', 'schemes.scheme_name as SchemeName', 'complaint_statuses.*')
+                                ->first();
+            // dd($application_detail);
+
+        return view('complaint.viewComplaint')->with(['application_detail' => $application_detail]);
+    }
 }

@@ -63,12 +63,17 @@ Route::middleware(['auth','PreventBackHistory', 'firewall.all'])->group(function
     // complaint routes
     Route::resource('complaint', App\Http\Controllers\Admin\Complaint\ComplaintController::class );
     Route::get('/get-scheme-details/{id}', [App\Http\Controllers\Admin\Complaint\ComplaintController::class, 'getSchemeDetails'])->name('get.scheme.details');
+    Route::get('/view-application/{id}', [App\Http\Controllers\Admin\Complaint\ComplaintController::class, 'viewApplicationDetails'])->name('view.application.details');
 
-    // citizen route
+
+    // citizen routes
     Route::get('/application-list', [App\Http\Controllers\Admin\Citizen\ListingController::class, 'allApplicationList'])->name('list.all.applications');
     Route::get('/rejected-application-list', [App\Http\Controllers\Admin\Citizen\ListingController::class, 'rejectedApplicationList'])->name('list.rejected.applications');
     Route::get('/hearing-application-list', [App\Http\Controllers\Admin\Citizen\ListingController::class, 'hearingApplicationList'])->name('list.hearing.applications');
     Route::get('/close-application-list', [App\Http\Controllers\Admin\Citizen\ListingController::class, 'closeApplicationList'])->name('list.close.applications');
+
+    // clerk routes
+    Route::get('/complaint-list', [App\Http\Controllers\Admin\Clerk\ClerkActionController::class, 'complaintList'])->name('complaint.list');
 
 
 
