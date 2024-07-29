@@ -225,4 +225,15 @@ class ClerkActionController extends Controller
         }
     }
 
+    public function annexureVerificationList(Request $request)
+    {
+        $application_lists = ComplaintDetail::leftjoin('complaint_statuses', 'complaint_details.id', '=', 'complaint_statuses.complaint_id')
+                                ->leftjoin('schemes', 'complaint_details.scheme_name', '=', 'schemes.id')
+                                ->where('complaint_statuses.overall_status', 'Send To Collector')
+                                ->select('complaint_details.*', 'schemes.scheme_name as SchemeName', 'complaint_statuses.*')
+                                ->get();
+
+        return view('clerk.annexureVerificationList')->with(['application_lists' => $application_lists]);
+    }
+
 }

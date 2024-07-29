@@ -240,9 +240,9 @@
                         @if ($application_detail->overall_status == "Pending" && auth()->user()->roles->pluck('name')[0] == 'clerk')
                             <button type="button" class="btn btn-primary" id="approveBtn" data-id="{{ $application_detail->id }}">Approve</button>
                             <button type="button" class="btn btn-warning" id="rejectBtn" data-id="{{ $application_detail->id }}">Reject</button>
-                            <button type="button" class="btn btn-danger" id="sendBtn" data-id="{{ $application_detail->id }}">Send</button>
+                            <button type="button" class="btn btn-danger" id="sendBtn" data-id="{{ $application_detail->id }}">Send To Collector</button>
                         @endif
-                        <a href="{{ url()->previous() }}" class="btn btn-sm btn-warning">Back</a>
+                        <a href="{{ url()->previous() }}" class="btn btn-info">Back</a>
                     </div>
                 </div>
                 <!-- Reject Remark Modal -->
@@ -257,7 +257,7 @@
                             <form id="rejectForm">
                                 @csrf
                                 <div class="mb-3">
-                                <label for="remark" class="form-label">Remark</label>
+                                <label for="remark" class="form-label">Remark (शेरा)</label>
                                 <textarea class="form-control" id="remark" name="remark" rows="3" required></textarea>
                                 </div>
                                 <input type="hidden" id="applicationId" name="application_id">
@@ -276,14 +276,14 @@
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
-                            <h5 class="modal-title" id="sendRemarkModalLabel">Send Application</h5>
+                            <h5 class="modal-title" id="sendRemarkModalLabel">Send Application To DY Collector</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
                             <form id="sendForm">
                                 @csrf
                                 <div class="mb-3">
-                                <label for="sendRemark" class="form-label">Remark</label>
+                                <label for="sendRemark" class="form-label">Remark (शेरा)</label>
                                 <textarea class="form-control" id="sendRemark" name="sendremark" rows="3" required></textarea>
                                 </div>
                                 <input type="hidden" id="sendApplicationId" name="application_id">
@@ -408,7 +408,7 @@
                     $('#sendRemarkModal').modal('hide');
                     if(response.success) {
                         swal("Sent!", response.success, "success").then((action) => {
-                            window.location.reload();
+                            window.location.href = "{{ route('annexure.verification.list') }}";
                         });
                     } else {
                         swal("Error!", response.error, "error");

@@ -88,6 +88,8 @@ Route::middleware(['auth','PreventBackHistory', 'firewall.all'])->group(function
     // hearing
     Route::post('/application/hearingdetails', [App\Http\Controllers\Admin\Clerk\ClerkActionController::class, 'storeHearingDetails'])->name('application.hearingDetails.store');
 
+    Route::get('/annexure-verification-list', [App\Http\Controllers\Admin\Clerk\ClerkActionController::class, 'annexureVerificationList'])->name('annexure.verification.list');
+
 
 
 

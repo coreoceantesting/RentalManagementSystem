@@ -61,12 +61,12 @@
                                 <div class="modal-body">
                                     <input type="hidden" name="applicationIdOne" id="applicationIdOne">
                                     <div class="form-group">
-                                        <label for="subject">Subject <span class="text-danger">*</span></label>
+                                        <label for="subject">Subject (विषय) <span class="text-danger">*</span></label>
                                         <textarea name="subject" class="form-control" id="subject" cols="30" rows="2" placeholder="Enter Subject" required></textarea>
                                         <span class="text-danger is-invalid subject_err"></span>
                                     </div>
                                     <div class="form-group">
-                                        <label for="document">Upload Document <span class="text-danger">*</span></label>
+                                        <label for="document">Upload Document (दस्तऐवज अपलोड करा) <span class="text-danger">*</span></label>
                                         <input type="file" class="form-control" id="document" name="document" required>
                                         <span class="text-danger is-invalid document_err"></span>
                                     </div>
@@ -92,12 +92,12 @@
                                 <div class="modal-body">
                                     <input type="hidden" name="applicationIdTwo" id="applicationIdTwo">
                                     <div class="form-group">
-                                        <label for="subjectTwo">Subject <span class="text-danger">*</span></label>
+                                        <label for="subjectTwo">Subject (विषय)<span class="text-danger">*</span></label>
                                         <textarea name="subjectTwo" class="form-control" id="subjectTwo" cols="30" rows="2" placeholder="Enter Subject" required></textarea>
                                         <span class="text-danger is-invalid subjectTwo_err"></span>
                                     </div>
                                     <div class="form-group">
-                                        <label for="documentTwo">Upload Document <span class="text-danger">*</span></label>
+                                        <label for="documentTwo">Upload Document (दस्तऐवज अपलोड करा)<span class="text-danger">*</span></label>
                                         <input type="file" class="form-control" id="documentTwo" name="documentTwo" required>
                                         <span class="text-danger is-invalid documentTwo_err"></span>
                                     </div>
@@ -123,12 +123,12 @@
                                 <div class="modal-body">
                                     <input type="hidden" name="applicationIdThree" id="applicationIdThree">
                                     <div class="form-group">
-                                        <label for="subjectThree">Subject <span class="text-danger">*</span></label>
+                                        <label for="subjectThree">Subject (विषय)<span class="text-danger">*</span></label>
                                         <textarea name="subjectThree" class="form-control" id="subjectThree" cols="30" rows="2" placeholder="Enter Subject" required></textarea>
                                         <span class="text-danger is-invalid subjectThree_err"></span>
                                     </div>
                                     <div class="form-group">
-                                        <label for="documentThree">Upload Document <span class="text-danger">*</span></label>
+                                        <label for="documentThree">Upload Document (दस्तऐवज अपलोड करा)<span class="text-danger">*</span></label>
                                         <input type="file" class="form-control" id="documentThree" name="documentThree" required>
                                         <span class="text-danger is-invalid documentThree_err"></span>
                                     </div>
@@ -154,25 +154,25 @@
                                 <div class="modal-body">
                                     <input type="hidden" name="hearingApplicationId" id="hearingApplicationId">
                                     <div class="form-group">
-                                        <label for="hearingSubject">Subject <span class="text-danger">*</span></label>
+                                        <label for="hearingSubject">Subject (विषय)<span class="text-danger">*</span></label>
                                         <textarea name="hearingSubject" class="form-control" id="hearingSubject" cols="30" rows="2" placeholder="Enter Subject" required></textarea>
                                         <span class="text-danger is-invalid hearingSubject_err"></span>
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="hearingPlace">Hearing Place <span class="text-danger">*</span></label>
+                                        <label for="hearingPlace">Hearing Place (सुनावणीचे ठिकाण)<span class="text-danger">*</span></label>
                                         <input type="text" class="form-control" id="hearingPlace" name="hearingPlace" required>
                                         <span class="text-danger is-invalid hearingPlace_err"></span>
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="hearingTime">Hearing Time <span class="text-danger">*</span></label>
+                                        <label for="hearingTime">Hearing DateTime (सुनावणी तारीख वेळ)<span class="text-danger">*</span></label>
                                         <input type="datetime-local" class="form-control" id="hearingTime" name="hearingTime" required>
                                         <span class="text-danger is-invalid hearingTime_err"></span>
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="hearingDocument">Upload Document <span class="text-danger">*</span></label>
+                                        <label for="hearingDocument">Upload Document (दस्तऐवज अपलोड करा)<span class="text-danger">*</span></label>
                                         <input type="file" class="form-control" id="hearingDocument" name="hearingDocument" required>
                                         <span class="text-danger is-invalid hearingDocument_err"></span>
                                     </div>
