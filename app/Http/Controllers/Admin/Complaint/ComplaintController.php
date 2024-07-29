@@ -127,4 +127,61 @@ class ComplaintController extends Controller
 
         return view('complaint.viewComplaint')->with(['application_detail' => $application_detail]);
     }
+
+    public function approveApplication($id)
+    {
+        try {
+
+            // Update the status
+            DB::table('complaint_statuses')->where('complaint_id', $id)->update([
+                'overall_status' => 'Approved',
+                'approval_by' => auth()->user()->id,
+                'approval_at' => now()
+            ]);
+
+            return response()->json(['success' => 'Application approved successfully!']);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Error approving complaint.'], 500);
+        }
+    }
+
+    public function rejectApplication(Request $request)
+    {
+        try {
+            $applicationId = $request->application_id;
+            $remark = $request->remark; 
+
+            DB::table('complaint_statuses')->where('complaint_id', $applicationId)->update([
+                'overall_status' => 'Rejected',
+                'approval_remark' => $remark,
+                'approval_by' => auth()->user()->id,
+                'approval_at' => now()
+            ]);
+
+
+            return response()->json(['success' => 'Application rejected successfully!']);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Failed to reject application!'], 500);
+        }
+    }
+
+    public function sendApplication(Request $request)
+    {
+        try {
+            $applicationId = $request->application_id;
+            $remark = $request->sendremark; 
+
+            DB::table('complaint_statuses')->where('complaint_id', $applicationId)->update([
+                'overall_status' => 'Send To Collector',
+                'send_to_collector_remark' => $remark,
+                'send_to_collector_by' => auth()->user()->id,
+                'send_to_collector_at' => now()
+            ]);
+
+
+            return response()->json(['success' => 'Application send to collector successfully!']);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Failed to send application!'], 500);
+        }
+    }
 }
