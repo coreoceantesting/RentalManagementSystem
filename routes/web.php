@@ -81,6 +81,13 @@ Route::middleware(['auth','PreventBackHistory', 'firewall.all'])->group(function
     Route::post('/application/reject', [App\Http\Controllers\Admin\Clerk\ClerkActionController::class, 'rejectApplication'])->name('application.reject');
     Route::post('/application/send', [App\Http\Controllers\Admin\Clerk\ClerkActionController::class, 'sendApplication'])->name('application.send');
 
+    Route::post('/application/explantationone', [App\Http\Controllers\Admin\Clerk\ClerkActionController::class, 'sendExplainationOne'])->name('application.explaination.one');
+    Route::post('/application/explantationtwo', [App\Http\Controllers\Admin\Clerk\ClerkActionController::class, 'sendExplainationTwo'])->name('application.explaination.two');
+    Route::post('/application/explantationthree', [App\Http\Controllers\Admin\Clerk\ClerkActionController::class, 'sendExplainationThree'])->name('application.explaination.three');
+
+    // hearing
+    Route::post('/application/hearingdetails', [App\Http\Controllers\Admin\Clerk\ClerkActionController::class, 'storeHearingDetails'])->name('application.hearingDetails.store');
+
 
 
 

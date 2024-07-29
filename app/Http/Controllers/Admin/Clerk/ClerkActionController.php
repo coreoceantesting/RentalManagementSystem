@@ -30,7 +30,7 @@ class ClerkActionController extends Controller
         $application_lists = ComplaintDetail::leftjoin('complaint_statuses', 'complaint_details.id', '=', 'complaint_statuses.complaint_id')
                                 ->leftjoin('schemes', 'complaint_details.scheme_name', '=', 'schemes.id')
                                 ->where('complaint_statuses.overall_status', 'Approved')
-                                ->select('complaint_details.*', 'schemes.scheme_name as SchemeName', 'complaint_statuses.overall_status')
+                                ->select('complaint_details.*', 'schemes.scheme_name as SchemeName', 'complaint_statuses.*')
                                 ->get();
 
         return view('clerk.approvedList')->with(['application_lists' => $application_lists]);
@@ -93,4 +93,136 @@ class ClerkActionController extends Controller
             return response()->json(['error' => 'Failed to send application!'], 500);
         }
     }
+
+    public function sendExplainationOne(Request $request)
+    {
+        // $request->validate([
+        //     'subject' => 'required|string|max:255',
+        //     'document' => 'nullable|file|mimes:pdf,jpg,png|max:2048',
+        // ]);
+    
+        try {
+                $applicationId = $request->applicationIdOne;
+                $subject = $request->subject; 
+
+                if ($request->hasFile('document')) {
+                    $document = $request->file('document');
+                    $DocPath = $document->store('explanation_call_one', 'public');
+                }
+
+                // Update the status
+                DB::table('complaint_statuses')->where('complaint_id', $applicationId)->update([
+                    'explanation_call_one_at' => now(),
+                    'explanation_call_one_by' => auth()->user()->id,
+                    'explanation_doc_one' => $DocPath,
+                    'explanation_subject_one' => $subject,
+                    'status' => "Explanation Call Send",
+                ]);
+
+                
+            return response()->json(['success' => 'First explaination call send successfully!']);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'An error occurred while updating data.']);
+        }
+    }
+
+    public function sendExplainationTwo(Request $request)
+    {
+        // $request->validate([
+        //     'subjectTwo' => 'required|string|max:255',
+        //     'documentTwo' => 'nullable|file|mimes:pdf,jpg,png|max:2048',
+        // ]);
+    
+        try {
+                $applicationId = $request->applicationIdTwo;
+                $subject = $request->subjectTwo; 
+
+                if ($request->hasFile('documentTwo')) {
+                    $document = $request->file('documentTwo');
+                    $DocPath = $document->store('explanation_call_two', 'public');
+                }
+
+                // Update the status
+                DB::table('complaint_statuses')->where('complaint_id', $applicationId)->update([
+                    'explanation_call_two_at' => now(),
+                    'explanation_call_two_by' => auth()->user()->id,
+                    'explanation_doc_two' => $DocPath,
+                    'explanation_subject_two' => $subject,
+                    'status' => "Explanation Call Send",
+                ]);
+
+                
+            return response()->json(['success' => 'Second explaination call send successfully!']);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'An error occurred while updating data.']);
+        }
+    }
+
+
+    public function sendExplainationThree(Request $request)
+    {
+        // $request->validate([
+        //     'subjectThree' => 'required|string|max:255',
+        //     'documentThree' => 'nullable|file|mimes:pdf,jpg,png|max:2048',
+        // ]);
+    
+        try {
+                $applicationId = $request->applicationIdThree;
+                $subject = $request->subjectThree; 
+
+                if ($request->hasFile('documentThree')) {
+                    $document = $request->file('documentThree');
+                    $DocPath = $document->store('explanation_call_three', 'public');
+                }
+
+                // Update the status
+                DB::table('complaint_statuses')->where('complaint_id', $applicationId)->update([
+                    'explanation_call_three_at' => now(),
+                    'explanation_call_three_by' => auth()->user()->id,
+                    'explanation_doc_three' => $DocPath,
+                    'explanation_subject_three' => $subject,
+                    'status' => "Explanation Call Send",
+                ]);
+
+                
+            return response()->json(['success' => 'Third explaination call send successfully!']);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'An error occurred while updating data.']);
+        }
+    }
+
+    public function storeHearingDetails(Request $request)
+    {
+        // $request->validate([
+        //     'subjectThree' => 'required|string|max:255',
+        //     'documentThree' => 'nullable|file|mimes:pdf,jpg,png|max:2048',
+        // ]);
+    
+        try {
+                $applicationId = $request->hearingApplicationId;
+                $subject = $request->hearingSubject; 
+                $hearingPlace = $request->hearingPlace;
+                $hearingTime = $request->hearingTime;
+
+                if ($request->hasFile('hearingDocument')) {
+                    $hearingDocument = $request->file('hearingDocument');
+                    $DocPath = $hearingDocument->store('hearing_doc', 'public');
+                }
+
+                // Update the status
+                DB::table('complaint_statuses')->where('complaint_id', $applicationId)->update([
+                    'hearing_place' => $hearingPlace,
+                    'hearing_subject' => $subject,
+                    'hearing_doc' => $DocPath,
+                    'hearing_datetime' => $hearingTime,
+                    'status' => "Send For Hearing",
+                ]);
+
+                
+            return response()->json(['success' => 'Hearing details send successfully!']);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'An error occurred while sending data.']);
+        }
+    }
+
 }
