@@ -236,7 +236,7 @@
                         </div>
                     </div>
 
-                    @if ($application_detail->overall_status == "Pending")
+                    @if ($application_detail->overall_status == "Pending" && auth()->user()->roles->pluck('name')[0] == 'clerk')
                         <div class="card-footer text-center">
                             <button type="submit" class="btn btn-primary" id="approveBtn" data-id="{{ $application_detail->id }}">Approve</button>
                             <button type="reset" class="btn btn-warning" id="rejectBtn" data-id="{{ $application_detail->id }}">Reject</button>
