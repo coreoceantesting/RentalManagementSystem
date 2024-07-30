@@ -30,13 +30,200 @@
                                         <td>{{ $list->overall_status }}</td>
                                         <td>
                                             <a href="{{ route('view.application.details', $list->id) }}" class="btn btn-sm btn-primary view-element px-2 py-1" title="View Details" data-id="{{ $list->id }}">View</a>
+                                            <a class="btn btn-sm btn-warning view-explaination-detail px-2 py-1" title="View Explanation Call Details" data-id="{{ $list->id }}">Call Details</a>
+                                            <a class="btn btn-sm btn-info upload-doc px-2 py-1" id="upload-doc" title="Upload Document" data-id="{{ $list->id }}">Upload Document</a>
                                         </td>
                                     </tr>
                                 @endforeach
                         </table>
                     </div>
                 </div>
+
+                <!-- explaination call Details -->
+                <div class="modal fade" id="explanationCallDetailsModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Explaination Call Details (सुनावणीचे तपशील)</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div id="explanationCallDetails"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Upload document -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Upload Document</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <form id="updateForm" enctype="multipart/form-data">
+                                @csrf
+                                <div class="modal-body">
+                                    <input type="hidden" name="applicationIdOne" id="applicationIdOne">
+                                    <div class="form-group">
+                                        <label for="document">Upload Document (दस्तऐवज अपलोड करा) <span class="text-danger">*</span></label>
+                                        <input type="file" class="form-control" id="document" name="document" required>
+                                        <span class="text-danger is-invalid document_err"></span>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="submit" class="btn btn-primary">Update</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
 </x-admin.layout>
+
+{{-- View explaination details --}}
+<script>
+    $(document).on('click', '.view-explaination-detail', function(e) {
+        e.preventDefault();
+        
+        let applicationId = $(this).data('id');
+        
+        // Fetch the hearing details via AJAX
+        $.ajax({
+            url: "{{ route('application.explainationCall.details') }}", // Replace with your actual route
+            type: 'GET',
+            data: {
+                id: applicationId
+            },
+            success: function(response) {
+                if (response.success) {
+                    let details = response.data;
+                    var tableHtml = '<h3 class="text-center"> 1st Explanation Call Details (प्रथम स्पष्टीकरण कॉल तपशील) </h3><br>';
+                    tableHtml += '<table class="table table-bordered">';
+                    
+                    // Use predefined headers
+                    tableHtml += '<thead><tr>';
+                    tableHtml += '<th scope="col">Subject (विषय)</th>';
+                    tableHtml += '<th scope="col">Document (कागदपत्र)</th>';
+                    tableHtml += '</tr></thead>';
+
+                    // Create table body
+                    tableHtml += '<tbody>';
+                    tableHtml += '<tr>';
+                    tableHtml += '<td scope="row">' + (details.explanation_subject_one || 'NA') + '</td>';
+                    tableHtml += '<td>' + (details.explanation_doc_one ? '<a href="/storage/' + details.explanation_doc_one + '" target="_blank">View Document</a>' : 'NA') + '</td>';
+                    tableHtml += '</tr>';
+                    tableHtml += '</tbody></table>';
+
+                    // 2nd explaination call details
+                    tableHtml += '<br><h3 class="text-center"> 2nd Explanation Call Details (दुसरे स्पष्टीकरण कॉल तपशील) </h3><br>';
+                    tableHtml += '<table class="table table-bordered">';
+                    
+                    // Use predefined headers
+                    tableHtml += '<thead><tr>';
+                    tableHtml += '<th scope="col">Subject (विषय)</th>';
+                    tableHtml += '<th scope="col">Document (कागदपत्र)</th>';
+                    tableHtml += '</tr></thead>';
+
+                    // Create table body
+                    tableHtml += '<tbody>';
+                    tableHtml += '<tr>';
+                    tableHtml += '<td scope="row">' + (details.explanation_subject_two || 'NA') + '</td>';
+                    tableHtml += '<td>' + (details.explanation_doc_two ? '<a href="/storage/' + details.explanation_doc_two + '" target="_blank">View Document</a>' : 'NA') + '</td>';
+                    tableHtml += '</tr>';
+                    tableHtml += '</tbody></table>';
+
+                    // 3rd explaination call details
+                    tableHtml += '<br><h3 class="text-center"> 3rd Explanation Call Details (तिसरे स्पष्टीकरण कॉल तपशील) </h3><br>';
+                    tableHtml += '<table class="table table-bordered">';
+                    
+                    // Use predefined headers
+                    tableHtml += '<thead><tr>';
+                    tableHtml += '<th scope="col">Subject (विषय)</th>';
+                    tableHtml += '<th scope="col">Document (कागदपत्र)</th>';
+                    tableHtml += '</tr></thead>';
+
+                    // Create table body
+                    tableHtml += '<tbody>';
+                    tableHtml += '<tr>';
+                    tableHtml += '<td scope="row">' + (details.explanation_subject_three || 'NA') + '</td>';
+                    tableHtml += '<td>' + (details.explanation_doc_three ? '<a href="/storage/' + details.explanation_doc_three + '" target="_blank">View Document</a>' : 'NA') + '</td>';
+                    tableHtml += '</tr>';
+                    tableHtml += '</tbody></table>';
+                    
+                    // contractor uploaded document
+                    tableHtml += '<br><h3 class="text-center"> Contractor Uploaded Document (कंत्राटदाराने अपलोड केलेले दस्तऐवज) </h3><br>';
+                    tableHtml += '<table class="table table-bordered">';
+                    tableHtml += '<thead><tr>';
+                    tableHtml += '<th scope="col">Document (कागदपत्र)</th>';
+                    tableHtml += '</tr></thead>';
+                    tableHtml += '<tbody>';
+                    tableHtml += '<tr>';
+                    tableHtml += '<td>' + (details.contractor_explanation_doc_one ? '<a href="/storage/' + details.contractor_explanation_doc_one + '" target="_blank">View Document</a>' : 'NA') + '</td>';
+                    tableHtml += '</tr>';
+                    tableHtml += '</tbody></table>';
+
+
+                    $('#explanationCallDetails').html(tableHtml);
+                    $('#explanationCallDetailsModal').modal('show');
+                } else {
+                    swal("Error!", "Could not fetch hearing details.", "error");
+                }
+            },
+            error: function(xhr, status, error) {
+                swal("Error!", "Something went wrong.", "error");
+            }
+        });
+    });
+</script>
+
+{{--Upload explaination document uploaded by contractor --}}
+<script>
+    $(document).ready(function(){
+
+        document.getElementById('upload-doc').addEventListener('click', function() {
+            var applicationId = $(this).data('id');
+            $('#applicationIdOne').val(applicationId);
+            $('#exampleModal').modal('show');
+        });
+        
+        $('#updateForm').submit(function(e) {
+            e.preventDefault();
+
+            let formData = new FormData(this);
+
+            $.ajax({
+                url: "{{ route('application.upload.doc') }}", // Replace with your route
+                type: 'POST',
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: function(data) {
+                    if (data.success) {
+                        swal("Success!", data.success, "success")
+                            .then(() => {
+                                $('#exampleModal').modal('hide');
+                                window.location.reload(); // Reload to reflect changes
+                            });
+                    } else {
+                        if (data.errors) {
+                            $.each(data.errors, function(key, error) {
+                                $('#' + key + '_err').text(error);
+                            });
+                        } else {
+                            swal("Error!", data.error, "error");
+                        }
+                    }
+                },
+                error: function(xhr, status, error) {
+                    swal("Error!", "Something went wrong", "error");
+                }
+            });
+        });
+
+    });
+</script>

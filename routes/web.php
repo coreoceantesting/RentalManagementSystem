@@ -65,7 +65,7 @@ Route::middleware(['auth','PreventBackHistory', 'firewall.all'])->group(function
     Route::get('/get-scheme-details/{id}', [App\Http\Controllers\Admin\Complaint\ComplaintController::class, 'getSchemeDetails'])->name('get.scheme.details');
     Route::get('/view-application/{id}', [App\Http\Controllers\Admin\Complaint\ComplaintController::class, 'viewApplicationDetails'])->name('view.application.details');
     Route::post('/application/{id}/close', [App\Http\Controllers\Admin\Complaint\ComplaintController::class, 'closeApplication'])->name('application.close');
-
+    Route::post('/application/upload-doc', [App\Http\Controllers\Admin\Complaint\ComplaintController::class, 'uploadDocbyContractor'])->name('application.upload.doc');
 
     // citizen routes
     Route::get('/application-list', [App\Http\Controllers\Admin\Citizen\ListingController::class, 'allApplicationList'])->name('list.all.applications');

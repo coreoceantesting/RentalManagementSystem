@@ -194,6 +194,18 @@
                     tableHtml += '</tr>';
                     tableHtml += '</tbody></table>';
 
+                    // contractor uploaded document
+                    tableHtml += '<br><h3 class="text-center"> Contractor Uploaded Document (कंत्राटदाराने अपलोड केलेले दस्तऐवज) </h3><br>';
+                    tableHtml += '<table class="table table-bordered">';
+                    tableHtml += '<thead><tr>';
+                    tableHtml += '<th scope="col">Document (कागदपत्र)</th>';
+                    tableHtml += '</tr></thead>';
+                    tableHtml += '<tbody>';
+                    tableHtml += '<tr>';
+                    tableHtml += '<td>' + (details.contractor_explanation_doc_one ? '<a href="/storage/' + details.contractor_explanation_doc_one + '" target="_blank">View Document</a>' : 'NA') + '</td>';
+                    tableHtml += '</tr>';
+                    tableHtml += '</tbody></table>';
+
                     $('#explanationCallDetails').html(tableHtml);
                     $('#explanationCallDetailsModal').modal('show');
                 } else {

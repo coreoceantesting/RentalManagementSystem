@@ -146,4 +146,27 @@ class ComplaintController extends Controller
         }
     }
 
+    public function uploadDocbyContractor(Request $request)
+    {
+        try {
+            $applicationId = $request->applicationIdOne;
+            $subject = $request->subject; 
+
+            if ($request->hasFile('document')) {
+                $document = $request->file('document');
+                $DocPath = $document->store('doc_by_contractor', 'public');
+            }
+
+            // Update the status
+            DB::table('complaint_statuses')->where('complaint_id', $applicationId)->update([
+                'contractor_explanation_doc_one' => $DocPath,
+            ]);
+
+            
+        return response()->json(['success' => 'Document Uploaded Successfully !']);
+    } catch (\Exception $e) {
+        return response()->json(['error' => 'An error occurred while uploading document.']);
+    }
+    }
+
 }
