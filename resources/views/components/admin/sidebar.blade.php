@@ -151,6 +151,15 @@
                     </a>
                 </li>
 
+                {{-- contractors Menu --}}
+                
+                <li class="nav-item">
+                    <a class="nav-link menu-link" href="{{ route('list.explaination') }}" >
+                        <i class="ri-list-check"></i>
+                        <span data-key="t-dashboards">Explaination Call List</span>
+                    </a>
+                </li>
+
             </ul>
         </div>
     </div>

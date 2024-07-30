@@ -73,6 +73,8 @@ Route::middleware(['auth','PreventBackHistory', 'firewall.all'])->group(function
     Route::get('/hearing-application-list', [App\Http\Controllers\Admin\Citizen\ListingController::class, 'hearingApplicationList'])->name('list.hearing.applications');
     Route::get('/close-application-list', [App\Http\Controllers\Admin\Citizen\ListingController::class, 'closeApplicationList'])->name('list.close.applications');
 
+    Route::get('/explaination-call-application-list', [App\Http\Controllers\Admin\Citizen\ListingController::class, 'explanationCallList'])->name('list.explaination');
+
     // clerk routes
     Route::get('/complaint-list', [App\Http\Controllers\Admin\Clerk\ClerkActionController::class, 'complaintList'])->name('complaint.list');
     Route::get('/approved-complaint-list', [App\Http\Controllers\Admin\Clerk\ClerkActionController::class, 'approvedComplaintList'])->name('approved.complaint.list');

@@ -36,6 +36,7 @@ class ComplaintDetail extends Model
         'ifsc_code',
         'copy_of_bank_passbook',
         'created_by', 
-        'updated_by'
+        'updated_by',
+        'contractor_id'
     ];
 }

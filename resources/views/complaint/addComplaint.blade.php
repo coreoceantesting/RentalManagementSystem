@@ -114,7 +114,7 @@
                                 <div class="card-header">
                                     <h4 class="text-center"><b>Contractor Details (कंत्राटदार तपशील)</b></h4>
                                 </div>
-
+                                <input type="hidden" name="contractor_id" id="contractor_id">
                                 <div class="col-md-6">
                                     <label class="col-form-label" for="contractor_name">Contractor Name <span class="text-danger">*</span></label>
                                     <input class="form-control" name="contractor_name" id="contractor_name" placeholder="Contractor Name" readonly>
@@ -340,6 +340,7 @@
                         $('#scheme_details').val(response.scheme_detail.scheme_detail);
                         $('#contractor_name').val(response.contractor_detail.contractor_name);
                         $('#contractor_details').val(response.contractor_detail.contractor_address);
+                        $('#contractor_id').val(response.contractor_detail.id);
                     },
                     error: function() {
                         alert('Failed to fetch scheme details. Please try again.');

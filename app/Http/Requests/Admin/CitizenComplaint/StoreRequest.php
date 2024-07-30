@@ -47,6 +47,7 @@ class StoreRequest extends FormRequest
             'bank_name' => 'required',
             'bank_address' => 'required',
             'ifsc_code' => 'required',
+            'contractor_id'=> 'nullable',
             'copy_of_bank_passbook' => 'required|mimes:pdf,jpg,jpeg,png',
         ];
     }

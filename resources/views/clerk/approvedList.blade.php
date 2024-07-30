@@ -370,7 +370,7 @@
                         swal("Success!", data.success, "success")
                             .then(() => {
                                 $('#exampleModalThree').modal('hide');
-                                window.location.reload(); // Reload to reflect changes
+                                window.location.href = "{{ route('hearingList') }}";
                             });
                     } else {
                         if (data.errors) {
