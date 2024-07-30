@@ -84,10 +84,14 @@ Route::middleware(['auth','PreventBackHistory', 'firewall.all'])->group(function
     Route::post('/application/explantationone', [App\Http\Controllers\Admin\Clerk\ClerkActionController::class, 'sendExplainationOne'])->name('application.explaination.one');
     Route::post('/application/explantationtwo', [App\Http\Controllers\Admin\Clerk\ClerkActionController::class, 'sendExplainationTwo'])->name('application.explaination.two');
     Route::post('/application/explantationthree', [App\Http\Controllers\Admin\Clerk\ClerkActionController::class, 'sendExplainationThree'])->name('application.explaination.three');
+    Route::get('/application/explanation-call-details', [App\Http\Controllers\Admin\Clerk\ClerkActionController::class, 'explanationCallDetails'])->name('application.explainationCall.details');
 
     // hearing
     Route::post('/application/hearingdetails', [App\Http\Controllers\Admin\Clerk\ClerkActionController::class, 'storeHearingDetails'])->name('application.hearingDetails.store');
-    Route::post('/application/hearing-list', [App\Http\Controllers\Admin\Clerk\ClerkActionController::class, 'hearingList'])->name('application.hearing.list');
+    Route::get('/application/hearing-list', [App\Http\Controllers\Admin\Clerk\ClerkActionController::class, 'hearingList'])->name('application.hearing.list');
+    Route::get('/application/hearing-details', [App\Http\Controllers\Admin\Clerk\ClerkActionController::class, 'hearingDetails'])->name('application.hearing.details');
+    
+
 
     Route::get('/annexure-verification-list', [App\Http\Controllers\Admin\Clerk\ClerkActionController::class, 'annexureVerificationList'])->name('annexure.verification.list');
 

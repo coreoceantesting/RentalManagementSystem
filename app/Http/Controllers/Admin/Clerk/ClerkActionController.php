@@ -236,4 +236,55 @@ class ClerkActionController extends Controller
         return view('clerk.annexureVerificationList')->with(['application_lists' => $application_lists]);
     }
 
+    public function hearingList(Request $request)
+    {
+        $application_lists = ComplaintDetail::leftjoin('complaint_statuses', 'complaint_details.id', '=', 'complaint_statuses.complaint_id')
+                                ->leftjoin('schemes', 'complaint_details.scheme_name', '=', 'schemes.id')
+                                ->whereNotNull('complaint_statuses.hearing_doc')
+                                ->select('complaint_details.*', 'schemes.scheme_name as SchemeName', 'complaint_statuses.*')
+                                ->get();
+
+        return view('clerk.hearingList')->with(['application_lists' => $application_lists]);
+    }
+
+    public function hearingDetails(Request $request)
+    {
+        $applicationId = $request->input('id');
+
+        // Fetch the hearing details from the database
+        $details = DB::table('complaint_statuses')->where('complaint_id', $applicationId)->first([
+            'hearing_doc',
+            'hearing_place',
+            'hearing_subject',
+            'hearing_datetime'
+        ]);
+
+        if ($details) {
+            return response()->json(['success' => true, 'data' => $details]);
+        } else {
+            return response()->json(['success' => false, 'error' => 'Details not found.']);
+        }
+    }
+
+    public function explanationCallDetails(Request $request)
+    {
+        $applicationId = $request->input('id');
+
+        // Fetch the hearing details from the database
+        $details = DB::table('complaint_statuses')->where('complaint_id', $applicationId)->first([
+            'explanation_doc_one',
+            'explanation_subject_one',
+            'explanation_doc_two',
+            'explanation_subject_two',
+            'explanation_doc_three',
+            'explanation_subject_three'
+        ]);
+
+        if ($details) {
+            return response()->json(['success' => true, 'data' => $details]);
+        } else {
+            return response()->json(['success' => false, 'error' => 'Details not found.']);
+        }
+    }
+
 }
