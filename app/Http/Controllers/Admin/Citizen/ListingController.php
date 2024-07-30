@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use App\Models\Contractor;
 use App\Models\Scheme;
 use Carbon\Carbon;
+use Auth;
 
 class ListingController extends Controller
 {
@@ -50,12 +51,16 @@ class ListingController extends Controller
 
     public function closeApplicationList(Request $request)
     {
-        $application_lists = ComplaintDetail::leftjoin('complaint_statuses', 'complaint_details.id', '=', 'complaint_statuses.complaint_id')
-                                ->leftjoin('schemes', 'complaint_details.scheme_name', '=', 'schemes.id')
-                                ->where('complaint_details.created_by', auth()->user()->id)
-                                ->where('complaint_statuses.overall_status', 'Closed')
-                                ->select('complaint_details.*', 'schemes.scheme_name as SchemeName', 'complaint_statuses.overall_status', 'complaint_statuses.approval_remark')
-                                ->get();
+        $query = ComplaintDetail::leftjoin('complaint_statuses', 'complaint_details.id', '=', 'complaint_statuses.complaint_id')
+                            ->leftjoin('schemes', 'complaint_details.scheme_name', '=', 'schemes.id')
+                            ->where('complaint_statuses.overall_status', 'Closed')
+                            ->select('complaint_details.*', 'schemes.scheme_name as SchemeName', 'complaint_statuses.overall_status', 'complaint_statuses.approval_remark');
+
+        if (auth()->user()->role == 'citizen') {
+            $query->where('complaint_details.created_by', auth()->user()->id);
+        }
+
+        $application_lists = $query->get();
 
         return view('citizen.closeApplicationList')->with(['application_lists' => $application_lists]);
     }

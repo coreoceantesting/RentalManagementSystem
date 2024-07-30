@@ -128,4 +128,22 @@ class ComplaintController extends Controller
         return view('complaint.viewComplaint')->with(['application_detail' => $application_detail]);
     }
 
+    public function closeApplication($id)
+    {
+        try {
+
+            // Update the status
+            DB::table('complaint_statuses')->where('complaint_id', $id)->update([
+                'overall_status' => 'Closed',
+                'status' => 'Closed',
+                'close_complaint_by' => auth()->user()->id,
+                'close_complaint_at' => now()
+            ]);
+
+            return response()->json(['success' => 'Application closed successfully!']);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Error closing complaint.'], 500);
+        }
+    }
+
 }

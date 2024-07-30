@@ -39,8 +39,13 @@
                                             @endif
 
                                             @if ($list->explanation_call_three_at != "" && $list->hearing_datetime == "")
-                                                <button class="btn btn-sm btn-dark" data-id="{{ $list->id }}" id="hearingCall">Call For Hearing</button>
+                                                <button class="btn btn-sm btn-info" data-id="{{ $list->id }}" id="hearingCall">Call For Hearing</button>
                                             @endif
+
+                                            @if ($list->overall_status != "Closed" )
+                                                <button class="btn btn-sm btn-dark" data-id="{{ $list->id }}" id="closeComplaint">Close Complaint</button>
+                                            @endif
+
                                         </td>
                                     </tr>
                                 @endforeach
@@ -385,5 +390,44 @@
 
 
 
+    });
+</script>
+
+{{-- Close application --}}
+<script>
+    $("#closeComplaint").on("click", function(e) {
+        e.preventDefault();
+        swal({
+            title: "Are you sure to close this application?",
+            icon: "info",
+            buttons: ["Cancel", "Confirm"]
+        })
+        .then((willApprove) => {
+            if (willApprove) {
+                var model_id = $(this).data("id"); 
+                var url = "{{ route('application.close', ":model_id") }}";
+
+                $.ajax({
+                    url: url.replace(':model_id', model_id),
+                    type: 'POST',
+                    data: {
+                        '_token': "{{ csrf_token() }}"
+                    },
+                    success: function(data) {
+                        if (data.success) {
+                            swal("Success!", data.success, "success")
+                                .then(() => {
+                                    window.location.href = "{{ route('list.close.applications') }}";
+                                });
+                        } else {
+                            swal("Error!", data.error, "error");
+                        }
+                    },
+                    error: function(error) {
+                        swal("Error!", "Something went wrong", "error");
+                    },
+                });
+            }
+        });
     });
 </script>

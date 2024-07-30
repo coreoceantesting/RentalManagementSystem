@@ -64,7 +64,7 @@ Route::middleware(['auth','PreventBackHistory', 'firewall.all'])->group(function
     Route::resource('complaint', App\Http\Controllers\Admin\Complaint\ComplaintController::class );
     Route::get('/get-scheme-details/{id}', [App\Http\Controllers\Admin\Complaint\ComplaintController::class, 'getSchemeDetails'])->name('get.scheme.details');
     Route::get('/view-application/{id}', [App\Http\Controllers\Admin\Complaint\ComplaintController::class, 'viewApplicationDetails'])->name('view.application.details');
-    
+    Route::post('/application/{id}/close', [App\Http\Controllers\Admin\Complaint\ComplaintController::class, 'closeApplication'])->name('application.close');
 
 
     // citizen routes
