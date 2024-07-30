@@ -242,9 +242,15 @@
                             <button type="button" class="btn btn-warning" id="rejectBtn" data-id="{{ $application_detail->id }}">Reject</button>
                             <button type="button" class="btn btn-danger" id="sendBtn" data-id="{{ $application_detail->id }}">Send To Collector</button>
                         @endif
+
+                        @if ($application_detail->overall_status == "Send To Collector" && auth()->user()->roles->pluck('name')[0] == 'collector')
+                            <button type="button" class="btn btn-info" id="approvedByCollector" data-id="{{ $application_detail->id }}">Approve</button>
+                            <button type="button" class="btn btn-dark" id="rejectByCollector" data-id="{{ $application_detail->id }}">Reject</button>
+                        @endif
                         <a href="{{ url()->previous() }}" class="btn btn-info">Back</a>
                     </div>
                 </div>
+
                 <!-- Reject Remark Modal -->
                 <div class="modal fade" id="rejectRemarkModal" tabindex="-1" aria-labelledby="rejectRemarkModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
@@ -292,6 +298,32 @@
                             <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                             <button type="button" class="btn btn-primary" id="submitSend">Send</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Reject by collector Remark Modal -->
+                <div class="modal fade" id="rejectByCollectorRemarkModal" tabindex="-1" aria-labelledby="rejectRemarkModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                            <h5 class="modal-title" id="rejectRemarkModalLabel">Reject Application</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                            <form id="rejectByCollectorForm">
+                                @csrf
+                                <div class="mb-3">
+                                <label for="remark" class="form-label">Remark (शेरा)</label>
+                                <textarea class="form-control" id="rejectedremark" name="rejectedremark" rows="3" required></textarea>
+                                </div>
+                                <input type="hidden" id="applicationIdNew" name="application_id_new">
+                            </form>
+                            </div>
+                            <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-danger" id="submitRejectByCollector">Reject</button>
                             </div>
                         </div>
                     </div>
@@ -420,6 +452,88 @@
                 }
             });
         });
+
+    });
+</script>
+
+{{-- approved application by collector --}}
+<script>
+    $("#approvedByCollector").on("click", function(e) {
+        e.preventDefault();
+        swal({
+            title: "Are you sure to approve this application?",
+            icon: "info",
+            buttons: ["Cancel", "Confirm"]
+        })
+        .then((willApprove) => {
+            if (willApprove) {
+                var model_id = $(this).data("id"); // Assuming you have data-id attribute on the button
+                var url = "{{ route('application.approve', ":model_id") }}";
+
+                $.ajax({
+                    url: url.replace(':model_id', model_id),
+                    type: 'POST',
+                    data: {
+                        '_token': "{{ csrf_token() }}"
+                    },
+                    success: function(data) {
+                        if (data.success) {
+                            swal("Success!", data.success, "success")
+                                .then(() => {
+                                    window.location.reload();
+                                });
+                        } else {
+                            swal("Error!", data.error, "error");
+                        }
+                    },
+                    error: function(error) {
+                        swal("Error!", "Something went wrong", "error");
+                    },
+                });
+            }
+        });
+    });
+</script>
+
+{{-- reject application by collector--}}
+
+<script>
+    $(document).ready(function() {
+        
+        $('#rejectByCollector').click(function() {
+            var applicationId = $(this).data('id');
+            $('#applicationIdNew').val(applicationId);
+            $('#rejectByCollectorRemarkModal').modal('show');
+        });
+
+        $('#submitRejectByCollector').click(function() {
+            var formData = $('#rejectByCollectorForm').serialize();
+
+            $.ajax({
+                url: "{{ route('application.reject.collector') }}",
+                type: 'POST',
+                data: formData,
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function(response) {
+                    $('#rejectRemarkModal').modal('hide');
+                    if(response.success) {
+                        swal("Rejected!", response.success, "success").then((action) => {
+                            window.location.reload();
+                        });
+                    } else {
+                        swal("Error!", response.error, "error");
+                    }
+                },
+                error: function(xhr) {
+                    var error = xhr.responseJSON.message;
+                    swal("Error!", error, "error");
+                }
+            });
+        });
+
+
 
     });
 </script>

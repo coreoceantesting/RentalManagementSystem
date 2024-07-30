@@ -74,6 +74,26 @@ class ClerkActionController extends Controller
         }
     }
 
+    public function rejectApplicationByCollector(Request $request)
+    {
+        try {
+            $applicationId = $request->application_id_new;
+            $remark = $request->rejectedremark; 
+
+            DB::table('complaint_statuses')->where('complaint_id', $applicationId)->update([
+                'overall_status' => 'Rejected',
+                'approval_remark' => $remark,
+                'approval_by' => auth()->user()->id,
+                'approval_at' => now()
+            ]);
+
+
+            return response()->json(['success' => 'Application rejected successfully!']);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Failed to reject application!'], 500);
+        }
+    }
+
     public function sendApplication(Request $request)
     {
         try {
