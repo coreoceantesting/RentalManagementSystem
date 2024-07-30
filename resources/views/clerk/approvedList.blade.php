@@ -370,7 +370,7 @@
                         swal("Success!", data.success, "success")
                             .then(() => {
                                 $('#exampleModalThree').modal('hide');
-                                window.location.href = "{{ route('hearingList') }}";
+                                window.location.href = "{{ route('application.hearing.list') }}";
                             });
                     } else {
                         if (data.errors) {
