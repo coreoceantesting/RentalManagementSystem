@@ -93,6 +93,9 @@ Route::middleware(['auth','PreventBackHistory', 'firewall.all'])->group(function
     Route::post('/application/hearingdetails', [App\Http\Controllers\Admin\Clerk\ClerkActionController::class, 'storeHearingDetails'])->name('application.hearingDetails.store');
     Route::get('/application/hearing-list', [App\Http\Controllers\Admin\Clerk\ClerkActionController::class, 'hearingList'])->name('application.hearing.list');
     Route::get('/application/hearing-details', [App\Http\Controllers\Admin\Clerk\ClerkActionController::class, 'hearingDetails'])->name('application.hearing.details');
+
+    // stop work
+    Route::post('/application/stopwork', [App\Http\Controllers\Admin\Clerk\ClerkActionController::class, 'storeStopWorkDetails'])->name('application.stopwork.store');
     
 
 

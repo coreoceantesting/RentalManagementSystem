@@ -30,6 +30,7 @@
                                         <td>{{ $list->overall_status }}</td>
                                         <td>
                                             <a href="{{ route('view.application.details', $list->id) }}" class="btn btn-sm btn-primary view-element px-2 py-1" title="View Details" data-id="{{ $list->id }}">View</a>
+                                            <a class="btn btn-sm btn-dark stop-work px-2 py-1" title="Stop Work" id="stopWork" data-id="{{ $list->id }}">Stop Work</a>
                                             <a class="btn btn-sm btn-secondary view-hearing-detail px-2 py-1" title="View Hearing Details" data-id="{{ $list->id }}">View Hearing Details</a>
                                             <a class="btn btn-sm btn-warning view-explaination-detail px-2 py-1" title="View Explanation Call Details" data-id="{{ $list->id }}">View Explaination Call Details</a>
                                         </td>
@@ -83,10 +84,42 @@
                 </div>
             </div>
 
+            {{-- stop work model --}}
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Stop Work Details</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <form id="updateForm" enctype="multipart/form-data">
+                            @csrf
+                            <div class="modal-body">
+                                <input type="hidden" name="applicationId" id="applicationId">
+                                <div class="form-group">
+                                    <label for="subject">Subject (विषय) <span class="text-danger">*</span></label>
+                                    <textarea name="subject" class="form-control" id="subject" cols="30" rows="2" placeholder="Enter Subject" required></textarea>
+                                    <span class="text-danger is-invalid subject_err"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="document">Upload Document (दस्तऐवज अपलोड करा) <span class="text-danger">*</span></label>
+                                    <input type="file" class="form-control" id="document" name="document" required>
+                                    <span class="text-danger is-invalid document_err"></span>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-primary">Send</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 </x-admin.layout>
 
+{{-- hearing Details --}}
 <script>
     $(document).on('click', '.view-hearing-detail', function(e) {
         e.preventDefault();
@@ -125,6 +158,7 @@
     });
 </script>
 
+{{-- explaination call details --}}
 <script>
     $(document).on('click', '.view-explaination-detail', function(e) {
         e.preventDefault();
@@ -216,5 +250,54 @@
                 swal("Error!", "Something went wrong.", "error");
             }
         });
+    });
+</script>
+
+{{-- stop work --}}
+<script>
+    $(document).ready(function(){
+
+        document.getElementById('stopWork').addEventListener('click', function() {
+            var applicationId = $(this).data('id');
+            $('#applicationId').val(applicationId);
+            $('#exampleModal').modal('show');
+        });
+        
+        $('#updateForm').submit(function(e) {
+            e.preventDefault();
+
+            let formData = new FormData(this);
+
+            $.ajax({
+                url: "{{ route('application.stopwork.store') }}",
+                type: 'POST',
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: function(data) {
+                    if (data.success) {
+                        swal("Success!", data.success, "success")
+                            .then(() => {
+                                $('#exampleModal').modal('hide');
+                                window.location.reload();
+                            });
+                    } else {
+                        if (data.errors) {
+                            $.each(data.errors, function(key, error) {
+                                $('#' + key + '_err').text(error);
+                            });
+                        } else {
+                            swal("Error!", data.error, "error");
+                        }
+                    }
+                },
+                error: function(xhr, status, error) {
+                    swal("Error!", "Something went wrong", "error");
+                }
+            });
+        });
+
+
+
     });
 </script>

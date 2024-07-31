@@ -308,4 +308,32 @@ class ClerkActionController extends Controller
         }
     }
 
+    public function storeStopWorkDetails(Request $request)
+    {
+    
+        try {
+                $applicationId = $request->applicationId;
+                $subject = $request->subject; 
+
+                if ($request->hasFile('document')) {
+                    $document = $request->file('document');
+                    $DocPath = $document->store('stop_work_doc', 'public');
+                }
+
+                // Update the status
+                DB::table('complaint_statuses')->where('complaint_id', $applicationId)->update([
+                    'stop_work_approval_at' => now(),
+                    'stop_work_approval_by' => auth()->user()->id,
+                    'stop_work_doc' => $DocPath,
+                    'stop_work_subject' => $subject,
+                    'status' => "Send For Stop Work",
+                ]);
+
+                
+            return response()->json(['success' => 'Send For Stop Work Successfully!']);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'An error occurred while send for stop work.']);
+        }
+    }
+
 }
