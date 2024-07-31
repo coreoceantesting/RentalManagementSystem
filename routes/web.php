@@ -96,7 +96,20 @@ Route::middleware(['auth','PreventBackHistory', 'firewall.all'])->group(function
 
     // stop work
     Route::post('/application/stopwork', [App\Http\Controllers\Admin\Clerk\ClerkActionController::class, 'storeStopWorkDetails'])->name('application.stopwork.store');
-    
+    Route::get('/application/stopwork/list', [App\Http\Controllers\Admin\Complaint\StopWorkController::class, 'stopWorkList'])->name('application.stopwork.list');
+    Route::get('/application/stopwork/approved/list', [App\Http\Controllers\Admin\Complaint\StopWorkController::class, 'stopWorkApprovedList'])->name('application.stopwork.approved.list');
+    Route::get('/application/stopwork/rejected/list', [App\Http\Controllers\Admin\Complaint\StopWorkController::class, 'stopWorkRejectedList'])->name('application.stopwork.rejected.list');
+    Route::get('/application/stop-work-details', [App\Http\Controllers\Admin\Complaint\StopWorkController::class, 'stopWorkDetails'])->name('application.stopWork.details');
+    // approval of stop work
+    Route::post('/stopwork/{id}/approve', [App\Http\Controllers\Admin\Complaint\StopWorkController::class, 'approveStopWorkByRegistrar'])->name('registrar.approve.stopwork');
+    Route::post('/stopwork/reject/', [App\Http\Controllers\Admin\Complaint\StopWorkController::class, 'rejectStopWorkByRegistrar'])->name('registrar.reject.stopwork');
+    Route::post('/close/application/', [App\Http\Controllers\Admin\Complaint\StopWorkController::class, 'closeApplicationByRegistrar'])->name('registrar.close.application');
+
+    Route::post('/stopwork/{id}/approve/secretary', [App\Http\Controllers\Admin\Complaint\StopWorkController::class, 'approveStopWorkBySecretary'])->name('secretary.approve.stopwork');
+    Route::post('/stopwork/reject/secretary', [App\Http\Controllers\Admin\Complaint\StopWorkController::class, 'rejectStopWorkBySecretary'])->name('secretary.reject.stopwork');
+
+    Route::post('/stopwork/{id}/approve/ceo', [App\Http\Controllers\Admin\Complaint\StopWorkController::class, 'approveStopWorkByCeo'])->name('ceo.approve.stopwork');
+    Route::post('/stopwork/reject/ceo', [App\Http\Controllers\Admin\Complaint\StopWorkController::class, 'rejectStopWorkByCeo'])->name('ceo.reject.stopwork');
 
 
     Route::get('/annexure-verification-list', [App\Http\Controllers\Admin\Clerk\ClerkActionController::class, 'annexureVerificationList'])->name('annexure.verification.list');

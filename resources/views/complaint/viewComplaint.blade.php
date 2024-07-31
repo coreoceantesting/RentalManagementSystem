@@ -247,6 +247,24 @@
                             <button type="button" class="btn btn-info" id="approvedByCollector" data-id="{{ $application_detail->id }}">Approve</button>
                             <button type="button" class="btn btn-dark" id="rejectByCollector" data-id="{{ $application_detail->id }}">Reject</button>
                         @endif
+
+                        @if ($application_detail->status == "Send For Stop Work" && $application_detail->stopwork_status_by_register == "Pending" && auth()->user()->roles->pluck('name')[0] == 'registrar')
+                            <button type="button" class="btn btn-warning" id="approveStopWorkByRegistrar" data-id="{{ $application_detail->id }}">Approve</button>
+                            <button type="button" class="btn btn-danger" id="rejectStopWorkByRegistrar" data-id="{{ $application_detail->id }}">Reject</button>
+                            <button type="button" class="btn btn-dark" id="closeApplication" data-id="{{ $application_detail->id }}">Close</button>
+                        @endif
+
+
+                        @if ($application_detail->status == "Send For Stop Work" && $application_detail->stopwork_status_by_register == "Approved" && $application_detail->stopwork_status_by_secretory == "Pending" && auth()->user()->roles->pluck('name')[0] == 'secretary')
+                            <button type="button" class="btn btn-warning" id="approveStopWorkBySecretary" data-id="{{ $application_detail->id }}">Approve</button>
+                            <button type="button" class="btn btn-danger" id="rejectStopWorkBySecretary" data-id="{{ $application_detail->id }}">Reject</button>
+                        @endif
+
+                        @if ($application_detail->status == "Send For Stop Work" && $application_detail->stopwork_status_by_register == "Approved" && $application_detail->stopwork_status_by_secretory == "Approved" && $application_detail->stopwork_status_by_ceo == "Pending" && auth()->user()->roles->pluck('name')[0] == 'ceo')
+                            <button type="button" class="btn btn-warning" id="approveStopWorkByCeo" data-id="{{ $application_detail->id }}">Approve</button>
+                            <button type="button" class="btn btn-danger" id="rejectStopWorkByCeo" data-id="{{ $application_detail->id }}">Reject</button>
+                        @endif
+
                         <a href="{{ url()->previous() }}" class="btn btn-info">Back</a>
                     </div>
                 </div>
@@ -324,6 +342,110 @@
                             <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                             <button type="button" class="btn btn-danger" id="submitRejectByCollector">Reject</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- reject stop work by registrar Remark Modal -->
+                <div class="modal fade" id="rejectByRegistrarModal" tabindex="-1" aria-labelledby="rejectByRegistrarLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                            <h5 class="modal-title" id="rejectByRegistrarLabel">Reject Application</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                            <form id="rejectByRegistrarForm">
+                                @csrf
+                                <div class="mb-3">
+                                <label for="remarkByRegistrar" class="form-label">Remark (शेरा)</label>
+                                <textarea class="form-control" id="remarkByRegistrar" name="remarkByRegistrar" rows="3" required></textarea>
+                                </div>
+                                <input type="hidden" id="remarkByRegistrarApplicationId" name="remarkByRegistrar_application_id">
+                            </form>
+                            </div>
+                            <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary" id="remarkByRegistrarsubmit">Reject</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- close by registrar Remark Modal -->
+                <div class="modal fade" id="closeModal" tabindex="-1" aria-labelledby="closeLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                            <h5 class="modal-title" id="closeLabel">Close Application</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                            <form id="closeForm">
+                                @csrf
+                                <div class="mb-3">
+                                <label for="closeremark" class="form-label">Remark (शेरा)</label>
+                                <textarea class="form-control" id="closeremark" name="closeremark" rows="3" required></textarea>
+                                </div>
+                                <input type="hidden" id="closeApplicationId" name="close_application_id">
+                            </form>
+                            </div>
+                            <div class="modal-footer">
+                            {{-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> --}}
+                            <button type="button" class="btn btn-primary" id="closesubmit">close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- reject stop work by secretary Remark Modal -->
+                <div class="modal fade" id="rejectBySecretaryRemarkModal" tabindex="-1" aria-labelledby="rejectRemarkModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                            <h5 class="modal-title" id="rejectRemarkModalLabel">Reject Application</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                            <form id="rejectBySecretaryForm">
+                                @csrf
+                                <div class="mb-3">
+                                <label for="remark" class="form-label">Remark (शेरा)</label>
+                                <textarea class="form-control" id="remarkBySecretary" name="remarkBySecretary" rows="3" required></textarea>
+                                </div>
+                                <input type="hidden" id="remarkBySecretaryapplicationId" name="remarkBySecretary_application_id">
+                            </form>
+                            </div>
+                            <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-danger" id="submitRejectBySecretary">Reject</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- reject stop work by ceo Remark Modal -->
+                <div class="modal fade" id="rejectByCeoRemarkModal" tabindex="-1" aria-labelledby="rejectRemarkModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                            <h5 class="modal-title" id="rejectRemarkModalLabel">Reject Application</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                            <form id="rejectByCeoForm">
+                                @csrf
+                                <div class="mb-3">
+                                <label for="remark" class="form-label">Remark (शेरा)</label>
+                                <textarea class="form-control" id="remarkByCeo" name="remarkByCeo" rows="3" required></textarea>
+                                </div>
+                                <input type="hidden" id="remarkByCeoapplicationId" name="remarkByCeo_application_id">
+                            </form>
+                            </div>
+                            <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-danger" id="submitRejectByCeo">Reject</button>
                             </div>
                         </div>
                     </div>
@@ -518,6 +640,291 @@
                 },
                 success: function(response) {
                     $('#rejectRemarkModal').modal('hide');
+                    if(response.success) {
+                        swal("Rejected!", response.success, "success").then((action) => {
+                            window.location.reload();
+                        });
+                    } else {
+                        swal("Error!", response.error, "error");
+                    }
+                },
+                error: function(xhr) {
+                    var error = xhr.responseJSON.message;
+                    swal("Error!", error, "error");
+                }
+            });
+        });
+
+
+
+    });
+</script>
+
+{{-- approved stop work by registrar --}}
+<script>
+    $("#approveStopWorkByRegistrar").on("click", function(e) {
+        e.preventDefault();
+        swal({
+            title: "Are you sure to approve stop work of this application?",
+            icon: "info",
+            buttons: ["Cancel", "Confirm"]
+        })
+        .then((willApprove) => {
+            if (willApprove) {
+                var model_id = $(this).data("id"); // Assuming you have data-id attribute on the button
+                var url = "{{ route('registrar.approve.stopwork', ":model_id") }}";
+
+                $.ajax({
+                    url: url.replace(':model_id', model_id),
+                    type: 'POST',
+                    data: {
+                        '_token': "{{ csrf_token() }}"
+                    },
+                    success: function(data) {
+                        if (data.success) {
+                            swal("Success!", data.success, "success")
+                                .then(() => {
+                                    window.location.reload();
+                                });
+                        } else {
+                            swal("Error!", data.error, "error");
+                        }
+                    },
+                    error: function(error) {
+                        swal("Error!", "Something went wrong", "error");
+                    },
+                });
+            }
+        });
+    });
+</script>
+
+{{-- reject stop work by registrar --}}
+<script>
+    $(document).ready(function() {
+        
+        $('#rejectStopWorkByRegistrar').click(function() {
+            var applicationId = $(this).data('id');
+            $('#remarkByRegistrarApplicationId').val(applicationId);
+            $('#rejectByRegistrarModal').modal('show');
+        });
+
+        $('#remarkByRegistrarsubmit').click(function() {
+            var formData = $('#rejectByRegistrarForm').serialize();
+
+            $.ajax({
+                url: "{{ route('registrar.reject.stopwork') }}",
+                type: 'POST',
+                data: formData,
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function(response) {
+                    $('#rejectByRegistrarModal').modal('hide');
+                    if(response.success) {
+                        swal("Rejected!", response.success, "success").then((action) => {
+                            window.location.reload();
+                        });
+                    } else {
+                        swal("Error!", response.error, "error");
+                    }
+                },
+                error: function(xhr) {
+                    var error = xhr.responseJSON.message;
+                    swal("Error!", error, "error");
+                }
+            });
+        });
+
+
+
+    });
+</script>
+
+{{-- close application by registrar --}}
+<script>
+    $(document).ready(function() {
+        
+        $('#closeApplication').click(function() {
+            var applicationId = $(this).data('id');
+            $('#closeApplicationId').val(applicationId);
+            $('#closeModal').modal('show');
+        });
+
+        $('#closesubmit').click(function() {
+            var formData = $('#closeForm').serialize();
+
+            $.ajax({
+                url: "{{ route('registrar.close.application') }}",
+                type: 'POST',
+                data: formData,
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function(response) {
+                    $('#closeModal').modal('hide');
+                    if(response.success) {
+                        swal("Rejected!", response.success, "success").then((action) => {
+                            window.location.reload();
+                        });
+                    } else {
+                        swal("Error!", response.error, "error");
+                    }
+                },
+                error: function(xhr) {
+                    var error = xhr.responseJSON.message;
+                    swal("Error!", error, "error");
+                }
+            });
+        });
+
+
+
+    });
+</script>
+
+{{-- approved stop work by secretary --}}
+<script>
+    $("#approveStopWorkBySecretary").on("click", function(e) {
+        e.preventDefault();
+        swal({
+            title: "Are you sure to approve stop work of this application?",
+            icon: "info",
+            buttons: ["Cancel", "Confirm"]
+        })
+        .then((willApprove) => {
+            if (willApprove) {
+                var model_id = $(this).data("id"); // Assuming you have data-id attribute on the button
+                var url = "{{ route('secretary.approve.stopwork', ":model_id") }}";
+
+                $.ajax({
+                    url: url.replace(':model_id', model_id),
+                    type: 'POST',
+                    data: {
+                        '_token': "{{ csrf_token() }}"
+                    },
+                    success: function(data) {
+                        if (data.success) {
+                            swal("Success!", data.success, "success")
+                                .then(() => {
+                                    window.location.reload();
+                                });
+                        } else {
+                            swal("Error!", data.error, "error");
+                        }
+                    },
+                    error: function(error) {
+                        swal("Error!", "Something went wrong", "error");
+                    },
+                });
+            }
+        });
+    });
+</script>
+
+{{-- reject stop work by secretary --}}
+<script>
+    $(document).ready(function() {
+        
+        $('#rejectStopWorkBySecretary').click(function() {
+            var applicationId = $(this).data('id');
+            $('#remarkBySecretaryapplicationId').val(applicationId);
+            $('#rejectBySecretaryRemarkModal').modal('show');
+        });
+
+        $('#submitRejectBySecretary').click(function() {
+            var formData = $('#rejectBySecretaryForm').serialize();
+
+            $.ajax({
+                url: "{{ route('secretary.reject.stopwork') }}",
+                type: 'POST',
+                data: formData,
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function(response) {
+                    $('#rejectBySecretaryRemarkModal').modal('hide');
+                    if(response.success) {
+                        swal("Rejected!", response.success, "success").then((action) => {
+                            window.location.reload();
+                        });
+                    } else {
+                        swal("Error!", response.error, "error");
+                    }
+                },
+                error: function(xhr) {
+                    var error = xhr.responseJSON.message;
+                    swal("Error!", error, "error");
+                }
+            });
+        });
+
+
+
+    });
+</script>
+
+{{-- approved stop work by ceo --}}
+<script>
+    $("#approveStopWorkByCeo").on("click", function(e) {
+        e.preventDefault();
+        swal({
+            title: "Are you sure to approve stop work of this application?",
+            icon: "info",
+            buttons: ["Cancel", "Confirm"]
+        })
+        .then((willApprove) => {
+            if (willApprove) {
+                var model_id = $(this).data("id"); // Assuming you have data-id attribute on the button
+                var url = "{{ route('ceo.approve.stopwork', ":model_id") }}";
+
+                $.ajax({
+                    url: url.replace(':model_id', model_id),
+                    type: 'POST',
+                    data: {
+                        '_token': "{{ csrf_token() }}"
+                    },
+                    success: function(data) {
+                        if (data.success) {
+                            swal("Success!", data.success, "success")
+                                .then(() => {
+                                    window.location.reload();
+                                });
+                        } else {
+                            swal("Error!", data.error, "error");
+                        }
+                    },
+                    error: function(error) {
+                        swal("Error!", "Something went wrong", "error");
+                    },
+                });
+            }
+        });
+    });
+</script>
+
+{{-- reject stop work by ceo --}}
+<script>
+    $(document).ready(function() {
+        
+        $('#rejectStopWorkByCeo').click(function() {
+            var applicationId = $(this).data('id');
+            $('#remarkByCeoapplicationId').val(applicationId);
+            $('#rejectByCeoRemarkModal').modal('show');
+        });
+
+        $('#submitRejectByCeo').click(function() {
+            var formData = $('#rejectByCeoForm').serialize();
+
+            $.ajax({
+                url: "{{ route('ceo.reject.stopwork') }}",
+                type: 'POST',
+                data: formData,
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function(response) {
+                    $('#rejectByCeoRemarkModal').modal('hide');
                     if(response.success) {
                         swal("Rejected!", response.success, "success").then((action) => {
                             window.location.reload();

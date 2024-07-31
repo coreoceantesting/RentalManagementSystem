@@ -160,6 +160,27 @@
                     </a>
                 </li>
 
+                {{-- stop work menu --}}
+                <li class="nav-item">
+                    <a class="nav-link menu-link" href="#stopWorks" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarLayouts">
+                        <i class="bx bx-user-circle"></i>
+                        <span data-key="t-layouts">Stop Work Lists</span>
+                    </a>
+                    <div class="collapse menu-dropdown" id="stopWorks">
+                        <ul class="nav nav-sm flex-column">
+                            <li class="nav-item">
+                                <a href="{{ route('application.stopwork.list') }}" class="nav-link" data-key="t-horizontal">Application List</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('application.stopwork.approved.list') }}" class="nav-link" data-key="t-horizontal">Approved Application List</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('application.stopwork.rejected.list') }}" class="nav-link" data-key="t-horizontal">Rejected Application List</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
             </ul>
         </div>
     </div>
