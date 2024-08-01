@@ -42,7 +42,7 @@
                                                 <button class="btn btn-sm btn-info" data-id="{{ $list->id }}" id="hearingCall">Call For Hearing</button>
                                             @endif
 
-                                            @if ($list->overall_status != "Closed" )
+                                            @if ($list->overall_status != "Closed" && auth()->user()->roles->pluck('name')[0] == 'registrar' )
                                                 <button class="btn btn-sm btn-dark" data-id="{{ $list->id }}" id="closeComplaint">Close Complaint</button>
                                             @endif
 

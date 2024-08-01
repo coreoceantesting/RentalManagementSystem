@@ -20,6 +20,7 @@ class ListingController extends Controller
                                 ->leftjoin('schemes', 'complaint_details.scheme_name', '=', 'schemes.id')
                                 ->where('complaint_details.created_by', auth()->user()->id)
                                 ->select('complaint_details.*', 'schemes.scheme_name as SchemeName', 'complaint_statuses.overall_status')
+                                ->orderBy('complaint_details.id', 'desc')
                                 ->get();
 
         return view('citizen.allApplicationList')->with(['application_lists' => $application_lists]);
@@ -32,6 +33,7 @@ class ListingController extends Controller
                                 ->where('complaint_details.created_by', auth()->user()->id)
                                 ->where('complaint_statuses.overall_status', 'Rejected')
                                 ->select('complaint_details.*', 'schemes.scheme_name as SchemeName', 'complaint_statuses.overall_status', 'complaint_statuses.approval_remark')
+                                ->orderBy('complaint_details.id', 'desc')
                                 ->get();
 
         return view('citizen.rejectedApplicationList')->with(['application_lists' => $application_lists]);
@@ -42,8 +44,10 @@ class ListingController extends Controller
         $application_lists = ComplaintDetail::leftjoin('complaint_statuses', 'complaint_details.id', '=', 'complaint_statuses.complaint_id')
                                 ->leftjoin('schemes', 'complaint_details.scheme_name', '=', 'schemes.id')
                                 ->where('complaint_details.created_by', auth()->user()->id)
-                                ->where('complaint_statuses.status', 'Send For Hearing')
+                                // ->where('complaint_statuses.status', 'Send For Hearing')
+                                ->whereNotNull('complaint_statuses.hearing_datetime')
                                 ->select('complaint_details.*', 'schemes.scheme_name as SchemeName', 'complaint_statuses.overall_status', 'complaint_statuses.approval_remark')
+                                ->orderBy('complaint_details.id', 'desc')
                                 ->get();
 
         return view('citizen.hearingApplicationList')->with(['application_lists' => $application_lists]);
@@ -60,7 +64,7 @@ class ListingController extends Controller
             $query->where('complaint_details.created_by', auth()->user()->id);
         }
 
-        $application_lists = $query->get();
+        $application_lists = $query->orderBy('complaint_details.id', 'desc')->get();
 
         return view('citizen.closeApplicationList')->with(['application_lists' => $application_lists]);
     }
@@ -76,7 +80,7 @@ class ListingController extends Controller
             $query->where('complaint_details.created_by', auth()->user()->id);
         }
 
-        $application_lists = $query->get();
+        $application_lists = $query->orderBy('complaint_details.id', 'desc')->get();
 
         return view('contractor.explainationCallApplicationList')->with(['application_lists' => $application_lists]);
     }

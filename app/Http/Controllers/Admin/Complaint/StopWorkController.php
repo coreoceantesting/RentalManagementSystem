@@ -40,7 +40,7 @@ class StopWorkController extends Controller
                 break;
         }
 
-        $application_lists = $query->get();
+        $application_lists = $query->orderBy('complaint_details.id', 'desc')->get();
 
         return view('stopWork.allApplicationList', ['application_lists' => $application_lists]);
     }
@@ -69,7 +69,7 @@ class StopWorkController extends Controller
                 break;
         }
 
-        $application_lists = $query->get();
+        $application_lists = $query->orderBy('complaint_details.id', 'desc')->get();
 
         return view('stopWork.allApplicationApprovedList')->with(['application_lists' => $application_lists]);
     }
@@ -98,7 +98,7 @@ class StopWorkController extends Controller
                 break;
         }
 
-        $application_lists = $query->get();
+        $application_lists = $query->orderBy('complaint_details.id', 'desc')->get();
 
         return view('stopWork.allApplicationRejectedList')->with(['application_lists' => $application_lists]);
     }
@@ -269,7 +269,7 @@ class StopWorkController extends Controller
                                 ->where('complaint_statuses.stopwork_status_by_ceo', '=', 'Approved')
                                 ->select('complaint_details.*', 'schemes.scheme_name as SchemeName', 'complaint_statuses.*');
 
-        $application_lists = $query->get();
+        $application_lists = $query->orderBy('complaint_details.id', 'desc')->get();
 
         return view('stopWork.finalApprovedList')->with(['application_lists' => $application_lists]);
     }
@@ -283,7 +283,7 @@ class StopWorkController extends Controller
                                 ->select('complaint_details.*', 'schemes.scheme_name as SchemeName', 'complaint_statuses.*');
 
 
-        $application_lists = $query->get();
+        $application_lists = $query->orderBy('complaint_details.id', 'desc')->get();
 
         return view('stopWork.finalRejectedList')->with(['application_lists' => $application_lists]);
     }

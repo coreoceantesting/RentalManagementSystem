@@ -39,26 +39,27 @@
                     </a>
                 </li>
 
-
-                <li class="nav-item">
-                    <a class="nav-link menu-link" href="#sidebarLayoutsMasters" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarLayouts">
-                        <i class="ri-layout-3-line"></i>
-                        <span data-key="t-layouts">Masters</span>
-                    </a>
-                    <div class="collapse menu-dropdown" id="sidebarLayoutsMasters">
-                        <ul class="nav nav-sm flex-column">
-                            <li class="nav-item">
-                                <a href="{{ route('contractors.index') }}" class="nav-link" data-key="t-horizontal">Contractor</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="{{ route('architects.index') }}" class="nav-link" data-key="t-horizontal">Architect</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="{{ route('schemes.index') }}" class="nav-link" data-key="t-horizontal">Schemes</a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
+                @can(['masters.allmasters'])
+                    <li class="nav-item">
+                        <a class="nav-link menu-link" href="#sidebarLayoutsMasters" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarLayouts">
+                            <i class="ri-layout-3-line"></i>
+                            <span data-key="t-layouts">Masters</span>
+                        </a>
+                        <div class="collapse menu-dropdown" id="sidebarLayoutsMasters">
+                            <ul class="nav nav-sm flex-column">
+                                <li class="nav-item">
+                                    <a href="{{ route('contractors.index') }}" class="nav-link" data-key="t-horizontal">Contractor</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('architects.index') }}" class="nav-link" data-key="t-horizontal">Architect</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('schemes.index') }}" class="nav-link" data-key="t-horizontal">Schemes</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                @endcan
 
 
                 @canany(['users.view', 'roles.view'])
@@ -85,119 +86,151 @@
                 @endcan
 
                 {{-- Citizen Menus --}}
+                @can('complaint.add')
+                    <li class="nav-item">
+                        <a class="nav-link menu-link" href="{{ route('complaint.index') }}" >
+                            <i class="ri-add-circle-line"></i>
+                            <span data-key="t-dashboards">Add Complaint</span>
+                        </a>
+                    </li>
+                @endcan
 
-                <li class="nav-item">
-                    <a class="nav-link menu-link" href="{{ route('complaint.index') }}" >
-                        <i class="ri-add-circle-line"></i>
-                        <span data-key="t-dashboards">Add Complaint</span>
-                    </a>
-                </li>
+                @can('complaint.applicationlist')
+                    <li class="nav-item">
+                        <a class="nav-link menu-link" href="{{ route('list.all.applications') }}" >
+                            <i class="ri-list-check"></i>
+                            <span data-key="t-dashboards">Application List</span>
+                        </a>
+                    </li>
+                @endcan
 
-                <li class="nav-item">
-                    <a class="nav-link menu-link" href="{{ route('list.all.applications') }}" >
-                        <i class="ri-list-check"></i>
-                        <span data-key="t-dashboards">Application List</span>
-                    </a>
-                </li>
+                @can('complaint.rejectlist')
+                    <li class="nav-item">
+                        <a class="nav-link menu-link" href="{{ route('list.rejected.applications') }}" >
+                            <i class="ri-list-check"></i>
+                            <span data-key="t-dashboards">Rejected Application List</span>
+                        </a>
+                    </li>
+                @endcan
 
-                <li class="nav-item">
-                    <a class="nav-link menu-link" href="{{ route('list.rejected.applications') }}" >
-                        <i class="ri-list-check"></i>
-                        <span data-key="t-dashboards">Rejected Application List</span>
-                    </a>
-                </li>
+                @can('complaint.hearinglist')
+                    <li class="nav-item">
+                        <a class="nav-link menu-link" href="{{ route('list.hearing.applications') }}" >
+                            <i class="ri-list-check"></i>
+                            <span data-key="t-dashboards">Hearing Application List</span>
+                        </a>
+                    </li>
+                @endif
 
-                <li class="nav-item">
-                    <a class="nav-link menu-link" href="{{ route('list.hearing.applications') }}" >
-                        <i class="ri-list-check"></i>
-                        <span data-key="t-dashboards">Hearing Application List</span>
-                    </a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link menu-link" href="{{ route('list.close.applications') }}" >
-                        <i class="ri-list-check"></i>
-                        <span data-key="t-dashboards">Close List</span>
-                    </a>
-                </li>
+                @canany(['complaint.closelist' , 'lists.closelist'])
+                    <li class="nav-item">
+                        <a class="nav-link menu-link" href="{{ route('list.close.applications') }}" >
+                            <i class="ri-list-check"></i>
+                            <span data-key="t-dashboards">Close List</span>
+                        </a>
+                    </li>
+                @endcan
 
                 {{-- clerk menu --}}
 
-                <li class="nav-item">
-                    <a class="nav-link menu-link" href="{{ route('complaint.list') }}" >
-                        <i class="ri-list-check"></i>
-                        <span data-key="t-dashboards">Complaint List</span>
-                    </a>
-                </li>
+                @can('lists.complaintlist')
+                    <li class="nav-item">
+                        <a class="nav-link menu-link" href="{{ route('complaint.list') }}" >
+                            <i class="ri-list-check"></i>
+                            <span data-key="t-dashboards">Complaint List</span>
+                        </a>
+                    </li>
+                @endcan
 
-                <li class="nav-item">
-                    <a class="nav-link menu-link" href="{{ route('approved.complaint.list') }}" >
-                        <i class="ri-list-check"></i>
-                        <span data-key="t-dashboards">Approved List</span>
-                    </a>
-                </li>
+                @can('lists.approvedcomplaintlist')
+                    <li class="nav-item">
+                        <a class="nav-link menu-link" href="{{ route('approved.complaint.list') }}" >
+                            <i class="ri-list-check"></i>
+                            <span data-key="t-dashboards">Approved List</span>
+                        </a>
+                    </li>
+                @endif
 
-                <li class="nav-item">
-                    <a class="nav-link menu-link" href="{{ route('annexure.verification.list') }}" >
-                        <i class="ri-list-check"></i>
-                        <span data-key="t-dashboards">Annexure Verification List</span>
-                    </a>
-                </li>
+                @can('lists.annexureverificationlist')
+                    <li class="nav-item">
+                        <a class="nav-link menu-link" href="{{ route('annexure.verification.list') }}" >
+                            <i class="ri-list-check"></i>
+                            <span data-key="t-dashboards">Annexure Verification List</span>
+                        </a>
+                    </li>
+                @endcan
 
-                <li class="nav-item">
-                    <a class="nav-link menu-link" href="{{ route('application.hearing.list') }}" >
-                        <i class="ri-list-check"></i>
-                        <span data-key="t-dashboards">Hearing List</span>
-                    </a>
-                </li>
+                @can('lists.hearinglist')
+                    <li class="nav-item">
+                        <a class="nav-link menu-link" href="{{ route('application.hearing.list') }}" >
+                            <i class="ri-list-check"></i>
+                            <span data-key="t-dashboards">Hearing List</span>
+                        </a>
+                    </li>
+                @endcan
 
                 {{-- contractors Menu --}}
-                
-                <li class="nav-item">
-                    <a class="nav-link menu-link" href="{{ route('list.explaination') }}" >
-                        <i class="ri-list-check"></i>
-                        <span data-key="t-dashboards">Explaination Call List</span>
-                    </a>
-                </li>
+                @can('lists.explainationcalllist')
+                    <li class="nav-item">
+                        <a class="nav-link menu-link" href="{{ route('list.explaination') }}" >
+                            <i class="ri-list-check"></i>
+                            <span data-key="t-dashboards">Explaination Call List</span>
+                        </a>
+                    </li>
+                @endcan
 
                 {{-- stop work menu --}}
-                <li class="nav-item">
-                    <a class="nav-link menu-link" href="#stopWorks" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarLayouts">
-                        <i class="bx bx-user-circle"></i>
-                        <span data-key="t-layouts">Stop Work Lists</span>
-                    </a>
-                    <div class="collapse menu-dropdown" id="stopWorks">
-                        <ul class="nav nav-sm flex-column">
-                            <li class="nav-item">
-                                <a href="{{ route('application.stopwork.list') }}" class="nav-link" data-key="t-horizontal">Application List</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="{{ route('application.stopwork.approved.list') }}" class="nav-link" data-key="t-horizontal">Approved Application List</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="{{ route('application.stopwork.rejected.list') }}" class="nav-link" data-key="t-horizontal">Rejected Application List</a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
+                @can('lists.stopworklist')
+                    <li class="nav-item">
+                        <a class="nav-link menu-link" href="#stopWorks" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarLayouts">
+                            <i class="bx bx-user-circle"></i>
+                            <span data-key="t-layouts">Stop Work Lists</span>
+                        </a>
+                        <div class="collapse menu-dropdown" id="stopWorks">
+                            <ul class="nav nav-sm flex-column">
+                                <li class="nav-item">
+                                    <a href="{{ route('application.stopwork.list') }}" class="nav-link" data-key="t-horizontal">Application List</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('application.stopwork.approved.list') }}" class="nav-link" data-key="t-horizontal">Approved Application List</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('application.stopwork.rejected.list') }}" class="nav-link" data-key="t-horizontal">Rejected Application List</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                @endcan
 
                 {{-- final stop work --}}
-                <li class="nav-item">
-                    <a class="nav-link menu-link" href="#finalstopWorks" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarLayouts">
-                        <i class="bx bx-user-circle"></i>
-                        <span data-key="t-layouts">Final Stop Work Lists</span>
-                    </a>
-                    <div class="collapse menu-dropdown" id="finalstopWorks">
-                        <ul class="nav nav-sm flex-column">
-                            <li class="nav-item">
-                                <a href="{{ route('application.finalstopwork.approved.list') }}" class="nav-link" data-key="t-horizontal">Approved Application List</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="{{ route('application.finalstopwork.rejected.list') }}" class="nav-link" data-key="t-horizontal">Rejected Application List</a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
+                @can('lists.finalstopworklist')
+                    <li class="nav-item">
+                        <a class="nav-link menu-link" href="#finalstopWorks" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarLayouts">
+                            <i class="bx bx-user-circle"></i>
+                            <span data-key="t-layouts">Final Stop Work Lists</span>
+                        </a>
+                        <div class="collapse menu-dropdown" id="finalstopWorks">
+                            <ul class="nav nav-sm flex-column">
+                                <li class="nav-item">
+                                    <a href="{{ route('application.finalstopwork.approved.list') }}" class="nav-link" data-key="t-horizontal">Approved Application List</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('application.finalstopwork.rejected.list') }}" class="nav-link" data-key="t-horizontal">Rejected Application List</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                @endcan
+
+                {{-- send to collector list --}}
+                @can('lists.sendtocollectorlist')
+                    <li class="nav-item">
+                        <a class="nav-link menu-link" href="{{ route('list.sendtocollector') }}" >
+                            <i class="ri-list-check"></i>
+                            <span data-key="t-dashboards">Explaination Call List</span>
+                        </a>
+                    </li>
+                @endcan
 
             </ul>
         </div>

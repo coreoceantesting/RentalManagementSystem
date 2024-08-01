@@ -20,6 +20,7 @@ class ClerkActionController extends Controller
                                 ->where('complaint_statuses.overall_status', 'Pending')
                                 ->where('complaint_statuses.status', 'Pending')
                                 ->select('complaint_details.*', 'schemes.scheme_name as SchemeName', 'complaint_statuses.overall_status')
+                                ->orderBy('complaint_details.id', 'desc')
                                 ->get();
 
         return view('clerk.complaintList')->with(['application_lists' => $application_lists]);
@@ -31,6 +32,7 @@ class ClerkActionController extends Controller
                                 ->leftjoin('schemes', 'complaint_details.scheme_name', '=', 'schemes.id')
                                 ->where('complaint_statuses.overall_status', 'Approved')
                                 ->select('complaint_details.*', 'schemes.scheme_name as SchemeName', 'complaint_statuses.*')
+                                ->orderBy('complaint_details.id', 'desc')
                                 ->get();
 
         return view('clerk.approvedList')->with(['application_lists' => $application_lists]);
@@ -251,6 +253,7 @@ class ClerkActionController extends Controller
                                 ->leftjoin('schemes', 'complaint_details.scheme_name', '=', 'schemes.id')
                                 ->where('complaint_statuses.overall_status', 'Send To Collector')
                                 ->select('complaint_details.*', 'schemes.scheme_name as SchemeName', 'complaint_statuses.*')
+                                ->orderBy('complaint_details.id', 'desc')
                                 ->get();
 
         return view('clerk.annexureVerificationList')->with(['application_lists' => $application_lists]);
@@ -262,6 +265,7 @@ class ClerkActionController extends Controller
                                 ->leftjoin('schemes', 'complaint_details.scheme_name', '=', 'schemes.id')
                                 ->whereNotNull('complaint_statuses.hearing_doc')
                                 ->select('complaint_details.*', 'schemes.scheme_name as SchemeName', 'complaint_statuses.*')
+                                ->orderBy('complaint_details.id', 'desc')
                                 ->get();
 
         return view('clerk.hearingList')->with(['application_lists' => $application_lists]);

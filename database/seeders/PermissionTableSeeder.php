@@ -94,6 +94,86 @@ class PermissionTableSeeder extends Seeder
                 'name' => 'wards.delete',
                 'group' => 'wards',
             ],
+            [
+                'id' => 17,
+                'name' => 'complaint.add',
+                'group' => 'citizen',
+            ],
+            [
+                'id' => 18,
+                'name' => 'complaint.rejectlist',
+                'group' => 'citizen',
+            ],
+            [
+                'id' => 19,
+                'name' => 'complaint.hearinglist',
+                'group' => 'citizen',
+            ],
+            [
+                'id' => 20,
+                'name' => 'complaint.closelist',
+                'group' => 'citizen',
+            ],
+            [
+                'id' => 21,
+                'name' => 'masters.allmasters',
+                'group' => 'masters',
+            ],
+            [
+                'id' => 22,
+                'name' => 'lists.complaintlist',
+                'group' => 'lists',
+            ],
+            [
+                'id' => 23,
+                'name' => 'lists.approvedcomplaintlist',
+                'group' => 'lists',
+            ],
+            [
+                'id' => 24,
+                'name' => 'lists.annexureverificationlist',
+                'group' => 'lists',
+            ],
+            [
+                'id' => 25,
+                'name' => 'lists.hearinglist',
+                'group' => 'lists',
+            ],
+            [
+                'id' => 26,
+                'name' => 'lists.closelist',
+                'group' => 'lists',
+            ],
+            [
+                'id' => 27,
+                'name' => 'lists.stopworklist',
+                'group' => 'lists',
+            ],
+            [
+                'id' => 28,
+                'name' => 'lists.finalstopworklist',
+                'group' => 'lists',
+            ],
+            [
+                'id' => 29,
+                'name' => 'lists.totalapplicationlist',
+                'group' => 'lists',
+            ],
+            [
+                'id' => 30,
+                'name' => 'lists.explainationcalllist',
+                'group' => 'lists',
+            ],
+            [
+                'id' => 31,
+                'name' => 'complaint.applicationlist',
+                'group' => 'citizen',
+            ],
+            [
+                'id' => 32,
+                'name' => 'lists.sendtocollectorlist',
+                'group' => 'lists',
+            ],
         ];
 
         foreach ($permissions as $permission)
