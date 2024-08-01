@@ -52,7 +52,7 @@ class StopWorkController extends Controller
         
         $query = ComplaintDetail::leftjoin('complaint_statuses', 'complaint_details.id', '=', 'complaint_statuses.complaint_id')
                                 ->leftjoin('schemes', 'complaint_details.scheme_name', '=', 'schemes.id')
-                                ->where('complaint_statuses.status', '=', 'Send For Stop Work')
+                                // ->where('complaint_statuses.status', '=', 'Send For Stop Work')
                                 ->select('complaint_details.*', 'schemes.scheme_name as SchemeName', 'complaint_statuses.*');
 
         switch ($userRole) {

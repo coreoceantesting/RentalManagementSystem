@@ -31,7 +31,7 @@
                                         <td>{{ $list->overall_status }}</td>
                                         <td>{{ $list->approval_remark }}</td>
                                         <td>
-                                            <button class="btn btn-sm btn-primary view-element px-2 py-1" title="View Details" data-id="{{ $list->id }}">View</button>
+                                            <a href="{{ route('view.application.details', $list->id) }}" class="btn btn-sm btn-primary view-element px-2 py-1" title="View Details" data-id="{{ $list->id }}">View</a>
                                         </td>
                                     </tr>
                                 @endforeach
