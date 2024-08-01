@@ -222,16 +222,6 @@
                     </li>
                 @endcan
 
-                {{-- send to collector list --}}
-                @can('lists.sendtocollectorlist')
-                    <li class="nav-item">
-                        <a class="nav-link menu-link" href="{{ route('list.sendtocollector') }}" >
-                            <i class="ri-list-check"></i>
-                            <span data-key="t-dashboards">Explaination Call List</span>
-                        </a>
-                    </li>
-                @endcan
-
             </ul>
         </div>
     </div>
