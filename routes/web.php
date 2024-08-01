@@ -111,6 +111,9 @@ Route::middleware(['auth','PreventBackHistory', 'firewall.all'])->group(function
     Route::post('/stopwork/{id}/approve/ceo', [App\Http\Controllers\Admin\Complaint\StopWorkController::class, 'approveStopWorkByCeo'])->name('ceo.approve.stopwork');
     Route::post('/stopwork/reject/ceo', [App\Http\Controllers\Admin\Complaint\StopWorkController::class, 'rejectStopWorkByCeo'])->name('ceo.reject.stopwork');
 
+    // final stop work list
+    Route::get('/final/stopwork/approved/list', [App\Http\Controllers\Admin\Complaint\StopWorkController::class, 'finalStopWorkApprovedList'])->name('application.finalstopwork.approved.list');
+    Route::get('/final/stopwork/rejected/list', [App\Http\Controllers\Admin\Complaint\StopWorkController::class, 'finalStopWorkRejectedList'])->name('application.finalstopwork.rejected.list');
 
     Route::get('/annexure-verification-list', [App\Http\Controllers\Admin\Clerk\ClerkActionController::class, 'annexureVerificationList'])->name('annexure.verification.list');
 

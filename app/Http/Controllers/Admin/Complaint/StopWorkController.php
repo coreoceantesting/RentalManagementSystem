@@ -228,6 +228,8 @@ class StopWorkController extends Controller
             // Update the status
             DB::table('complaint_statuses')->where('complaint_id', $id)->update([
                 'stopwork_status_by_ceo' => 'Approved',
+                'overall_status' => 'Work Stopped',
+                'status' => 'Work Stopped',
                 'stopwork_approval_by_ceo_id' => auth()->user()->id,
                 'stopwork_approval_at_by_ceo' => now()
             ]);
@@ -256,6 +258,34 @@ class StopWorkController extends Controller
         } catch (\Exception $e) {
             return response()->json(['error' => 'Failed to reject application!'], 500);
         }
+    }
+
+    // final stop work
+    public function finalStopWorkApprovedList()
+    {
+
+        $query = ComplaintDetail::leftjoin('complaint_statuses', 'complaint_details.id', '=', 'complaint_statuses.complaint_id')
+                                ->leftjoin('schemes', 'complaint_details.scheme_name', '=', 'schemes.id')
+                                ->where('complaint_statuses.stopwork_status_by_ceo', '=', 'Approved')
+                                ->select('complaint_details.*', 'schemes.scheme_name as SchemeName', 'complaint_statuses.*');
+
+        $application_lists = $query->get();
+
+        return view('stopWork.finalApprovedList')->with(['application_lists' => $application_lists]);
+    }
+
+    public function finalStopWorkRejectedList()
+    {
+   
+        $query = ComplaintDetail::leftjoin('complaint_statuses', 'complaint_details.id', '=', 'complaint_statuses.complaint_id')
+                                ->leftjoin('schemes', 'complaint_details.scheme_name', '=', 'schemes.id')
+                                ->where('complaint_statuses.stopwork_status_by_ceo', '=', 'Rejected')
+                                ->select('complaint_details.*', 'schemes.scheme_name as SchemeName', 'complaint_statuses.*');
+
+
+        $application_lists = $query->get();
+
+        return view('stopWork.finalRejectedList')->with(['application_lists' => $application_lists]);
     }
 
 }

@@ -181,6 +181,24 @@
                     </div>
                 </li>
 
+                {{-- final stop work --}}
+                <li class="nav-item">
+                    <a class="nav-link menu-link" href="#finalstopWorks" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarLayouts">
+                        <i class="bx bx-user-circle"></i>
+                        <span data-key="t-layouts">Final Stop Work Lists</span>
+                    </a>
+                    <div class="collapse menu-dropdown" id="finalstopWorks">
+                        <ul class="nav nav-sm flex-column">
+                            <li class="nav-item">
+                                <a href="{{ route('application.finalstopwork.approved.list') }}" class="nav-link" data-key="t-horizontal">Approved Application List</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('application.finalstopwork.rejected.list') }}" class="nav-link" data-key="t-horizontal">Rejected Application List</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
             </ul>
         </div>
     </div>
