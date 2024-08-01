@@ -84,4 +84,19 @@ class ListingController extends Controller
 
         return view('contractor.explainationCallApplicationList')->with(['application_lists' => $application_lists]);
     }
+
+    public function totalApplicationList()
+    {
+        $query = ComplaintDetail::leftjoin('complaint_statuses', 'complaint_details.id', '=', 'complaint_statuses.complaint_id')
+                            ->leftjoin('schemes', 'complaint_details.scheme_name', '=', 'schemes.id')
+                            ->select('complaint_details.*', 'schemes.scheme_name as SchemeName', 'complaint_statuses.overall_status', 'complaint_statuses.approval_remark');
+
+        if (auth()->user()->role == 'citizen') {
+            $query->where('complaint_details.created_by', auth()->user()->id);
+        }
+
+        $application_lists = $query->orderBy('complaint_details.id', 'desc')->get();
+
+        return view('complaint.totalApplicationList')->with(['application_lists' => $application_lists]);
+    }
 }

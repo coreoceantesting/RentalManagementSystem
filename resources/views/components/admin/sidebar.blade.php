@@ -222,6 +222,16 @@
                     </li>
                 @endcan
 
+                {{-- total application list --}}
+                @can('lists.totalapplicationlist')
+                    <li class="nav-item">
+                        <a class="nav-link menu-link" href="{{ route('total.application.list') }}" >
+                            <i class="ri-list-check"></i>
+                            <span data-key="t-dashboards">Total Application</span>
+                        </a>
+                    </li>
+                @endcan
+
             </ul>
         </div>
     </div>

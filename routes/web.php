@@ -117,7 +117,7 @@ Route::middleware(['auth','PreventBackHistory', 'firewall.all'])->group(function
 
     Route::get('/annexure-verification-list', [App\Http\Controllers\Admin\Clerk\ClerkActionController::class, 'annexureVerificationList'])->name('annexure.verification.list');
 
-
+    Route::get('/total-application-list', [App\Http\Controllers\Admin\Citizen\ListingController::class, 'totalApplicationList'])->name('total.application.list');
 
 
     // Users Roles n Permissions
