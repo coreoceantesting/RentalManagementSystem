@@ -169,11 +169,6 @@ class PermissionTableSeeder extends Seeder
                 'name' => 'complaint.applicationlist',
                 'group' => 'citizen',
             ],
-            [
-                'id' => 32,
-                'name' => 'lists.sendtocollectorlist',
-                'group' => 'lists',
-            ],
         ];
 
         foreach ($permissions as $permission)
