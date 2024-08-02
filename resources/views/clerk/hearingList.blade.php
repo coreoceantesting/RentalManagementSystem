@@ -33,6 +33,10 @@
                                             @if (empty($list->stop_work_approval_at) && auth()->user()->roles->pluck('name')[0] == 'clerk')
                                                 <a class="btn btn-sm btn-dark stop-work px-2 py-1" title="Stop Work" id="stopWork" data-id="{{ $list->id }}">Stop Work</a>
                                             @endif
+
+                                            @if ($list->overall_status != "Closed" && auth()->user()->roles->pluck('name')[0] == 'registrar' )
+                                                <button class="btn btn-sm btn-dark" data-id="{{ $list->id }}" id="closeComplaint">Close Complaint</button>
+                                            @endif
                                             <a class="btn btn-sm btn-secondary view-hearing-detail px-2 py-1" title="View Hearing Details" data-id="{{ $list->id }}">View Hearing Details</a>
                                             <a class="btn btn-sm btn-warning view-explaination-detail px-2 py-1" title="View Explanation Call Details" data-id="{{ $list->id }}">View Explaination Call Details</a>
                                         </td>
@@ -301,5 +305,44 @@
 
 
 
+    });
+</script>
+
+{{-- Close application --}}
+<script>
+    $("#closeComplaint").on("click", function(e) {
+        e.preventDefault();
+        swal({
+            title: "Are you sure to close this application?",
+            icon: "info",
+            buttons: ["Cancel", "Confirm"]
+        })
+        .then((willApprove) => {
+            if (willApprove) {
+                var model_id = $(this).data("id"); 
+                var url = "{{ route('application.close', ":model_id") }}";
+
+                $.ajax({
+                    url: url.replace(':model_id', model_id),
+                    type: 'POST',
+                    data: {
+                        '_token': "{{ csrf_token() }}"
+                    },
+                    success: function(data) {
+                        if (data.success) {
+                            swal("Success!", data.success, "success")
+                                .then(() => {
+                                    window.location.href = "{{ route('list.close.applications') }}";
+                                });
+                        } else {
+                            swal("Error!", data.error, "error");
+                        }
+                    },
+                    error: function(error) {
+                        swal("Error!", "Something went wrong", "error");
+                    },
+                });
+            }
+        });
     });
 </script>
