@@ -209,7 +209,7 @@
                             </div>
 
                             <div class="col-md-6">
-                                <label class="col-form-label" for="bank_name">Bank Name (बँकेचे नाव)></label>
+                                <label class="col-form-label" for="bank_name">Bank Name (बँकेचे नाव)</label>
                                 <input class="form-control" type="text" name="bank_name" id="bank_name" placeholder="Enter Bank Name" value="{{ $application_detail->bank_name  }}" readonly>
                                 <span class="text-danger is-invalid bank_name_err"></span>
                             </div>
