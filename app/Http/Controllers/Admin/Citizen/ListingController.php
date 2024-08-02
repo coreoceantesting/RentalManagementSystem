@@ -76,8 +76,12 @@ class ListingController extends Controller
                             ->whereNotNull('complaint_statuses.explanation_call_one_at')
                             ->select('complaint_details.*', 'schemes.scheme_name as SchemeName', 'complaint_statuses.overall_status', 'complaint_statuses.approval_remark');
 
-        if (auth()->user()->role == 'citizen') {
+        if (auth()->user()->roles->pluck('name')[0] == 'citizen') {
             $query->where('complaint_details.created_by', auth()->user()->id);
+        }
+
+        if (auth()->user()->roles->pluck('name')[0] == "contractor") {
+            $query->where('complaint_details.contractor_id', auth()->user()->id);
         }
 
         $application_lists = $query->orderBy('complaint_details.id', 'desc')->get();

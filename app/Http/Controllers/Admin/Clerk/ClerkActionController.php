@@ -15,13 +15,19 @@ class ClerkActionController extends Controller
 {
     public function complaintList(Request $request)
     {
-        $application_lists = ComplaintDetail::leftjoin('complaint_statuses', 'complaint_details.id', '=', 'complaint_statuses.complaint_id')
-                                ->leftjoin('schemes', 'complaint_details.scheme_name', '=', 'schemes.id')
-                                ->where('complaint_statuses.overall_status', 'Pending')
-                                ->where('complaint_statuses.status', 'Pending')
-                                ->select('complaint_details.*', 'schemes.scheme_name as SchemeName', 'complaint_statuses.overall_status')
-                                ->orderBy('complaint_details.id', 'desc')
-                                ->get();
+        $query = ComplaintDetail::leftjoin('complaint_statuses', 'complaint_details.id', '=', 'complaint_statuses.complaint_id')
+                            ->leftjoin('schemes', 'complaint_details.scheme_name', '=', 'schemes.id')
+                            ->where('complaint_statuses.overall_status', 'Pending')
+                            ->where('complaint_statuses.status', 'Pending')
+                            ->select('complaint_details.*', 'schemes.scheme_name as SchemeName', 'complaint_statuses.overall_status')
+                            ->orderBy('complaint_details.id', 'desc');
+
+        // Check if the logged-in user is a contractor
+        if (auth()->user()->roles->pluck('name')[0] == "contractor") {
+            $query->where('complaint_details.contractor_id', auth()->user()->id);
+        }
+
+        $application_lists = $query->get();
 
         return view('clerk.complaintList')->with(['application_lists' => $application_lists]);
     }
@@ -261,12 +267,18 @@ class ClerkActionController extends Controller
 
     public function hearingList(Request $request)
     {
-        $application_lists = ComplaintDetail::leftjoin('complaint_statuses', 'complaint_details.id', '=', 'complaint_statuses.complaint_id')
-                                ->leftjoin('schemes', 'complaint_details.scheme_name', '=', 'schemes.id')
-                                ->whereNotNull('complaint_statuses.hearing_doc')
-                                ->select('complaint_details.*', 'schemes.scheme_name as SchemeName', 'complaint_statuses.*')
-                                ->orderBy('complaint_details.id', 'desc')
-                                ->get();
+        $query = ComplaintDetail::leftjoin('complaint_statuses', 'complaint_details.id', '=', 'complaint_statuses.complaint_id')
+                            ->leftjoin('schemes', 'complaint_details.scheme_name', '=', 'schemes.id')
+                            ->whereNotNull('complaint_statuses.hearing_doc')
+                            ->select('complaint_details.*', 'schemes.scheme_name as SchemeName', 'complaint_statuses.*')
+                            ->orderBy('complaint_details.id', 'desc');
+
+        // Check if the logged-in user is a contractor
+        if (auth()->user()->roles->pluck('name')[0] == "contractor") {
+            $query->where('complaint_details.contractor_id', auth()->user()->id);
+        }
+
+        $application_lists = $query->get();
 
         return view('clerk.hearingList')->with(['application_lists' => $application_lists]);
     }

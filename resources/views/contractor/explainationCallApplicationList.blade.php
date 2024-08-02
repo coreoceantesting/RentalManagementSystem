@@ -31,7 +31,9 @@
                                         <td>
                                             <a href="{{ route('view.application.details', $list->id) }}" class="btn btn-sm btn-primary view-element px-2 py-1" title="View Details" data-id="{{ $list->id }}">View</a>
                                             <a class="btn btn-sm btn-warning view-explaination-detail px-2 py-1" title="View Explanation Call Details" data-id="{{ $list->id }}">Call Details</a>
-                                            <a class="btn btn-sm btn-info upload-doc px-2 py-1" id="upload-doc" title="Upload Document" data-id="{{ $list->id }}">Upload Document</a>
+                                            @if (auth()->user()->roles->pluck('name')[0] == "contractor")  
+                                                <a class="btn btn-sm btn-info upload-doc px-2 py-1" id="upload-doc" title="Upload Document" data-id="{{ $list->id }}">Upload Document</a>
+                                            @endif
                                         </td>
                                     </tr>
                                 @endforeach
