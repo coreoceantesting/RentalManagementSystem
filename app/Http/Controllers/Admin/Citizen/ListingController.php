@@ -19,7 +19,7 @@ class ListingController extends Controller
         $application_lists = ComplaintDetail::leftjoin('complaint_statuses', 'complaint_details.id', '=', 'complaint_statuses.complaint_id')
                                 ->leftjoin('schemes', 'complaint_details.scheme_name', '=', 'schemes.id')
                                 ->where('complaint_details.created_by', auth()->user()->id)
-                                ->select('complaint_details.*', 'schemes.scheme_name as SchemeName', 'complaint_statuses.overall_status')
+                                ->select('complaint_details.*', 'schemes.scheme_name as SchemeName', 'complaint_statuses.overall_status', 'complaint_statuses.explanation_call_one_at')
                                 ->orderBy('complaint_details.id', 'desc')
                                 ->get();
 
