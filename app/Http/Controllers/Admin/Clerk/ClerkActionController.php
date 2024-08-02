@@ -24,7 +24,7 @@ class ClerkActionController extends Controller
 
         // Check if the logged-in user is a contractor
         if (auth()->user()->roles->pluck('name')[0] == "contractor") {
-            $query->where('complaint_details.contractor_id', auth()->user()->id);
+            $query->where('complaint_details.contractor_id', auth()->user()->contractor_id);
         }
 
         $application_lists = $query->get();
@@ -275,7 +275,7 @@ class ClerkActionController extends Controller
 
         // Check if the logged-in user is a contractor
         if (auth()->user()->roles->pluck('name')[0] == "contractor") {
-            $query->where('complaint_details.contractor_id', auth()->user()->id);
+            $query->where('complaint_details.contractor_id', auth()->user()->contractor_id);
         }
 
         $application_lists = $query->get();
