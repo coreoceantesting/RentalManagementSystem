@@ -30,7 +30,7 @@
                                         <td>{{ $list->overall_status }}</td>
                                         <td>
                                             <a href="{{ route('view.application.details', $list->id) }}" class="btn btn-sm btn-primary view-element px-2 py-1" title="View Details" data-id="{{ $list->id }}">View</a>
-                                            @if (empty($list->stop_work_approval_at))
+                                            @if (empty($list->stop_work_approval_at) && auth()->user()->roles->pluck('name')[0] == 'clerk')
                                                 <a class="btn btn-sm btn-dark stop-work px-2 py-1" title="Stop Work" id="stopWork" data-id="{{ $list->id }}">Stop Work</a>
                                             @endif
                                             <a class="btn btn-sm btn-secondary view-hearing-detail px-2 py-1" title="View Hearing Details" data-id="{{ $list->id }}">View Hearing Details</a>

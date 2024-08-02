@@ -60,7 +60,7 @@ class ListingController extends Controller
                             ->where('complaint_statuses.overall_status', 'Closed')
                             ->select('complaint_details.*', 'schemes.scheme_name as SchemeName', 'complaint_statuses.overall_status', 'complaint_statuses.approval_remark');
 
-        if (auth()->user()->role == 'citizen') {
+        if (auth()->user()->roles->pluck('name')[0] == 'citizen') {
             $query->where('complaint_details.created_by', auth()->user()->id);
         }
 
@@ -95,7 +95,7 @@ class ListingController extends Controller
                             ->leftjoin('schemes', 'complaint_details.scheme_name', '=', 'schemes.id')
                             ->select('complaint_details.*', 'schemes.scheme_name as SchemeName', 'complaint_statuses.overall_status', 'complaint_statuses.approval_remark');
 
-        if (auth()->user()->role == 'citizen') {
+        if (auth()->user()->roles->pluck('name')[0] == 'citizen') {
             $query->where('complaint_details.created_by', auth()->user()->id);
         }
 
