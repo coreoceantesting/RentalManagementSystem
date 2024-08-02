@@ -25,7 +25,8 @@ class User extends Authenticatable
         'mobile',
         'address',
         'is_citizen',
-        'non_encrypt_password'
+        'non_encrypt_password',
+        'contractor_id'
     ];
 
     /**

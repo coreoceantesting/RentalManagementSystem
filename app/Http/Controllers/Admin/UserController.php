@@ -9,6 +9,7 @@ use App\Http\Requests\Admin\StoreUserRequest;
 use App\Http\Requests\Admin\UpdateUserRequest;
 use App\Models\Department;
 use App\Models\Role;
+use App\Models\Contractor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
@@ -26,8 +27,8 @@ class UserController extends Controller
     {
         $users = User::whereNot('id', Auth::user()->id)->whereNull('is_citizen')->latest()->get();
         $roles = Role::orderBy('id', 'DESC')->whereNot('name', 'like', '%super%')->get();
-
-        return view('admin.users')->with(['users'=> $users, 'roles'=> $roles]);
+        $contractors = Contractor::latest()->get();
+        return view('admin.users')->with(['users'=> $users, 'roles'=> $roles, 'contractors' => $contractors]);
     }
 
     /**

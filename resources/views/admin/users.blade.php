@@ -48,6 +48,17 @@
                                 <span class="text-danger is-invalid role_err"></span>
                             </div>
 
+                            <div class="col-md-4 mt-3" id="contractorField" style="display: none;">
+                                <label class="col-form-label" for="role">Select Contractor <span class="text-danger">*</span></label>
+                                <select class="form-control col-sm-12" id="contractor_id" name="contractor_id">
+                                    <option value="">--Select contractor--</option>
+                                    @foreach ($contractors as $contractor)
+                                        <option value="{{ $contractor->id }}">{{ $contractor->contractor_name }}</option>
+                                    @endforeach
+                                </select>
+                                <span class="text-danger is-invalid contractor_id_err"></span>
+                            </div>
+
                             <div class="col-md-4 mt-3">
                                 <label class="col-form-label" for="password">Password <span class="text-danger">*</span></label>
                                 <input class="form-control" id="password" name="password" type="password" placeholder="********">
@@ -116,6 +127,17 @@
                                     @endforeach
                                 </select>
                                 <span class="text-danger is-invalid role_err"></span>
+                            </div>
+
+                            <div class="col-md-4 mt-3" id="editContractorField" style="display: none;">
+                                <label class="col-form-label" for="role">Select Contractor <span class="text-danger">*</span></label>
+                                <select class="form-control col-sm-12" id="contractor_id" name="contractor_id">
+                                    <option value="">--Select contractor--</option>
+                                    @foreach ($contractors as $contractor)
+                                        <option value="{{ $contractor->id }}">{{ $contractor->contractor_name }}</option>
+                                    @endforeach
+                                </select>
+                                <span class="text-danger is-invalid contractor_id_err"></span>
                             </div>
 
                         </div>
@@ -453,6 +475,17 @@
                     $("#editForm input[name='email']").val(data.user.email);
                     $("#editForm input[name='mobile']").val(data.user.mobile);
                     $("#editForm select[name='ward_id']").html(data.wardHtml);
+
+                    var role_id = $("#editForm select[name='role']").val();
+
+                    if (role_id == '5') {
+                        $("#editContractorField").show();
+                        $("#editForm select[name='contractor_id']").val(data.user.contractor_id);
+                    } else {
+                        $("#editContractorField").hide();
+                        $("#editForm select[name='contractor_id']").val('');
+                    }
+
                 } else {
                     swal("Error!", data.error, "error");
                 }
@@ -601,5 +634,19 @@
             });
         }
 
+    });
+</script>
+
+{{-- hide and show contractor --}}
+<script>
+    $(document).ready(function() {
+        $('#role').change(function() {
+            var selectedRole = $(this).val();
+            if (selectedRole == '5') { 
+                $('#contractorField').show();
+            } else {
+                $('#contractorField').hide();
+            }
+        });
     });
 </script>
