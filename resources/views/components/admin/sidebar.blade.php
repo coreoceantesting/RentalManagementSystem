@@ -232,6 +232,21 @@
                     </li>
                 @endcan
 
+                {{-- new module --}}
+                <li class="nav-item">
+                    <a class="nav-link menu-link" href="{{ route('add.form') }}" >
+                        <i class="ri-account-circle-fill"></i>
+                        <span data-key="t-dashboards">Scheme Details</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link menu-link" href="{{ route('list.schemeDetails') }}" >
+                        <i class="ri-file-list-line"></i>
+                        <span data-key="t-dashboards">Scheme Details List</span>
+                    </a>
+                </li>
+
             </ul>
         </div>
     </div>

@@ -120,6 +120,12 @@ Route::middleware(['auth','PreventBackHistory', 'firewall.all'])->group(function
     Route::get('/total-application-list', [App\Http\Controllers\Admin\Citizen\ListingController::class, 'totalApplicationList'])->name('total.application.list');
 
 
+    // Scheme Details module
+    Route::get('/scheme-details/add', [App\Http\Controllers\SchemeDetails\SchemeDetailsController::class, 'addForm'])->name('add.form');
+    Route::post('/scheme-details/store', [App\Http\Controllers\SchemeDetails\SchemeDetailsController::class, 'storeForm'])->name('store.form');
+    Route::get('/scheme-details/edit/{id}', [App\Http\Controllers\SchemeDetails\SchemeDetailsController::class, 'editForm'])->name('edit.form');
+    Route::get('/scheme-details/list', [App\Http\Controllers\SchemeDetails\SchemeDetailsController::class, 'schemeDetailsList'])->name('list.schemeDetails');
+
     // Users Roles n Permissions
     Route::resource('users', App\Http\Controllers\Admin\UserController::class );
     Route::get('users/{user}/toggle', [App\Http\Controllers\Admin\UserController::class, 'toggle' ])->name('users.toggle');
