@@ -32,7 +32,10 @@
                                         <td>{{ $list->amount_to_pay }}</td>
                                         <td>{{ $list->paid_amount }}</td>
                                         <td>{{ $list->amount_to_pay - $list->paid_amount }}</td>
-                                        <td><a href="{{ route('edit.form', $list->id) }}" class="btn btn-sm btn-primary">Edit</a></td>
+                                        <td>
+                                            <a href="{{ route('view.form', $list->id) }}" class="btn btn-sm btn-primary"><i class="fa fa-eye"></i></a>
+                                            <a href="{{ route('edit.form', $list->id) }}" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></a>
+                                        </td>
                                     </tr>
                                 @endforeach
                             </tbody>

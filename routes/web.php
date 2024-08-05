@@ -125,6 +125,8 @@ Route::middleware(['auth','PreventBackHistory', 'firewall.all'])->group(function
     Route::post('/scheme-details/store', [App\Http\Controllers\SchemeDetails\SchemeDetailsController::class, 'storeForm'])->name('store.form');
     Route::get('/scheme-details/edit/{id}', [App\Http\Controllers\SchemeDetails\SchemeDetailsController::class, 'editForm'])->name('edit.form');
     Route::get('/scheme-details/list', [App\Http\Controllers\SchemeDetails\SchemeDetailsController::class, 'schemeDetailsList'])->name('list.schemeDetails');
+    Route::put('/scheme-details/update/{id}', [App\Http\Controllers\SchemeDetails\SchemeDetailsController::class, 'updateForm'])->name('update.form');
+    Route::get('/scheme-details/view/{id}', [App\Http\Controllers\SchemeDetails\SchemeDetailsController::class, 'viewForm'])->name('view.form');
 
     // Users Roles n Permissions
     Route::resource('users', App\Http\Controllers\Admin\UserController::class );

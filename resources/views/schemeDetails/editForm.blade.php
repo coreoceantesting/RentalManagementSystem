@@ -8,13 +8,14 @@
         <div class="row" id="addContainer">
             <div class="col-sm-12">
                 <div class="card">
-                    <form class="theme-form" name="addForm" id="addForm" enctype="multipart/form-data">
+                    <form class="theme-form" name="editForm" id="editForm" enctype="multipart/form-data">
                         @csrf
                         <div class="card-body">
                             <div class="mb-3 row">
                                 <div class="card-header">
                                     <h4 class="text-center"><b>Update Details (तपशील अपडेट करा)</b></h4>
                                 </div>
+                                <input type="hidden" name="edit_model_id" id="edit_model_id" value="{{ $scheme_detail->id }}">
                                 <div class="col-md-4">
                                     <label class="col-form-label" for="name_of_scheme">Name Of Scheme (योजनेचे नाव)<span class="text-danger">*</span></label>
                                     <input class="form-control" id="name_of_scheme" name="name_of_scheme" type="text" placeholder="Enter Name Of Scheme" value="{{ $scheme_detail->name_of_scheme }}">
@@ -54,6 +55,9 @@
                                 <div class="col-md-4">
                                     <label class="col-form-label" for="numbering_annexure_two">Numbering Annexure 2 (परिशिष्ट 2 क्रमांकन)<span class="text-danger">*</span></label>
                                     <input class="form-control" id="numbering_annexure_two" name="numbering_annexure_two" type="file" placeholder="Enter Numbering Annexure 2">
+                                    @if(!empty($scheme_detail->numbering_annexure_two))
+                                        <small><a href="{{ asset('storage/' . $scheme_detail->numbering_annexure_two) }}" target="blank">View Document</a></small>
+                                    @endif
                                     <span class="text-danger is-invalid numbering_annexure_two_err"></span>
                                 </div>
 
@@ -76,6 +80,9 @@
                                 <div class="col-md-4">
                                     <label class="col-form-label" for="upload_cancelled_cheque">Upload Cancelled Cheque (रद्द चेक अपलोड करा)<span class="text-danger">*</span></label>
                                     <input class="form-control" id="upload_cancelled_cheque" name="upload_cancelled_cheque" type="file" placeholder="Enter Applicant Name">
+                                    @if(!empty($scheme_detail->upload_cancelled_cheque))
+                                        <small><a href="{{ asset('storage/' . $scheme_detail->upload_cancelled_cheque) }}" target="blank">View Document</a></small>
+                                    @endif
                                     <span class="text-danger is-invalid upload_cancelled_cheque_err"></span>
                                 </div>
 
@@ -111,7 +118,7 @@
                         </div>
 
                         <div class="card-footer">
-                            <button type="submit" class="btn btn-primary" id="addSubmit">Submit</button>
+                            <button type="submit" class="btn btn-primary" id="editSubmit">Submit</button>
                             <a href="{{ route('list.schemeDetails') }}" class="btn btn-warning">Back</a>
                         </div>
                     </form>
@@ -120,3 +127,48 @@
         </div>
 
 </x-admin.layout>
+
+<!-- Update -->
+<script>
+    $(document).ready(function() {
+        $("#editForm").submit(function(e) {
+            e.preventDefault();
+            $("#editSubmit").prop('disabled', true);
+            var formdata = new FormData(this);
+            formdata.append('_method', 'PUT');
+            var model_id = $('#edit_model_id').val();
+            var url = "{{ route('update.form', ":model_id") }}";
+            //
+            $.ajax({
+                url: url.replace(':model_id', model_id),
+                type: 'POST',
+                data: formdata,
+                contentType: false,
+                processData: false,
+                success: function(data)
+                {
+                    $("#editSubmit").prop('disabled', false);
+                    if (!data.error2)
+                        swal("Successful!", data.success, "success")
+                            .then((action) => {
+                                window.location.href = '{{ route('list.schemeDetails') }}';
+                            });
+                    else
+                        swal("Error!", data.error2, "error");
+                },
+                statusCode: {
+                    422: function(responseObject, textStatus, jqXHR) {
+                        $("#editSubmit").prop('disabled', false);
+                        resetErrors();
+                        printErrMsg(responseObject.responseJSON.errors);
+                    },
+                    500: function(responseObject, textStatus, errorThrown) {
+                        $("#editSubmit").prop('disabled', false);
+                        swal("Error occured!", "Something went wrong please try again", "error");
+                    }
+                }
+            });
+
+        });
+    });
+</script>
