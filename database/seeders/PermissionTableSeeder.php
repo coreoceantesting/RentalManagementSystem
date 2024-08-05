@@ -169,6 +169,11 @@ class PermissionTableSeeder extends Seeder
                 'name' => 'complaint.applicationlist',
                 'group' => 'citizen',
             ],
+            [
+                'id' => 32,
+                'name' => 'schemeDetails.module',
+                'group' => 'schemeDetails',
+            ],
         ];
 
         foreach ($permissions as $permission)
