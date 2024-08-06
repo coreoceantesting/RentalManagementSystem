@@ -125,14 +125,7 @@
                     </li>
                 @endif
 
-                @canany(['complaint.closelist' , 'lists.closelist'])
-                    <li class="nav-item">
-                        <a class="nav-link menu-link" href="{{ route('list.close.applications') }}" >
-                            <i class="ri-list-check"></i>
-                            <span data-key="t-dashboards">Close List</span>
-                        </a>
-                    </li>
-                @endcan
+                
 
                 {{-- clerk menu --}}
 
@@ -231,6 +224,15 @@
                         <a class="nav-link menu-link" href="{{ route('total.application.list') }}" >
                             <i class="ri-list-check"></i>
                             <span data-key="t-dashboards">Total Application</span>
+                        </a>
+                    </li>
+                @endcan
+
+                @canany(['complaint.closelist' , 'lists.closelist'])
+                    <li class="nav-item">
+                        <a class="nav-link menu-link" href="{{ route('list.close.applications') }}" >
+                            <i class="ri-list-check"></i>
+                            <span data-key="t-dashboards">Close List</span>
                         </a>
                     </li>
                 @endcan
