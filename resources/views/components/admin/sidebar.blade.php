@@ -133,7 +133,7 @@
                     <li class="nav-item">
                         <a class="nav-link menu-link" href="{{ route('complaint.list') }}" >
                             <i class="ri-list-check"></i>
-                            <span data-key="t-dashboards">Complaint List</span>
+                            <span data-key="t-dashboards">Citizen Complaint List</span>
                         </a>
                     </li>
                 @endcan
@@ -142,7 +142,7 @@
                     <li class="nav-item">
                         <a class="nav-link menu-link" href="{{ route('approved.complaint.list') }}" >
                             <i class="ri-list-check"></i>
-                            <span data-key="t-dashboards">Approved List</span>
+                            <span data-key="t-dashboards">Approved Complaint List</span>
                         </a>
                     </li>
                 @endif
@@ -160,7 +160,7 @@
                     <li class="nav-item">
                         <a class="nav-link menu-link" href="{{ route('application.hearing.list') }}" >
                             <i class="ri-list-check"></i>
-                            <span data-key="t-dashboards">Hearing List</span>
+                            <span data-key="t-dashboards">Hearing complaint List</span>
                         </a>
                     </li>
                 @endcan
@@ -232,7 +232,7 @@
                     <li class="nav-item">
                         <a class="nav-link menu-link" href="{{ route('list.close.applications') }}" >
                             <i class="ri-list-check"></i>
-                            <span data-key="t-dashboards">Close List</span>
+                            <span data-key="t-dashboards">Close Complaint List</span>
                         </a>
                     </li>
                 @endcan
