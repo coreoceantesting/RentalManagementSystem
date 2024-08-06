@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
     <meta content="Themesbrand" name="author" />
-    <link rel="shortcut icon" href="{{ asset('admin/images/favicon.ico') }}">
+    <link rel="shortcut icon" href="{{ asset('admin/images/Slum-Rehabilitation-Authority-Mumbai (1).png') }}">
     <script src="{{ asset('admin/js/layout.js') }}"></script>
     <link href="{{ asset('admin/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('admin/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
@@ -63,18 +63,20 @@
                                             <form id="loginForm">
                                                 @csrf
                                                 <div class="mb-3">
-                                                    <label for="username" class="form-label">Username</label>
-                                                    <input type="text" class="form-control" name="username" id="username" placeholder="Enter username">
+                                                    <label for="username" class="form-label">Email Id ( ई-मेल )</label>
+                                                    <input type="text" class="form-control" name="username" id="username" placeholder="Enter email">
+                                                    <span class="text-danger is-invalid username_err"></span>
                                                 </div>
 
                                                 <div class="mb-3">
                                                     {{-- <div class="float-end">
                                                         <a href="auth-pass-reset-cover.html" class="text-muted">Forgot password?</a>
                                                     </div> --}}
-                                                    <label class="form-label" for="password-input">Password</label>
+                                                    <label class="form-label" for="password-input">Password ( पासवर्ड )</label>
                                                     <div class="position-relative auth-pass-inputgroup mb-3">
                                                         <input type="password" class="form-control pe-5 password-input" placeholder="Enter password" id="password" name="password" >
-                                                        <button class="btn btn-link position-absolute end-0 top-0 text-decoration-none text-muted password-addon" type="button" id="password-addon"><i class="ri-eye-fill align-middle"></i></button>
+                                                        <button class="btn btn-link position-absolute end-0 top-0 text-decoration-none text-muted password-addon" type="button" style="padding-right: 8%" id="password-addon"><i class="ri-eye-fill align-middle"></i></button>
+                                                        <span class="text-danger is-invalid password_err"></span>
                                                     </div>
                                                 </div>
 
