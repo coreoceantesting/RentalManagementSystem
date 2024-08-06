@@ -277,7 +277,7 @@
                 if (!data.error2)
                     swal("Successful!", data.success, "success")
                         .then((action) => {
-                            window.location.href = '{{ route('complaint.index') }}';
+                            window.location.href = '{{ route('list.all.applications') }}';
                         });
                 else
                     swal("Error!", data.error2, "error");
