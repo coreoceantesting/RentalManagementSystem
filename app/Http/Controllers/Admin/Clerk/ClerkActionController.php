@@ -314,7 +314,12 @@ class ClerkActionController extends Controller
             'explanation_subject_two',
             'explanation_doc_three',
             'explanation_subject_three',
-            'contractor_explanation_doc_one'
+            'contractor_explanation_doc_one',
+            'contractor_explanation_doc_two',
+            'contractor_explanation_doc_three',
+            'contractor_explanation_remark_one',
+            'contractor_explanation_remark_two',
+            'contractor_explanation_remark_three'
         ]);
 
         if ($details) {

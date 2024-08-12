@@ -49,6 +49,10 @@
                                                 <button class="btn btn-sm btn-dark" data-id="{{ $list->id }}" id="closeComplaint">Close Complaint</button>
                                             @endif
 
+                                            @if ($list->contractor_explanation_doc_one)
+                                                <a class="btn btn-sm btn-info view-contractor-explaination-detail px-2 py-1" title="View Explanation Call Details" data-id="{{ $list->id }}">Contractor Explaination Details</a>    
+                                            @endif
+
                                         </td>
                                     </tr>
                                 @endforeach
@@ -203,6 +207,21 @@
                             </div>
                             <div class="modal-body">
                                 <div id="explanationCallDetails"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--Contractor explaination call Details -->
+                <div class="modal fade" id="contractorexplanationCallDetailsModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Contractor Uploaded Document (कंत्राटदाराने अपलोड केलेले दस्तऐवज)</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div id="contractorexplanationCallDetails"></div>
                             </div>
                         </div>
                     </div>
@@ -520,20 +539,79 @@
                     tableHtml += '</tr>';
                     tableHtml += '</tbody></table>';
 
+                    $('#explanationCallDetails').html(tableHtml);
+                    $('#explanationCallDetailsModal').modal('show');
+                } else {
+                    swal("Error!", "Could not fetch hearing details.", "error");
+                }
+            },
+            error: function(xhr, status, error) {
+                swal("Error!", "Something went wrong.", "error");
+            }
+        });
+    });
+</script>
+
+{{-- contractor explaination details --}}
+<script>
+    $(document).on('click', '.view-contractor-explaination-detail', function(e) {
+        e.preventDefault();
+        
+        let applicationId = $(this).data('id');
+        
+        // Fetch the hearing details via AJAX
+        $.ajax({
+            url: "{{ route('application.explainationCall.details') }}", // Replace with your actual route
+            type: 'GET',
+            data: {
+                id: applicationId
+            },
+            success: function(response) {
+                if (response.success) {
+                    let details = response.data;
                     // contractor uploaded document
-                    tableHtml += '<br><h3 class="text-center"> Contractor Uploaded Document (कंत्राटदाराने अपलोड केलेले दस्तऐवज) </h3><br>';
+                    var tableHtml = '<h3 class="text-center"> 1st Contractor Explanation Call Details (प्रथम कंत्राटदार स्पष्टीकरण कॉल तपशील) </h3><br>';
                     tableHtml += '<table class="table table-bordered">';
                     tableHtml += '<thead><tr>';
                     tableHtml += '<th scope="col">Document (कागदपत्र)</th>';
+                    tableHtml += '<th scope="col">Remark (शेरा)</th>';
                     tableHtml += '</tr></thead>';
                     tableHtml += '<tbody>';
                     tableHtml += '<tr>';
                     tableHtml += '<td>' + (details.contractor_explanation_doc_one ? '<a href="/storage/' + details.contractor_explanation_doc_one + '" target="_blank">View Document</a>' : 'NA') + '</td>';
+                    tableHtml += '<td scope="row">' + (details.contractor_explanation_remark_one || 'NA') + '</td>';
                     tableHtml += '</tr>';
                     tableHtml += '</tbody></table>';
 
-                    $('#explanationCallDetails').html(tableHtml);
-                    $('#explanationCallDetailsModal').modal('show');
+                    tableHtml += '<h3 class="text-center"> 2nd Contractor Explanation Call Details (दुसरे कंत्राटदार स्पष्टीकरण कॉल तपशील) </h3><br>';
+                    tableHtml += '<table class="table table-bordered">';
+                    tableHtml += '<thead><tr>';
+                    tableHtml += '<th scope="col">Document (कागदपत्र)</th>';
+                    tableHtml += '<th scope="col">Remark (शेरा)</th>';
+                    tableHtml += '</tr></thead>';
+                    tableHtml += '<tbody>';
+                    tableHtml += '<tr>';
+                    tableHtml += '<td>' + (details.contractor_explanation_doc_two ? '<a href="/storage/' + details.contractor_explanation_doc_two + '" target="_blank">View Document</a>' : 'NA') + '</td>';
+                    tableHtml += '<td scope="row">' + (details.contractor_explanation_remark_two || 'NA') + '</td>';
+                    tableHtml += '</tr>';
+                    tableHtml += '</tbody></table>';
+
+                    tableHtml += '<h3 class="text-center"> 3rd Contractor Explanation Call Details (तिसरे कंत्राटदार स्पष्टीकरण कॉल तपशील) </h3><br>';
+                    tableHtml += '<table class="table table-bordered">';
+                    tableHtml += '<thead><tr>';
+                    tableHtml += '<th scope="col">Document (कागदपत्र)</th>';
+                    tableHtml += '<th scope="col">Remark (शेरा)</th>';
+                    tableHtml += '</tr></thead>';
+                    tableHtml += '<tbody>';
+                    tableHtml += '<tr>';
+                    tableHtml += '<td>' + (details.contractor_explanation_doc_three ? '<a href="/storage/' + details.contractor_explanation_doc_three + '" target="_blank">View Document</a>' : 'NA') + '</td>';
+                    tableHtml += '<td scope="row">' + (details.contractor_explanation_remark_three || 'NA') + '</td>';
+                    tableHtml += '</tr>';
+                    tableHtml += '</tbody></table>';
+
+
+                    $('#contractorexplanationCallDetails').html(tableHtml);
+                    $('#contractorexplanationCallDetailsModal').modal('show');
                 } else {
                     swal("Error!", "Could not fetch hearing details.", "error");
                 }

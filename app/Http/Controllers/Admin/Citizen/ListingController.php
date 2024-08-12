@@ -19,7 +19,25 @@ class ListingController extends Controller
         $application_lists = ComplaintDetail::leftjoin('complaint_statuses', 'complaint_details.id', '=', 'complaint_statuses.complaint_id')
                                 ->leftjoin('schemes', 'complaint_details.scheme_name', '=', 'schemes.id')
                                 ->where('complaint_details.created_by', auth()->user()->id)
-                                ->select('complaint_details.*', 'schemes.scheme_name as SchemeName', 'complaint_statuses.overall_status', 'complaint_statuses.explanation_call_one_at')
+                                ->select('complaint_details.*', 'schemes.scheme_name as SchemeName',
+                                    'complaint_statuses.overall_status',
+                                    'complaint_statuses.explanation_call_one_at',
+                                    'complaint_statuses.contractor_explanation_doc_one',
+                                    'complaint_statuses.contractor_explanation_remark_one',
+                                    'complaint_statuses.contractor_explanation_one_at',
+                                    'complaint_statuses.contractor_explanation_one_by',
+                                    'complaint_statuses.contractor_explanation_doc_two',
+                                    'complaint_statuses.contractor_explanation_remark_two',
+                                    'complaint_statuses.contractor_explanation_two_at',
+                                    'complaint_statuses.contractor_explanation_two_by',
+                                    'complaint_statuses.contractor_explanation_doc_three',
+                                    'complaint_statuses.contractor_explanation_remark_three',
+                                    'complaint_statuses.contractor_explanation_three_at',
+                                    'complaint_statuses.contractor_explanation_three_by',
+
+                                    
+                                    
+                                    )
                                 ->orderBy('complaint_details.id', 'desc')
                                 ->get();
 
@@ -74,7 +92,7 @@ class ListingController extends Controller
         $query = ComplaintDetail::leftjoin('complaint_statuses', 'complaint_details.id', '=', 'complaint_statuses.complaint_id')
                             ->leftjoin('schemes', 'complaint_details.scheme_name', '=', 'schemes.id')
                             ->whereNotNull('complaint_statuses.explanation_call_one_at')
-                            ->select('complaint_details.*', 'schemes.scheme_name as SchemeName', 'complaint_statuses.overall_status', 'complaint_statuses.approval_remark');
+                            ->select('complaint_details.*', 'schemes.scheme_name as SchemeName', 'complaint_statuses.*');
         
         if (auth()->user()->roles->pluck('name')[0] == 'citizen') {
             $query->where('complaint_details.created_by', auth()->user()->id);

@@ -66,6 +66,8 @@ Route::middleware(['auth','PreventBackHistory', 'firewall.all'])->group(function
     Route::get('/view-application/{id}', [App\Http\Controllers\Admin\Complaint\ComplaintController::class, 'viewApplicationDetails'])->name('view.application.details');
     Route::post('/application/{id}/close', [App\Http\Controllers\Admin\Complaint\ComplaintController::class, 'closeApplication'])->name('application.close');
     Route::post('/application/upload-doc', [App\Http\Controllers\Admin\Complaint\ComplaintController::class, 'uploadDocbyContractor'])->name('application.upload.doc');
+    Route::post('/application/upload-doc-two', [App\Http\Controllers\Admin\Complaint\ComplaintController::class, 'uploadDoctwobyContractor'])->name('application.upload.doc.two');
+    Route::post('/application/upload-doc-three', [App\Http\Controllers\Admin\Complaint\ComplaintController::class, 'uploadDocthreebyContractor'])->name('application.upload.doc.three');
 
     // citizen routes
     Route::get('/application-list', [App\Http\Controllers\Admin\Citizen\ListingController::class, 'allApplicationList'])->name('list.all.applications');

@@ -150,7 +150,7 @@ class ComplaintController extends Controller
     {
         try {
             $applicationId = $request->applicationIdOne;
-            $subject = $request->subject; 
+            $subject = $request->remark_one; 
 
             if ($request->hasFile('document')) {
                 $document = $request->file('document');
@@ -160,13 +160,68 @@ class ComplaintController extends Controller
             // Update the status
             DB::table('complaint_statuses')->where('complaint_id', $applicationId)->update([
                 'contractor_explanation_doc_one' => $DocPath,
+                'contractor_explanation_remark_one' => $subject,
+                'contractor_explanation_one_at' => date('Y-m-d'),
+                'contractor_explanation_one_by' =>  auth()->user()->id
             ]);
 
             
-        return response()->json(['success' => 'Document Uploaded Successfully !']);
-    } catch (\Exception $e) {
-        return response()->json(['error' => 'An error occurred while uploading document.']);
+            return response()->json(['success' => 'Document Uploaded Successfully !']);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'An error occurred while uploading document.']);
+        }
     }
+
+    public function uploadDoctwobyContractor(Request $request)
+    {
+        try {
+            $applicationId = $request->applicationIdTwo;
+            $subject = $request->remark_two; 
+
+            if ($request->hasFile('document_two')) {
+                $document = $request->file('document_two');
+                $DocPath = $document->store('doc_by_contractor', 'public');
+            }
+
+            // Update the status
+            DB::table('complaint_statuses')->where('complaint_id', $applicationId)->update([
+                'contractor_explanation_doc_two' => $DocPath,
+                'contractor_explanation_remark_two' => $subject,
+                'contractor_explanation_two_at' => date('Y-m-d'),
+                'contractor_explanation_two_by' =>  auth()->user()->id
+            ]);
+
+            
+            return response()->json(['success' => 'Document Uploaded Successfully !']);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'An error occurred while uploading document.']);
+        }
+    }
+
+    public function uploadDocthreebyContractor(Request $request)
+    {
+        try {
+            $applicationId = $request->applicationIdThree;
+            $subject = $request->remark_three; 
+
+            if ($request->hasFile('document_three')) {
+                $document = $request->file('document_three');
+                $DocPath = $document->store('doc_by_contractor', 'public');
+            }
+
+            // Update the status
+            DB::table('complaint_statuses')->where('complaint_id', $applicationId)->update([
+                'contractor_explanation_doc_three' => $DocPath,
+                'contractor_explanation_remark_three' => $subject,
+                'contractor_explanation_three_at' => date('Y-m-d'),
+                'contractor_explanation_three_by' =>  auth()->user()->id
+            ]);
+
+            
+            return response()->json(['success' => 'Document Uploaded Successfully !']);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'An error occurred while uploading document.']);
+        }
     }
 
 }
