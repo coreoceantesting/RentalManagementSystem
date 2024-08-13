@@ -30,6 +30,9 @@
                                         <td>{{ $list->overall_status }}</td>
                                         <td>
                                             <a href="{{ route('view.application.details', $list->id) }}" class="btn btn-sm btn-primary view-element px-2 py-1" title="View Details" data-id="{{ $list->id }}">View</a>
+                                            @if ($list->overall_status == "Pending")
+                                                <a href="{{ route('edit.application.details', $list->id) }}" class="btn btn-sm btn-primary edit-element px-2 py-1" title="edit Details" data-id="{{ $list->id }}">Edit</a>
+                                            @endif
                                             @if ($list->explanation_call_one_at)
                                                 <a class="btn btn-sm btn-warning view-explaination-detail px-2 py-1" title="View Explanation Call Details" data-id="{{ $list->id }}">Call Details</a>    
                                             @endif

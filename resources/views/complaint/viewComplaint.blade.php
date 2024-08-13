@@ -92,7 +92,7 @@
                             </div>
                             <div class="col-md-6">
                                 <label class="col-form-label" for="scheme_name">Scheme Name (योजनेचे नाव)</label>
-                                <input class="form-control" type="text" name="scheme_name" id="scheme_name" value="{{ $application_detail->appendix_no }}" readonly>
+                                <input class="form-control" type="text" name="scheme_name" id="scheme_name" value="{{ $application_detail->SchemeName }}" readonly>
                             </div>
 
                             <div class="col-md-6">

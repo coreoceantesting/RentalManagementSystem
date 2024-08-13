@@ -5,12 +5,14 @@ namespace App\Http\Controllers\Admin\Complaint;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\Admin\CitizenComplaint\StoreRequest;
+use App\Http\Requests\Admin\CitizenComplaint\UpdateRequest;
 use Illuminate\Support\Facades\DB;
 use App\Models\ComplaintDetail;
 use App\Models\ComplaintStatus;
 use App\Models\Contractor;
 use App\Models\Scheme;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Storage;
 
 class ComplaintController extends Controller
 {
@@ -84,17 +86,69 @@ class ComplaintController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit($id)
     {
-        //
+        $application_detail = ComplaintDetail::leftjoin('complaint_statuses', 'complaint_details.id', '=', 'complaint_statuses.complaint_id')
+                                ->leftjoin('schemes', 'complaint_details.scheme_name', '=', 'schemes.id')
+                                ->where('complaint_details.id', $id)
+                                ->select('complaint_details.*', 'schemes.scheme_name as SchemeName', 'complaint_statuses.*')
+                                ->first();
+        $schemes_list = Scheme::latest()->get();
+        $contractor_list = Contractor::latest()->get();
+            // dd($application_detail);
+
+        return view('complaint.editComplaint')->with(['application_detail' => $application_detail, 'schemes_list' => $schemes_list]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateRequest $request, $id)
     {
-        //
+        try
+        {
+            DB::beginTransaction();
+            $input = $request->validated();
+            $input['updated_by'] = auth()->user()->id;
+            $input['updated_at'] = now();
+
+            // Fetch the existing record
+            $ComplaintDetail = ComplaintDetail::findOrFail($id);
+
+            // Handle file uploads
+            if ($request->hasFile('appendix_doc')) {
+                // Delete the old file
+                if ($ComplaintDetail->appendix_doc) {
+                    Storage::disk('public')->delete($ComplaintDetail->appendix_doc);
+                }
+                // Store the new file
+                $appendixDoc = $request->file('appendix_doc');
+                $appendixDocPath = $appendixDoc->store('appendix_docs', 'public');
+                $input['appendix_doc'] = $appendixDocPath;
+            }
+
+            if ($request->hasFile('copy_of_bank_passbook')) {
+                // Delete the old file
+                if ($ComplaintDetail->copy_of_bank_passbook) {
+                    Storage::disk('public')->delete($ComplaintDetail->copy_of_bank_passbook);
+                }
+                // Store the new file
+                $bankPassbook = $request->file('copy_of_bank_passbook');
+                $bankPassbookPath = $bankPassbook->store('bank_passbooks', 'public');
+                $input['copy_of_bank_passbook'] = $bankPassbookPath;
+            }
+
+            // Update the record
+            $ComplaintDetail->update($input);
+
+            DB::commit();
+
+            return response()->json(['success'=> 'Complaint Updated Successfully!']);
+        }
+        catch(\Exception $e)
+        {
+            return $this->respondWithAjax($e, 'updateing', 'Complaint');
+        }
     }
 
     /**
