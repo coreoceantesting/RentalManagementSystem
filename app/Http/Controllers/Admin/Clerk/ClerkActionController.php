@@ -17,8 +17,8 @@ class ClerkActionController extends Controller
     {
         $query = ComplaintDetail::leftjoin('complaint_statuses', 'complaint_details.id', '=', 'complaint_statuses.complaint_id')
                             ->leftjoin('schemes', 'complaint_details.scheme_name', '=', 'schemes.id')
-                            ->where('complaint_statuses.overall_status', 'Pending')
-                            ->where('complaint_statuses.status', 'Pending')
+                            // ->where('complaint_statuses.overall_status', 'Pending')
+                            // ->where('complaint_statuses.status', 'Pending')
                             ->select('complaint_details.*', 'schemes.scheme_name as SchemeName', 'complaint_statuses.overall_status')
                             ->orderBy('complaint_details.id', 'desc');
 
