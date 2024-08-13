@@ -62,6 +62,24 @@ class ClerkActionController extends Controller
         }
     }
 
+    public function approvedByCollector($id)
+    {
+        try {
+
+            // Update the status
+            DB::table('complaint_statuses')->where('complaint_id', $id)->update([
+                'overall_status' => 'Approved',
+                'approval_by_collector' => 'Approved',
+                'approval_by' => auth()->user()->id,
+                'approval_at' => now()
+            ]);
+
+            return response()->json(['success' => 'Application approved successfully!']);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Error approving complaint.'], 500);
+        }
+    }
+
     public function rejectApplication(Request $request)
     {
         try {
@@ -91,6 +109,7 @@ class ClerkActionController extends Controller
             DB::table('complaint_statuses')->where('complaint_id', $applicationId)->update([
                 'overall_status' => 'Rejected',
                 'approval_remark' => $remark,
+                'approval_by_collector' => 'Rejected',
                 'approval_by' => auth()->user()->id,
                 'approval_at' => now()
             ]);
@@ -263,6 +282,30 @@ class ClerkActionController extends Controller
                                 ->get();
 
         return view('clerk.annexureVerificationList')->with(['application_lists' => $application_lists]);
+    }
+
+    public function annexureApprovedList(Request $request)
+    {
+        $application_lists = ComplaintDetail::leftjoin('complaint_statuses', 'complaint_details.id', '=', 'complaint_statuses.complaint_id')
+                                ->leftjoin('schemes', 'complaint_details.scheme_name', '=', 'schemes.id')
+                                ->where('complaint_statuses.approval_by_collector', 'Approved')
+                                ->select('complaint_details.*', 'schemes.scheme_name as SchemeName', 'complaint_statuses.*')
+                                ->orderBy('complaint_details.id', 'desc')
+                                ->get();
+
+        return view('clerk.annexureApprovedList')->with(['application_lists' => $application_lists]);
+    }
+
+    public function annexureRejectedList(Request $request)
+    {
+        $application_lists = ComplaintDetail::leftjoin('complaint_statuses', 'complaint_details.id', '=', 'complaint_statuses.complaint_id')
+                                ->leftjoin('schemes', 'complaint_details.scheme_name', '=', 'schemes.id')
+                                ->where('complaint_statuses.approval_by_collector', 'Rejected')
+                                ->select('complaint_details.*', 'schemes.scheme_name as SchemeName', 'complaint_statuses.*')
+                                ->orderBy('complaint_details.id', 'desc')
+                                ->get();
+
+        return view('clerk.annexureRejectedList')->with(['application_lists' => $application_lists]);
     }
 
     public function hearingList(Request $request)

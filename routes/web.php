@@ -87,6 +87,7 @@ Route::middleware(['auth','PreventBackHistory', 'firewall.all'])->group(function
     Route::post('/application/reject', [App\Http\Controllers\Admin\Clerk\ClerkActionController::class, 'rejectApplication'])->name('application.reject');
     Route::post('/application/send', [App\Http\Controllers\Admin\Clerk\ClerkActionController::class, 'sendApplication'])->name('application.send');
     Route::post('/application/reject/bycollector', [App\Http\Controllers\Admin\Clerk\ClerkActionController::class, 'rejectApplicationByCollector'])->name('application.reject.collector');
+    Route::post('/complaints/{id}/approvebycollector', [App\Http\Controllers\Admin\Clerk\ClerkActionController::class, 'approvedByCollector'])->name('application.approve.collector');
 
     Route::post('/application/explantationone', [App\Http\Controllers\Admin\Clerk\ClerkActionController::class, 'sendExplainationOne'])->name('application.explaination.one');
     Route::post('/application/explantationtwo', [App\Http\Controllers\Admin\Clerk\ClerkActionController::class, 'sendExplainationTwo'])->name('application.explaination.two');
@@ -120,6 +121,8 @@ Route::middleware(['auth','PreventBackHistory', 'firewall.all'])->group(function
     Route::get('/final/stopwork/rejected/list', [App\Http\Controllers\Admin\Complaint\StopWorkController::class, 'finalStopWorkRejectedList'])->name('application.finalstopwork.rejected.list');
 
     Route::get('/annexure-verification-list', [App\Http\Controllers\Admin\Clerk\ClerkActionController::class, 'annexureVerificationList'])->name('annexure.verification.list');
+    Route::get('/annexure-approved-list', [App\Http\Controllers\Admin\Clerk\ClerkActionController::class, 'annexureApprovedList'])->name('annexure.approved.list');
+    Route::get('/annexure-rejected-list', [App\Http\Controllers\Admin\Clerk\ClerkActionController::class, 'annexureRejectedList'])->name('annexure.rejected.list');
 
     Route::get('/total-application-list', [App\Http\Controllers\Admin\Citizen\ListingController::class, 'totalApplicationList'])->name('total.application.list');
 

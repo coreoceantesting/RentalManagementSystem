@@ -590,7 +590,7 @@
         .then((willApprove) => {
             if (willApprove) {
                 var model_id = $(this).data("id"); // Assuming you have data-id attribute on the button
-                var url = "{{ route('application.approve', ":model_id") }}";
+                var url = "{{ route('application.approve.collector', ":model_id") }}";
 
                 $.ajax({
                     url: url.replace(':model_id', model_id),
