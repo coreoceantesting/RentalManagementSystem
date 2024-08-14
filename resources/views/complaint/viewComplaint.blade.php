@@ -35,7 +35,9 @@
                             </div>
                         </div>
                     </div>
+                </div>
 
+                <div class="card">
                     <div class="card-body">
                         <div class="mb-3 row">
                             <div class="card-header">
@@ -84,7 +86,9 @@
 
                         </div>
                     </div>
+                </div>
 
+                <div class="card">
                     <div class="card-body">
                         <div class="mb-3 row">
                             <div class="card-header">
@@ -103,7 +107,9 @@
 
                         </div>
                     </div>
+                </div>
 
+                <div class="card">
                     <div class="card-body">
                         <div class="mb-3 row">
                             <div class="card-header">
@@ -124,7 +130,9 @@
 
                         </div>
                     </div>
+                </div>
 
+                <div class="card">
                     <div class="card-body">
                         <div class="mb-3 row">
                             <div class="card-header">
@@ -195,7 +203,9 @@
 
                         </div>
                     </div>
+                </div>
 
+                <div class="card">
                     <div class="card-body">
                         <div class="mb-3 row">
                             <div class="card-header">
@@ -235,7 +245,6 @@
 
                         </div>
                     </div>
-
                     <div class="card-footer text-center">
                         @if ($application_detail->overall_status == "Pending" && auth()->user()->roles->pluck('name')[0] == 'clerk')
                             <button type="button" class="btn btn-primary" id="approveBtn" data-id="{{ $application_detail->id }}">Approve</button>

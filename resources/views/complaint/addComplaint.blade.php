@@ -7,9 +7,9 @@
         <!-- Add Form -->
         <div class="row" id="addContainer">
             <div class="col-sm-12">
-                <div class="card">
-                    <form class="theme-form" name="addForm" id="addForm" enctype="multipart/form-data">
-                        @csrf
+                <form class="theme-form" name="addForm" id="addForm" enctype="multipart/form-data">
+                @csrf
+                    <div class="card">
                         <div class="card-body">
                             <div class="mb-3 row">
                                 <div class="card-header">
@@ -37,7 +37,8 @@
                                 </div>
                             </div>
                         </div>
-
+                    </div>
+                    <div class="card">
                         <div class="card-body">
                             <div class="mb-3 row">
                                 <div class="card-header">
@@ -83,7 +84,8 @@
 
                             </div>
                         </div>
-
+                    </div>
+                    <div class="card">
                         <div class="card-body">
                             <div class="mb-3 row">
                                 <div class="card-header">
@@ -108,7 +110,9 @@
 
                             </div>
                         </div>
+                    </div>
 
+                    <div class="card">
                         <div class="card-body">
                             <div class="mb-3 row">
                                 <div class="card-header">
@@ -135,7 +139,9 @@
 
                             </div>
                         </div>
+                    </div>
 
+                    <div class="card">
                         <div class="card-body">
                             <div class="mb-3 row">
                                 <div class="card-header">
@@ -206,7 +212,9 @@
 
                             </div>
                         </div>
+                    </div>
 
+                    <div class="card">
                         <div class="card-body">
                             <div class="mb-3 row">
                                 <div class="card-header">
@@ -245,13 +253,12 @@
 
                             </div>
                         </div>
-
-                        <div class="card-footer">
+                        <div class="card-footer text-center">
                             <button type="submit" class="btn btn-primary" id="addSubmit">Submit</button>
                             <button type="reset" class="btn btn-warning">Reset</button>
                         </div>
-                    </form>
-                </div>
+                    </div>
+                </form>
             </div>
         </div>
 
