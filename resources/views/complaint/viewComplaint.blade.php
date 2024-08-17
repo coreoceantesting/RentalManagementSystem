@@ -936,7 +936,7 @@
                     $('#rejectByCeoRemarkModal').modal('hide');
                     if(response.success) {
                         swal("Rejected!", response.success, "success").then((action) => {
-                            window.location.href = "{{ route('application.finalstopwork.rejected.list') }}";
+                            window.location.reload();
                         });
                     } else {
                         swal("Error!", response.error, "error");
