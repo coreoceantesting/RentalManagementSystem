@@ -14,7 +14,7 @@
                                     <th>Citizen Name</th>
                                     <th>Citizen Mobile No</th>
                                     <th>Scheme Name</th>
-                                    <th>Contractor Name</th>
+                                    <th>Developer Name</th>
                                     <th>Status</th>
                                     <th>Action</th>
                                 </tr>
