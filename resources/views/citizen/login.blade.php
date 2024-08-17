@@ -89,7 +89,7 @@
                                 <div class="col-lg-5">
                                     <div class="p-lg-3 p-1">
                                         <div class="text-center">
-                                            <img  src="{{ asset('admin/images/Slum-Rehabilitation-Authority-Mumbai (1).png') }}" height="40%" width="40%" alt="">
+                                            <img  src="{{ asset('admin/images/Group 1 copy 2.png') }}" height="70%" width="70%" alt="">
                                             <h5 class="text-dark text-center pt-3">नागरिक लॉगिन मध्ये आपले स्वागत आहे</h5>
                                         </div>
 

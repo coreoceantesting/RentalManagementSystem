@@ -186,7 +186,7 @@
                                 <th scope="col">Sr.No</th>
                                 <th scope="col">Citizen Name</th>
                                 <th scope="col">Scheme Name</th>
-                                <th scope="col">Contractor Name</th>
+                                <th scope="col">Developer Name</th>
                             </thead>
                             <tbody>
                                 @foreach ($application_list as $index => $list)
