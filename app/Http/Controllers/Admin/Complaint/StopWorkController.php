@@ -96,6 +96,24 @@ class StopWorkController extends Controller
             case 'ceo':
                 $query->where('complaint_statuses.stopwork_status_by_ceo', '=', 'Rejected');
                 break;
+
+            case 'citizen':
+                $query->where(function($query) {
+                    $query->where('complaint_statuses.stopwork_status_by_register', '=', 'Rejected')
+                            ->orWhere('complaint_statuses.stopwork_status_by_secretory', '=', 'Rejected')
+                            ->orWhere('complaint_statuses.stopwork_status_by_ceo', '=', 'Rejected');
+                })
+                ->where('complaint_details.created_by', '=', auth()->user()->id);
+                break;
+    
+            case 'contractor':
+                $query->where(function($query) {
+                    $query->where('complaint_statuses.stopwork_status_by_register', '=', 'Rejected')
+                            ->orWhere('complaint_statuses.stopwork_status_by_secretory', '=', 'Rejected')
+                            ->orWhere('complaint_statuses.stopwork_status_by_ceo', '=', 'Rejected');
+                })
+                ->where('complaint_details.contractor_id', '=', auth()->user()->id);
+                break;
         }
 
         $application_lists = $query->orderBy('complaint_details.id', 'desc')->get();
