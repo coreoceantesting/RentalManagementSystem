@@ -113,18 +113,18 @@
                     <div class="card-body">
                         <div class="mb-3 row">
                             <div class="card-header">
-                                <h4 class="text-center"><b>Contractor Details (कंत्राटदार तपशील)</b></h4>
+                                <h4 class="text-center"><b>Developer Details (विकसक तपशील)</b></h4>
                             </div>
 
                             <div class="col-md-6">
-                                <label class="col-form-label" for="contractor_name">Contractor Name</label>
-                                <input class="form-control" name="contractor_name" id="contractor_name" placeholder="Contractor Name" value="{{ $application_detail->contractor_name }}" readonly>
+                                <label class="col-form-label" for="contractor_name">Developer Name (विकसकाचे नाव)</label>
+                                <input class="form-control" name="contractor_name" id="contractor_name" placeholder="Developer Name" value="{{ $application_detail->contractor_name }}" readonly>
                                 <span class="text-danger is-invalid contractor_name_err"></span>
                             </div>
 
                             <div class="col-md-6">
-                                <label class="col-form-label" for="contractor_details">Contractor Details (कंत्राटदार तपशील)</label>
-                                <textarea class="form-control" name="contractor_details" id="contractor_details" cols="30" rows="2" placeholder="Contractor Details" readonly>{{ $application_detail->contractor_details }}</textarea>
+                                <label class="col-form-label" for="contractor_details">Developer Details (विकसक तपशील)</label>
+                                <textarea class="form-control" name="contractor_details" id="contractor_details" cols="30" rows="2" placeholder="Developer Details" readonly>{{ $application_detail->contractor_details }}</textarea>
                                 <span class="text-danger is-invalid contractor_details_err"></span>
                             </div>
 

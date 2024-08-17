@@ -116,12 +116,12 @@
                         <div class="card-body">
                             <div class="mb-3 row">
                                 <div class="card-header">
-                                    <h4 class="text-center"><b>Contractor Details (कंत्राटदार तपशील)</b></h4>
+                                    <h4 class="text-center"><b>Developer Details (विकसक तपशील)</b></h4>
                                 </div>
                                 <input type="hidden" name="contractor_id" id="contractor_id">
                                 <div class="col-md-6">
-                                    <label class="col-form-label" for="contractor_name">Contractor Name <span class="text-danger">*</span></label>
-                                    <input class="form-control" name="contractor_name" id="contractor_name" placeholder="Contractor Name" readonly>
+                                    <label class="col-form-label" for="contractor_name">Developer Name (विकसकाचे नाव)<span class="text-danger">*</span></label>
+                                    <input class="form-control" name="contractor_name" id="contractor_name" placeholder="Developer Name" readonly>
                                     {{-- <select class="form-control" name="contractor_name" id="contractor_name">
                                         <option value="">Contractor Name (कंत्राटदाराचे नाव)</option>
                                         @foreach ($contractor_list as $list)
@@ -132,8 +132,8 @@
                                 </div>
 
                                 <div class="col-md-6">
-                                    <label class="col-form-label" for="contractor_details">Contractor Details (कंत्राटदार तपशील)<span class="text-danger">*</span></label>
-                                    <textarea class="form-control" name="contractor_details" id="contractor_details" cols="30" rows="2" placeholder="Contractor Details" readonly></textarea>
+                                    <label class="col-form-label" for="contractor_details">Developer Details (विकसक तपशील)<span class="text-danger">*</span></label>
+                                    <textarea class="form-control" name="contractor_details" id="contractor_details" cols="30" rows="2" placeholder="Developer Details" readonly></textarea>
                                     <span class="text-danger is-invalid contractor_details_err"></span>
                                 </div>
 
