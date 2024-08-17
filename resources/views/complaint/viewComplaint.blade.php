@@ -774,7 +774,7 @@
                     $('#closeModal').modal('hide');
                     if(response.success) {
                         swal("Rejected!", response.success, "success").then((action) => {
-                            window.location.reload();
+                            window.location.href = "{{ route('application.stopwork.rejected.list') }}";
                         });
                     } else {
                         swal("Error!", response.error, "error");
@@ -855,7 +855,7 @@
                     $('#rejectBySecretaryRemarkModal').modal('hide');
                     if(response.success) {
                         swal("Rejected!", response.success, "success").then((action) => {
-                            window.location.reload();
+                            window.location.href = "{{ route('application.stopwork.rejected.list') }}";
                         });
                     } else {
                         swal("Error!", response.error, "error");
@@ -936,7 +936,7 @@
                     $('#rejectByCeoRemarkModal').modal('hide');
                     if(response.success) {
                         swal("Rejected!", response.success, "success").then((action) => {
-                            window.location.reload();
+                            window.location.href = "{{ route('application.finalstopwork.rejected.list') }}";
                         });
                     } else {
                         swal("Error!", response.error, "error");
