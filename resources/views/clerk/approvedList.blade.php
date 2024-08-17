@@ -33,6 +33,11 @@
                                             @if ($list->explanation_call_one_at != "")
                                                 <a class="btn btn-sm btn-warning view-explaination-detail px-2 py-1" title="View Explanation Call Details" data-id="{{ $list->id }}">View Explaination Call Details</a>
                                             @endif
+
+                                            @if ($list->contractor_explanation_doc_one)
+                                                <a class="btn btn-sm btn-info view-contractor-explaination-detail px-2 py-1" title="View Explanation Call Details" data-id="{{ $list->id }}">Contractor Explaination Details</a>    
+                                            @endif
+
                                             @if ($list->explanation_call_one_at == "")
                                                 <button data-id="{{ $list->id }}" class="btn btn-sm btn-primary" id="ExpOne">Explaination Call 1</button>
                                             @elseif ($list->explanation_call_one_at != "" && $list->explanation_call_two_at == "")
@@ -48,11 +53,7 @@
                                             @if ($list->overall_status != "Closed" && auth()->user()->roles->pluck('name')[0] == 'registrar' )
                                                 <button class="btn btn-sm btn-dark" data-id="{{ $list->id }}" id="closeComplaint">Close Complaint</button>
                                             @endif
-
-                                            @if ($list->contractor_explanation_doc_one)
-                                                <a class="btn btn-sm btn-info view-contractor-explaination-detail px-2 py-1" title="View Explanation Call Details" data-id="{{ $list->id }}">Contractor Explaination Details</a>    
-                                            @endif
-
+                                            
                                         </td>
                                     </tr>
                                 @endforeach

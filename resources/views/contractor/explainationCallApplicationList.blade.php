@@ -95,7 +95,7 @@
                                 <div class="modal-body">
                                     <input type="hidden" name="applicationIdOne" id="applicationIdOne">
                                     <div class="form-group">
-                                        <label for="document">Upload Document (दस्तऐवज अपलोड करा) <span class="text-danger">*</span></label>
+                                        <label for="document">Explanation Call Answer (स्पष्टीकरण कॉल उत्तर) <span class="text-danger">*</span></label>
                                         <input type="file" class="form-control" id="document" name="document" required>
                                         <span class="text-danger is-invalid document_err"></span>
                                     </div>
@@ -127,7 +127,7 @@
                                 <div class="modal-body">
                                     <input type="hidden" name="applicationIdTwo" id="applicationIdTwo">
                                     <div class="form-group">
-                                        <label for="document_two">Upload Document (दस्तऐवज अपलोड करा) <span class="text-danger">*</span></label>
+                                        <label for="document_two">Explanation Call Answer (स्पष्टीकरण कॉल उत्तर)<span class="text-danger">*</span></label>
                                         <input type="file" class="form-control" id="document_two" name="document_two" required>
                                         <span class="text-danger is-invalid document_two_err"></span>
                                     </div>
@@ -160,7 +160,7 @@
                                 <div class="modal-body">
                                     <input type="hidden" name="applicationIdThree" id="applicationIdThree">
                                     <div class="form-group">
-                                        <label for="document_three">Upload Document (दस्तऐवज अपलोड करा) <span class="text-danger">*</span></label>
+                                        <label for="document_three">Explanation Call Answer (स्पष्टीकरण कॉल उत्तर)<span class="text-danger">*</span></label>
                                         <input type="file" class="form-control" id="document_three" name="document_three" required>
                                         <span class="text-danger is-invalid document_three_err"></span>
                                     </div>
