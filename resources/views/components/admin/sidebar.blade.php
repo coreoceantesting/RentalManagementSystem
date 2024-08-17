@@ -138,6 +138,37 @@
                     </li>
                 @endcan
 
+                @can('lists.annexureverificationlist')
+                    <li class="nav-item">
+                        <a class="nav-link menu-link" href="#annexureList" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarLayouts">
+                            <i class="bx bx-user-circle"></i>
+                            <span data-key="t-layouts">Annexure Application List</span>
+                        </a>
+                        <div class="collapse menu-dropdown" id="annexureList">
+                            <ul class="nav nav-sm flex-column">
+                                <li class="nav-item">
+                                    <a class="nav-link menu-link" href="{{ route('annexure.verification.list') }}" >
+                                        <span data-key="t-dashboards">Annexure Verification List</span>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link menu-link" href="{{ route('annexure.approved.list') }}" >
+                                        <span data-key="t-dashboards">Approved Annexure List</span>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link menu-link" href="{{ route('annexure.rejected.list') }}" >
+                                        <span data-key="t-dashboards">Rejected Annexure List</span>
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </li>  
+                @endcan
+
                 @can('lists.approvedcomplaintlist')
                     <li class="nav-item">
                         <a class="nav-link menu-link" href="{{ route('approved.complaint.list') }}" >
@@ -147,25 +178,14 @@
                     </li>
                 @endif
 
-                @can('lists.annexureverificationlist')
-                    <li class="nav-item">
-                        <a class="nav-link menu-link" href="{{ route('annexure.verification.list') }}" >
-                            <i class="ri-list-check"></i>
-                            <span data-key="t-dashboards">Annexure Verification List</span>
-                        </a>
-                    </li>
+                
 
+                {{-- contractors Menu --}}
+                @can('lists.explainationcalllist')
                     <li class="nav-item">
-                        <a class="nav-link menu-link" href="{{ route('annexure.approved.list') }}" >
+                        <a class="nav-link menu-link" href="{{ route('list.explaination') }}" >
                             <i class="ri-list-check"></i>
-                            <span data-key="t-dashboards">Approved Annexure List</span>
-                        </a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link menu-link" href="{{ route('annexure.rejected.list') }}" >
-                            <i class="ri-list-check"></i>
-                            <span data-key="t-dashboards">Rejected Annexure List</span>
+                            <span data-key="t-dashboards">Explaination Call List</span>
                         </a>
                     </li>
                 @endcan
@@ -179,15 +199,7 @@
                     </li>
                 @endcan
 
-                {{-- contractors Menu --}}
-                @can('lists.explainationcalllist')
-                    <li class="nav-item">
-                        <a class="nav-link menu-link" href="{{ route('list.explaination') }}" >
-                            <i class="ri-list-check"></i>
-                            <span data-key="t-dashboards">Explaination Call List</span>
-                        </a>
-                    </li>
-                @endcan
+                
 
                 {{-- stop work menu --}}
                 @can('lists.stopworklist')
@@ -246,7 +258,7 @@
                     <li class="nav-item">
                         <a class="nav-link menu-link" href="{{ route('list.close.applications') }}" >
                             <i class="ri-list-check"></i>
-                            <span data-key="t-dashboards">Close Complaint List</span>
+                            <span data-key="t-dashboards">Closed Complaint List</span>
                         </a>
                     </li>
                 @endcan
